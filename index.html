@@ -3,154 +3,175 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shridhar Group of Company — Build Your Brand (Apps • Web • E‑Commerce • Branding)</title>
-  <meta name="description" content="Shridhar Group of Company: App development & Play Store launch, Website development & hosting, Amazon/Flipkart seller onboarding, premium logo & branding, visiting cards, and more." />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' x='0.08em' font-size='90'%3ES%3C/text%3E%3C/svg%3E" />
+  <title>Shridhar Group of Company — Apps • Websites • E‑Commerce • Branding</title>
+  <meta name="description" content="Shridhar Group of Company: Microsoft‑style polished brand site. App development & Play Store launch, website development & hosting, Amazon/Flipkart seller onboarding, premium logo & branding, visiting cards." />
+  <meta name="theme-color" content="#0067b8" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230067b8'/%3E%3Ctext y='0.78em' x='0.18em' font-size='70' font-family='Segoe UI, Roboto, Arial' font-weight='700' fill='white'%3ESG%3C/text%3E%3C/svg%3E" />
   <style>
-    :root{
-      --bg: #0b1020;            /* dark bg */
-      --bg-soft:#0f172a;
-      --surface:#111827;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --brand:#6d28d9;          /* violet */
-      --brand-2:#22d3ee;        /* cyan */
-      --ok:#22c55e;             /* green */
-      --warn:#f59e0b;           /* amber */
-      --err:#ef4444;            /* red */
-      --ring: 0 0 0 3px color-mix(in oklab, var(--brand) 30%, transparent);
+    /* ==================
+       FLUENT BRAND THEME
+       ================== */
+    :root {
+      --bg: #0b0e12;
+      --bg-soft: #0f141a;
+      --surface: #11161d;
+      --text: #e6eaf0;
+      --muted: #9aa6b2;
+      --accent: #0067b8;      /* Microsoft blue */
+      --accent-2: #50e6ff;    /* Fluent cyan */
+      --ok: #16a34a;          /* success */
+      --warn: #f59e0b;        /* warning */
+      --err: #ef4444;         /* error */
+      --radius: 18px;
+      --shadow-1: 0 1px 2px rgba(0,0,0,.2), 0 1px 10px rgba(0,0,0,.12);
+      --shadow-2: 0 8px 24px rgba(0,0,0,.25);
+      --acrylic: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      --ring: 0 0 0 3px color-mix(in oklab, var(--accent) 30%, transparent);
     }
-    [data-theme="light"]{
-      --bg:#ffffff; --bg-soft:#f8fafc; --surface:#ffffff; --text:#0b1020; --muted:#475569;
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --bg-soft: #f5f7fb;
+      --surface: #ffffff;
+      --text: #101418;
+      --muted: #4b5563;
+      --shadow-1: 0 1px 2px rgba(0,0,0,.06), 0 1px 12px rgba(0,0,0,.05);
+      --shadow-2: 0 16px 40px rgba(0,0,0,.12);
+      --acrylic: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
     }
-    html,body{height:100%;}
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background: radial-gradient(1200px 600px at 80% -10%, color-mix(in oklab, var(--brand) 18%, transparent), transparent),
-                  radial-gradient(1000px 500px at 0% 0%, color-mix(in oklab, var(--brand-2) 18%, transparent), transparent),
-                  var(--bg);
-      color:var(--text); line-height:1.6; scroll-behavior:smooth;
-    }
-    a{color:inherit; text-decoration:none}
-    .container{width:min(1140px, 92vw); margin-inline:auto}
-    .btn{display:inline-flex; align-items:center; gap:.6rem; border:1px solid color-mix(in oklab, var(--brand) 45%, var(--text)); padding:.9rem 1.2rem; border-radius:14px; font-weight:600; box-shadow:0 6px 20px rgba(0,0,0,.08); backdrop-filter:saturate(140%);
-      transition:.25s ease;
-    }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.12)}
-    .btn.primary{background: linear-gradient(135deg, var(--brand), color-mix(in oklab, var(--brand-2) 70%, var(--brand))); border-color:transparent; color:white}
-    .btn.ghost{background:color-mix(in oklab, var(--bg) 80%, var(--text) 5%)}
-    .badge{display:inline-flex; align-items:center; gap:.5rem; font-size:.85rem; padding:.4rem .7rem; border-radius:20px; border:1px solid color-mix(in oklab, var(--brand) 40%, var(--text)); background:color-mix(in oklab, var(--bg) 85%, var(--brand) 5%)}
-    .chip{font-size:.8rem; padding:.35rem .6rem; border-radius:999px; border:1px dashed color-mix(in oklab, var(--brand) 50%, var(--text)); opacity:.9}
 
-    /* Header */
-    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(8px);
-      background: color-mix(in oklab, var(--bg) 72%, transparent);
-      border-bottom:1px solid color-mix(in oklab, var(--brand) 20%, var(--text));
+    html, body { height: 100%; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Segoe UI, system-ui, -apple-system, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color: var(--text); background: var(--bg);
+      line-height: 1.55; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
-    nav{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
-    .logo{display:flex; align-items:center; gap:.75rem; font-weight:900; letter-spacing:.2px}
-    .logo svg{width:34px; height:34px}
-    .navlinks{display:flex; gap:1.1rem; align-items:center}
-    .navlinks a{opacity:.85}
-    .navlinks a:hover{opacity:1}
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1200px, 92vw); margin-inline: auto; }
+
+    /* Subtle background shapes (Fluent Mica vibe) */
+    .bg-field { position: fixed; inset: -10% -10% auto -10%; height: 70vh; z-index: -1; pointer-events: none; filter: blur(40px) saturate(120%); opacity: .45; }
+    .bg-field::before, .bg-field::after { content: ""; position: absolute; border-radius: 50%; }
+    .bg-field::before { width: 60vw; height: 60vw; left: -10vw; top: -10vh; background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 45%, transparent), transparent 65%); }
+    .bg-field::after  { width: 40vw; height: 40vw; right: -10vw; top: 10vh; background: radial-gradient(closest-side, color-mix(in oklab, var(--accent-2) 60%, transparent), transparent 60%); }
+
+    /* Header / Command bar */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px) saturate(140%);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--accent) 18%, var(--text));
+    }
+    nav { display:flex; align-items:center; justify-content:space-between; padding: .7rem 0; }
+    .logo { display:flex; align-items:center; gap:.7rem; font-weight:800; letter-spacing:.2px }
+    .logo svg { width: 34px; height: 34px; }
+    .cmd { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap }
+
+    .pill { display:inline-flex; align-items:center; gap:.55rem; padding:.6rem .9rem; border-radius: 999px; border:1px solid color-mix(in oklab, var(--accent) 35%, var(--text)); background: var(--acrylic); box-shadow: var(--shadow-1); transition: .25s ease; }
+    .pill:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
+
+    .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.2rem; border-radius: var(--radius); font-weight: 700; border: 1px solid transparent; box-shadow: var(--shadow-1); transition: .25s ease; position: relative; overflow: hidden; }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent-2) 70%, var(--accent))); color: #fff; }
+    .btn.ghost { background: var(--acrylic); border-color: color-mix(in oklab, var(--accent) 28%, var(--text)); }
+    .btn:focus-visible { outline: none; box-shadow: var(--ring), var(--shadow-2); }
 
     /* Hero */
-    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:2rem; align-items:center; padding:5rem 0 3rem}
-    .hero h1{font-size:clamp(2rem, 3.5vw + .5rem, 3.6rem); line-height:1.05; margin:0 0 1rem; letter-spacing:-.02em}
-    .hero p{font-size:clamp(1rem, .75vw + .8rem, 1.2rem); opacity:.9}
-    .hero-card{background:linear-gradient(180deg, color-mix(in oklab, var(--bg) 80%, var(--brand) 10%), var(--bg-soft)); border:1px solid color-mix(in oklab, var(--brand) 25%, var(--text)); border-radius:22px; padding:1.4rem; box-shadow:0 20px 40px rgba(0,0,0,.15)}
-    .grid{display:grid; gap:1rem}
-    .grid.cols-3{grid-template-columns:repeat(3, 1fr)}
-    .grid.cols-4{grid-template-columns:repeat(4, 1fr)}
-    @media (max-width: 980px){
-      .hero{grid-template-columns:1fr; padding:3.6rem 0 1.6rem}
-      .grid.cols-3{grid-template-columns:repeat(2, 1fr)}
-      .grid.cols-4{grid-template-columns:repeat(2, 1fr)}
-    }
-    @media (max-width: 640px){
-      .grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
-    }
+    .hero { display:grid; grid-template-columns: 1.05fr .95fr; gap: 2rem; align-items:center; padding: 5.2rem 0 3rem; }
+    .hero h1 { font-size: clamp(2rem, 3.4vw + .6rem, 3.6rem); line-height: 1.05; margin: 0 0 1rem; letter-spacing: -.02em; }
+    .accent { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip:text; background-clip:text; color: transparent; }
+    .hero p { font-size: clamp(1rem, .9vw + .7rem, 1.2rem); color: var(--muted); }
+    .heroCard { background: var(--acrylic); border:1px solid color-mix(in oklab, var(--accent) 25%, var(--text)); border-radius: calc(var(--radius) + 4px); padding: 1.2rem; box-shadow: var(--shadow-2); }
 
-    /* Cards */
-    .card{border:1px solid color-mix(in oklab, var(--brand) 25%, var(--text)); border-radius:18px; padding:1.1rem; background:color-mix(in oklab, var(--bg) 90%, var(--brand) 6%); position:relative; overflow:hidden}
-    .card h3{margin:.2rem 0 .4rem; letter-spacing:-.01em}
-    .card p{opacity:.9}
-    .card .icon{width:40px; height:40px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(135deg, color-mix(in oklab, var(--brand) 70%, black), color-mix(in oklab, var(--brand-2) 70%, black)); color:white; box-shadow:0 8px 22px rgba(0,0,0,.25)}
+    /* Grid / Cards */
+    .grid { display:grid; gap: 1rem; }
+    .cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .card { border: 1px solid color-mix(in oklab, var(--accent) 20%, var(--text)); background: color-mix(in oklab, var(--bg) 90%, var(--accent) 4%);
+            border-radius: var(--radius); padding: 1.1rem; position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+    .icon { width: 44px; height: 44px; border-radius: 12px; display:grid; place-items:center; color: white;
+      background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 80%, black), color-mix(in oklab, var(--accent-2) 80%, black)); box-shadow: 0 10px 22px rgba(0,0,0,.28); }
 
-    /* Section */
-    section{padding:3.2rem 0}
-    .section-h{display:flex; align-items:end; justify-content:space-between; margin-bottom:1.1rem}
-    .section-h h2{margin:0; font-size:clamp(1.6rem, 2.4vw + .4rem, 2.4rem)}
+    /* Sections */
+    section { padding: 3.2rem 0; }
+    .section-h { display:flex; align-items:end; justify-content:space-between; margin-bottom:1.1rem }
+    .section-h h2 { margin: 0; font-size: clamp(1.6rem, 2.3vw + .5rem, 2.4rem) }
+    .chip { font-size:.8rem; padding:.4rem .65rem; border-radius: 999px; border:1px dashed color-mix(in oklab, var(--accent) 45%, var(--text)); opacity:.9 }
 
-    /* Pricing */
-    .price{font-weight:900; font-size:1.8rem}
-    .save{font-size:.85rem; color:var(--ok); font-weight:700}
-
-    /* Footer */
-    footer{border-top:1px solid color-mix(in oklab, var(--brand) 20%, var(--text)); padding:2rem 0 4rem; background:color-mix(in oklab, var(--bg) 85%, transparent)}
-
-    /* Utilities */
-    .flex{display:flex; gap:.8rem; align-items:center}
-    .split{display:flex; gap:.8rem}
-    .split>*{flex:1}
-    .muted{color:var(--muted)}
-    .kpi{display:flex; gap:1rem; flex-wrap:wrap}
-    .kpi .pill{background:color-mix(in oklab, var(--bg) 85%, var(--brand) 5%); border:1px solid color-mix(in oklab, var(--brand) 30%, var(--text)); padding:.65rem .9rem; border-radius:14px}
-
-    /* Floating actions */
-    .fab{position:fixed; right:18px; bottom:18px; z-index:50; display:flex; flex-direction:column; gap:.6rem}
-    .fab a{width:52px; height:52px; border-radius:16px; display:grid; place-items:center; box-shadow:0 10px 24px rgba(0,0,0,.22)}
-
-    /* Forms */
-    input, textarea{width:100%; background:color-mix(in oklab, var(--bg) 88%, var(--brand) 4%); border:1px solid color-mix(in oklab, var(--brand) 30%, var(--text)); border-radius:12px; padding:.9rem 1rem; color:var(--text); outline:none; transition:.2s}
-    input:focus, textarea:focus{box-shadow:var(--ring)}
-    label{font-weight:600; font-size:.9rem}
-
-    /* Reveal animation */
-    .reveal{opacity:0; transform:translateY(10px); transition:.5s ease}
-    .reveal.show{opacity:1; transform:none}
-
-    /* Play badge */
-    .store-badge{display:inline-flex; align-items:center; gap:.6rem; border:1px solid color-mix(in oklab, var(--brand) 25%, var(--text)); padding:.6rem .9rem; border-radius:12px}
-
-    .qr-box{display:grid; grid-template-columns:150px 1fr; gap:1rem; align-items:center}
-    @media (max-width:640px){.qr-box{grid-template-columns:1fr}}
+    /* QR */
+    .qr { display:grid; grid-template-columns: 160px 1fr; gap: 1rem; align-items:center; }
+    .qr img { width:160px; height:160px; object-fit:contain; border-radius: 14px; border:1px solid color-mix(in oklab, var(--accent) 28%, var(--text)); background: color-mix(in oklab, var(--bg) 90%, var(--accent) 6%); }
 
     /* Table */
-    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px}
-    th,td{padding:.8rem; text-align:left}
-    thead th{background:color-mix(in oklab, var(--bg) 85%, var(--brand) 8%)}
-    tbody td{border-top:1px solid color-mix(in oklab, var(--brand) 18%, var(--text))}
+    table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden; }
+    th, td { padding: .85rem; text-align: left; }
+    thead th { background: color-mix(in oklab, var(--bg) 85%, var(--accent) 8%); }
+    tbody td { border-top:1px solid color-mix(in oklab, var(--accent) 18%, var(--text)); }
+
+    /* Pricing */
+    .price { font-weight: 900; font-size: 1.8rem; }
+    .save { font-size: .85rem; color: var(--ok); font-weight: 700; }
+
+    /* Footer */
+    footer { border-top:1px solid color-mix(in oklab, var(--accent) 18%, var(--text)); padding: 2rem 0 4rem; background: color-mix(in oklab, var(--bg) 90%, transparent); }
+
+    /* Utilities */
+    .flex { display:flex; gap:.8rem; align-items:center; }
+    .split { display:flex; gap:.8rem; }
+    .split > * { flex: 1; }
+    .muted { color: var(--muted); }
+
+    /* Fab */
+    .fab { position: fixed; right: 18px; bottom: 18px; z-index: 60; display:flex; flex-direction: column; gap:.6rem }
+    .fab a { width:52px; height:52px; border-radius: 16px; display:grid; place-items:center; box-shadow: var(--shadow-2) }
+
+    /* Forms */
+    input, textarea, select { width:100%; background: color-mix(in oklab, var(--bg) 88%, var(--accent) 4%); border:1px solid color-mix(in oklab, var(--accent) 30%, var(--text)); border-radius: 12px; padding: .9rem 1rem; color: var(--text); outline: none; transition:.2s }
+    input:focus, textarea:focus, select:focus { box-shadow: var(--ring); }
+    label { font-weight: 600; font-size: .9rem; }
+
+    /* Motion / reveal */
+    .reveal { opacity: 0; transform: translateY(8px); transition: .5s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+    .fade-in { animation: fade .5s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+
+    /* Responsive */
+    @media (max-width: 1020px) {
+      .hero { grid-template-columns: 1fr; padding: 3.6rem 0 1.6rem; }
+      .cols-3 { grid-template-columns: repeat(2, 1fr); }
+      .cols-4 { grid-template-columns: repeat(2, 1fr); }
+      .qr { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .cols-3, .cols-4 { grid-template-columns: 1fr; }
+    }
   </style>
   <script>
-    // --- Theme toggle with localStorage ---
-    const setTheme = (t)=>document.documentElement.setAttribute('data-theme', t);
-    const storedTheme = localStorage.getItem('sg-theme');
-    if(storedTheme) setTheme(storedTheme); else if(matchMedia('(prefers-color-scheme: light)').matches) setTheme('light');
+    // Theme toggle + store
+    const setTheme = (t) => document.documentElement.setAttribute('data-theme', t);
+    const stored = localStorage.getItem('sg-theme');
+    if (stored) setTheme(stored); else if (matchMedia('(prefers-color-scheme: light)').matches) setTheme('light');
+    function toggleTheme(){ const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; setTheme(next); localStorage.setItem('sg-theme', next); }
 
-    function toggleTheme(){
-      const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      setTheme(cur); localStorage.setItem('sg-theme', cur);
-    }
-
-    // Smooth scroll for anchor links
-    addEventListener('click', e=>{
-      const a = e.target.closest('a[href^="#"]');
-      if(!a) return; const id = a.getAttribute('href').slice(1); const el = document.getElementById(id); if(!el) return;
-      e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+    // Smooth anchor scroll
+    addEventListener('click', (e)=>{ const a = e.target.closest('a[href^="#"]'); if(!a) return; const id = a.getAttribute('href').slice(1); const el = document.getElementById(id); if(!el) return; e.preventDefault(); el.scrollIntoView({behavior: 'smooth', block: 'start'}); });
 
     // Reveal on view
     document.addEventListener('DOMContentLoaded', ()=>{
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
-      }, {threshold:.12});
-      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      const io = new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target); } }); }, {threshold: .12});
+      document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
     });
 
-    // WhatsApp form submit (no backend). Adjust phone if needed.
+    // Parallax for bg field
+    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!prefersReduced){
+      addEventListener('scroll', ()=>{
+        const y = scrollY * 0.15; document.querySelector('.bg-field').style.transform = `translateY(${y}px)`;
+      }, {passive:true});
+    }
+
+    // WhatsApp form
     function sendWhatsApp(event){
       event.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -158,25 +179,24 @@
       const email = document.getElementById('email').value.trim();
       const service = document.getElementById('service').value;
       const message = document.getElementById('message').value.trim();
-      const text = encodeURIComponent(`New enquiry from ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`);
-      const target = '917483640694'; // +91 7483640694 without plus
+      const text = encodeURIComponent(`New enquiry from ${name}
+Phone: ${phone}
+Email: ${email}
+Service: ${service}
+Message: ${message}`);
+      const target = '917483640694';
       const url = `https://wa.me/${target}?text=${text}`;
       window.open(url, '_blank');
     }
 
-    // Copy phone to clipboard
-    function copyPhone(){
-      const num = '+91 74836 40694';
-      navigator.clipboard.writeText(num).then(()=>{
-        const tip = document.getElementById('copyTip');
-        tip.textContent = 'Copied!';
-        setTimeout(()=> tip.textContent = 'Copy', 1400);
-      });
-    }
+    // Copy phone
+    function copyPhone(){ const num = '+91 74836 40694'; navigator.clipboard.writeText(num).then(()=>{ const tip = document.getElementById('copyTip'); tip.textContent = 'Copied!'; setTimeout(()=> tip.textContent = 'Copy', 1400); }); }
   </script>
 </head>
-<body>
-  <!-- Floating Actions (Call + WhatsApp) -->
+<body class="fade-in">
+  <div class="bg-field" aria-hidden="true"></div>
+
+  <!-- Quick actions -->
   <div class="fab" aria-label="Quick actions">
     <a class="btn primary" href="tel:+917483640694" title="Call Shridhar Group" style="width:52px;height:52px; padding:0; justify-content:center">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.1 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.12.9.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L9 10a16 16 0 0 0 5 5l.56-.56a2 2 0 0 1 2.11-.45c.84.27 1.71.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
@@ -191,24 +211,15 @@
     <div class="container">
       <nav>
         <a href="#home" class="logo" aria-label="Shridhar Group home">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#6d28d9"/>
-                <stop offset="100%" stop-color="#22d3ee"/>
-              </linearGradient>
-            </defs>
-            <rect rx="14" width="64" height="64" fill="url(#g)"/>
-            <text x="50%" y="54%" text-anchor="middle" fill="#fff" font-size="36" font-weight="900" font-family="system-ui, -apple-system, Segoe UI, Roboto">SG</text>
-          </svg>
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#0067b8"/><stop offset="100%" stop-color="#50e6ff"/></linearGradient></defs><rect rx="14" width="64" height="64" fill="url(#g)"/><text x="50%" y="54%" text-anchor="middle" fill="#fff" font-size="36" font-weight="900" font-family="Segoe UI, system-ui">SG</text></svg>
           <span>Shridhar Group of Company</span>
         </a>
-        <div class="navlinks">
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="#portfolio">Work</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact" class="btn">Get Quote</a>
+        <div class="cmd">
+          <a class="pill" href="#services">Services</a>
+          <a class="pill" href="#process">Process</a>
+          <a class="pill" href="#portfolio">Work</a>
+          <a class="pill" href="#pricing">Pricing</a>
+          <a class="btn" href="#contact">Get Quote</a>
           <button class="btn" onclick="toggleTheme()" aria-label="Toggle theme">🌓</button>
         </div>
       </nav>
@@ -219,70 +230,44 @@
   <main id="home" class="container">
     <section class="hero">
       <div>
-        <span class="badge">🚀 Build • Launch • Grow</span>
-        <h1>Make your <span style="background:linear-gradient(90deg, var(--brand), var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent">brand</span> with us — Apps, Websites, E‑Commerce & Premium Identity.</h1>
-        <p>
-          We design & ship production‑ready apps, websites, and stores — and we handle the heavy lift: Play Store publishing, domain & hosting, Amazon/Flipkart seller onboarding, listings, and premium branding (logo, packaging, visiting cards).
-        </p>
+        <span class="pill">🚀 Build • Launch • Grow</span>
+        <h1>Make your <span class="accent">brand</span> with us — Microsoft‑grade polish across Apps, Websites, E‑Commerce & Identity.</h1>
+        <p>We design & ship production‑ready apps and sites, publish to Play Store, set up Amazon/Flipkart selling, and deliver premium branding (logo, packaging, visiting cards). End‑to‑end, zero headache.</p>
         <div class="flex" style="margin-top:1.1rem">
           <a href="#contact" class="btn primary">Get a Free Quote</a>
           <a href="#services" class="btn ghost">Explore Services</a>
         </div>
-        <div class="kpi" style="margin-top:1rem">
-          <span class="pill">⚡ Fast delivery</span>
+        <div class="flex" style="gap:.6rem; flex-wrap:wrap; margin-top:1rem">
           <span class="pill">🛡️ End‑to‑end support</span>
+          <span class="pill">⚡ Fast delivery</span>
           <span class="pill">💳 UPI & GST invoice</span>
         </div>
       </div>
-      <div class="hero-card reveal">
+      <div class="heroCard reveal">
         <div class="grid cols-3">
-          <div class="card">
-            <div class="icon">📱</div>
-            <h3>App Development</h3>
-            <p>Android app with modern UI, analytics, push, and <b>Play Store launch</b>.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🌐</div>
-            <h3>Websites</h3>
-            <p>Business sites, landing pages, or portals with domain, SSL, and hosting.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🛒</div>
-            <h3>Amazon & Flipkart</h3>
-            <p>Seller account setup + add products with SEO‑rich listings & images.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🎨</div>
-            <h3>Premium Branding</h3>
-            <p>Logo, color system, typography, packaging, and brand guidelines.</p>
-          </div>
-          <div class="card">
-            <div class="icon">💳</div>
-            <h3>Visiting Cards & Print</h3>
-            <p>High‑quality print‑ready designs with foil/emboss options.</p>
-          </div>
-          <div class="card">
-            <div class="icon">♻️</div>
-            <h3>Growth & Care</h3>
-            <p>Ongoing updates, A/B tests, analytics dashboards, and SEO.</p>
-          </div>
+          <div class="card"><div class="icon">📱</div><h3>App Development</h3><p>Modern Android app with analytics, push & <b>Play Store launch</b>.</p></div>
+          <div class="card"><div class="icon">🌐</div><h3>Website</h3><p>Business sites & portals with domain, SSL, and hosting.</p></div>
+          <div class="card"><div class="icon">🛒</div><h3>Amazon/Flipkart</h3><p>Seller account, catalog, SEO‑rich listings & uploads.</p></div>
+          <div class="card"><div class="icon">🎨</div><h3>Branding</h3><p>Logo suite, color/typography system & brand guide.</p></div>
+          <div class="card"><div class="icon">💳</div><h3>Print</h3><p>Visiting cards, letterheads — print‑ready CMYK.</p></div>
+          <div class="card"><div class="icon">📈</div><h3>Growth</h3><p>Updates, A/B tests, dashboards & SEO basics.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- QR + Play Store Section -->
+    <!-- QR + Play Store -->
     <section id="qr" class="reveal">
       <div class="section-h">
         <h2>Scan to view our app on Play Store</h2>
-        <span class="chip">Add your QR here</span>
+        <span class="chip">Attach your QR</span>
       </div>
-      <div class="qr-box card">
-        <img src="qr-placeholder.png" alt="Your app QR code" style="width:150px; height:150px; object-fit:contain; background:color-mix(in oklab, var(--bg) 90%, var(--brand) 6%); border-radius:12px; border:1px solid color-mix(in oklab, var(--brand) 30%, var(--text))" />
+      <div class="card qr">
+        <img src="qr-placeholder.png" alt="App QR code" />
         <div>
-          <p class="muted" style="margin-top:0">Replace <code>qr-placeholder.png</code> with your generated QR for the Play Store link. Or change this button to your app URL.</p>
-          <a class="store-badge" href="#" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1 21l12-9L1 3v18zm13.5-9L23 5.5 17.5 0 9 8l5.5 4zM9 16l8.5 8.5L23 19 14.5 11 9 16z"/></svg>
-            <span><strong>View on Play Store</strong><br/><span class="muted">Your app link here</span></span>
+          <p class="muted" style="margin-top:0">Replace <code>qr-placeholder.png</code> with your generated QR image, or place your Play Store URL on the badge.</p>
+          <a class="pill" href="#" target="_blank" rel="noopener" aria-label="View on Play Store">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1 21l12-9L1 3v18zm13.5-9L23 5.5 17.5 0 9 8l5.5 4zM9 16l8.5 8.5L23 19 14.5 11 9 16z"/></svg>
+            <strong>View on Play Store</strong>
           </a>
         </div>
       </div>
@@ -290,142 +275,52 @@
 
     <!-- Services -->
     <section id="services" class="reveal">
-      <div class="section-h">
-        <h2>What we do</h2>
-        <span class="chip">End‑to‑end execution</span>
-      </div>
+      <div class="section-h"><h2>What we do</h2><span class="chip">End‑to‑end execution</span></div>
       <div class="grid cols-3">
-        <div class="card">
-          <h3>App Development & Play Store</h3>
-          <ul>
-            <li>Custom Android app (Kotlin/Flutter or WebView + enhancements)</li>
-            <li>Play Store listing: icons, screenshots, description & ASO</li>
-            <li>Crash analytics, in‑app updates, privacy policy & launch checklist</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Website Development & Hosting</h3>
-          <ul>
-            <li>Business website or landing page with SSL & performance score</li>
-            <li>Custom domain, email setup, Search Console & sitemap</li>
-            <li>Contact forms, WhatsApp chat, and basic SEO</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Amazon/Flipkart Seller Setup</h3>
-          <ul>
-            <li>Seller registration guidance & GST invoice templates</li>
-            <li>Catalog creation, title/keyword research & A+ images</li>
-            <li>Listing upload and inventory basics</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Premium Logo & Branding</h3>
-          <ul>
-            <li>Logo suite (primary, mono, favicon) + color & type scale</li>
-            <li>Brand style guide PDF and social templates</li>
-            <li>Packaging & mockups as needed</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Print Collateral</h3>
-          <ul>
-            <li>Visiting cards, letterhead, envelope & ID cards</li>
-            <li>Print‑ready CMYK files with bleed & margins</li>
-            <li>Vendor coordination (optional)</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Maintenance & Growth</h3>
-          <ul>
-            <li>Monthly updates & uptime checks</li>
-            <li>Basic SEO, analytics dashboards & reports</li>
-            <li>Feature roadmap & A/B tests</li>
-          </ul>
-        </div>
+        <div class="card"><h3>App Development & Play Store</h3><ul><li>Android app (Kotlin/Flutter or WebView + extras)</li><li>Play Store listing: icons, screenshots, description & ASO</li><li>Analytics, in‑app updates, privacy policy & launch checklist</li></ul></div>
+        <div class="card"><h3>Website Development & Hosting</h3><ul><li>Business site or landing with SSL & performance score</li><li>Custom domain, email, Search Console & sitemap</li><li>Contact forms, WhatsApp chat, and basic SEO</li></ul></div>
+        <div class="card"><h3>Amazon/Flipkart Seller Setup</h3><ul><li>Seller registration guidance & GST invoice templates</li><li>Catalog creation, title/keyword research & A+ images</li><li>Listing upload and inventory basics</li></ul></div>
+        <div class="card"><h3>Premium Logo & Branding</h3><ul><li>Logo suite (primary, mono, favicon) + color & type scale</li><li>Brand style guide PDF & social templates</li><li>Packaging & mockups as needed</li></ul></div>
+        <div class="card"><h3>Print Collateral</h3><ul><li>Visiting cards, letterhead, envelope & ID cards</li><li>Print‑ready CMYK files with bleed & margins</li><li>Vendor coordination (optional)</li></ul></div>
+        <div class="card"><h3>Maintenance & Growth</h3><ul><li>Monthly updates & uptime checks</li><li>Analytics dashboards & reports</li><li>Feature roadmap & A/B tests</li></ul></div>
       </div>
     </section>
 
     <!-- Process -->
     <section id="process" class="reveal">
-      <div class="section-h">
-        <h2>Simple process, strong outcomes</h2>
-        <span class="chip">4‑step delivery</span>
-      </div>
+      <div class="section-h"><h2>Simple process, strong outcomes</h2><span class="chip">4‑step delivery</span></div>
       <div class="grid cols-4">
         <div class="card"><div class="icon">🧭</div><h3>1. Plan</h3><p>Requirements, scope, brand direction, and success metrics.</p></div>
-        <div class="card"><div class="icon">🛠️</div><h3>2. Build</h3><p>Design & develop app/website with weekly previews.</p></div>
-        <div class="card"><div class="icon">🧪</div><h3>3. Test</h3><p>QA, performance, and compliance (Play Store/SEO/Policy).</p></div>
+        <div class="card"><div class="icon">🛠️</div><h3>2. Build</h3><p>Design & develop with weekly previews.</p></div>
+        <div class="card"><div class="icon">🧪</div><h3>3. Test</h3><p>QA & compliance (Play Store/SEO/Policy).</p></div>
         <div class="card"><div class="icon">🚀</div><h3>4. Launch</h3><p>Publish to Play Store, deploy site, submit to search engines.</p></div>
       </div>
     </section>
 
-    <!-- Portfolio (placeholders) -->
+    <!-- Portfolio placeholders -->
     <section id="portfolio" class="reveal">
-      <div class="section-h">
-        <h2>Selected work</h2>
-        <span class="chip">Add your screenshots</span>
-      </div>
+      <div class="section-h"><h2>Selected work</h2><span class="chip">Add your screenshots</span></div>
       <div class="grid cols-3">
-        <figure class="card"><img alt="App UI" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' fill='%23a5b4fc' font-family='system-ui' font-size='28'%3EApp UI Screenshot%3C/text%3E%3C/svg%3E" style="width:100%; border-radius:12px"/><figcaption class="muted">Fintech app – dark UI</figcaption></figure>
-        <figure class="card"><img alt="Website" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' fill='%23a5b4fc' font-family='system-ui' font-size='28'%3EWebsite Landing%3C/text%3E%3C/svg%3E" style="width:100%; border-radius:12px"/><figcaption class="muted">SaaS landing – speed 95+</figcaption></figure>
-        <figure class="card"><img alt="Branding" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%23111827'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' fill='%23a5b4fc' font-family='system-ui' font-size='28'%3ELogo & Packaging%3C/text%3E%3C/svg%3E" style="width:100%; border-radius:12px"/><figcaption class="muted">Brand kit & mockups</figcaption></figure>
+        <figure class="card"><img alt="App UI" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%2311161d'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' fill='%2366b9ff' font-family='Segoe UI' font-size='28'%3EApp UI Screenshot%3C/text%3E%3C/svg%3E" style="width:100%; border-radius:12px"/><figcaption class="muted">Fintech app – dark UI</figcaption></figure>
+        <figure class="card"><img alt="Website" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%2311161d'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' fill='%2366b9ff' font-family='Segoe UI' font-size='28'%3EWebsite Landing%3C/text%3E%3C/svg%3E" style="width:100%; border-radius:12px"/><figcaption class="muted">SaaS landing – speed 95+</figcaption></figure>
+        <figure class="card"><img alt="Branding" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%2311161d'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' fill='%2366b9ff' font-family='Segoe UI' font-size='28'%3ELogo %26 Packaging%3C/text%3E%3C/svg%3E" style="width:100%; border-radius:12px"/><figcaption class="muted">Brand kit & mockups</figcaption></figure>
       </div>
     </section>
 
     <!-- Pricing -->
     <section id="pricing" class="reveal">
-      <div class="section-h">
-        <h2>Transparent pricing</h2>
-        <span class="chip">Pay per project</span>
-      </div>
+      <div class="section-h"><h2>Transparent pricing</h2><span class="chip">Pay per project</span></div>
       <div class="grid cols-3">
-        <div class="card">
-          <h3>Starter Website</h3>
-          <p class="muted">Single page landing with domain & hosting</p>
-          <div class="price">₹9,999</div>
-          <p class="save">Includes SSL & basic SEO</p>
-          <ul>
-            <li>1 page design & build</li>
-            <li>Custom domain + SSL</li>
-            <li>WhatsApp & contact form</li>
-          </ul>
-          <a href="#contact" class="btn primary" style="margin-top:.6rem">Start</a>
-        </div>
-        <div class="card">
-          <h3>Play Store App</h3>
-          <p class="muted">Production app + listing & launch</p>
-          <div class="price">₹24,999</div>
-          <p class="save">Publishing included</p>
-          <ul>
-            <li>Modern UI + analytics</li>
-            <li>Privacy policy & assets</li>
-            <li>Play Store submission</li>
-          </ul>
-          <a href="#contact" class="btn primary" style="margin-top:.6rem">Launch</a>
-        </div>
-        <div class="card">
-          <h3>Branding Pro</h3>
-          <p class="muted">Logo suite + brand style guide</p>
-          <div class="price">₹14,999</div>
-          <p class="save">Print & social kit</p>
-          <ul>
-            <li>3 concepts, 2 revisions</li>
-            <li>Color, type, assets</li>
-            <li>Business card design</li>
-          </ul>
-          <a href="#contact" class="btn primary" style="margin-top:.6rem">Brand me</a>
-        </div>
+        <div class="card"><h3>Starter Website</h3><p class="muted">Single page landing with domain & hosting</p><div class="price">₹9,999</div><p class="save">Includes SSL & basic SEO</p><ul><li>1 page design & build</li><li>Custom domain + SSL</li><li>WhatsApp & contact form</li></ul><a href="#contact" class="btn primary" style="margin-top:.6rem">Start</a></div>
+        <div class="card"><h3>Play Store App</h3><p class="muted">Production app + listing & launch</p><div class="price">₹24,999</div><p class="save">Publishing included</p><ul><li>Modern UI + analytics</li><li>Privacy policy & assets</li><li>Play Store submission</li></ul><a href="#contact" class="btn primary" style="margin-top:.6rem">Launch</a></div>
+        <div class="card"><h3>Branding Pro</h3><p class="muted">Logo suite + brand style guide</p><div class="price">₹14,999</div><p class="save">Print & social kit</p><ul><li>3 concepts, 2 revisions</li><li>Color, type, assets</li><li>Business card design</li></ul><a href="#contact" class="btn primary" style="margin-top:.6rem">Brand me</a></div>
       </div>
       <p class="muted" style="margin-top:.8rem">Need Amazon/Flipkart setup or a custom package? <a href="#contact"><u>Contact us</u></a> for a tailored quote.</p>
     </section>
 
-    <!-- Feature Table -->
+    <!-- Deliverables table -->
     <section class="reveal">
-      <div class="section-h">
-        <h2>Deliverables checklist</h2>
-        <span class="chip">What you get</span>
-      </div>
+      <div class="section-h"><h2>Deliverables checklist</h2><span class="chip">What you get</span></div>
       <div class="card">
         <table>
           <thead><tr><th>Area</th><th>Core deliverables</th><th>Extras</th></tr></thead>
@@ -442,14 +337,11 @@
 
     <!-- Contact -->
     <section id="contact" class="reveal">
-      <div class="section-h">
-        <h2>Let’s build your brand</h2>
-        <span class="chip">Talk to us on call or WhatsApp</span>
-      </div>
+      <div class="section-h"><h2>Let’s build your brand</h2><span class="chip">Call or WhatsApp</span></div>
       <div class="split">
         <div class="card">
           <p><strong>Phone:</strong> <a href="tel:+917483640694">+91 74836 40694</a> <button id="copyTip" class="btn ghost" style="padding:.4rem .7rem; font-size:.9rem" onclick="copyPhone()">Copy</button></p>
-          <p><strong>Email:</strong> <a href="mailto:hello@shridhar.group">hello@shridhar.group</a> (change to your email)</p>
+          <p><strong>Email:</strong> <a href="mailto:hello@shridhar.group">hello@shridhar.group</a> (replace with yours)</p>
           <p><strong>Address:</strong> Your city, India (update)</p>
           <p class="muted">Business hours: 10:00 AM – 7:00 PM IST</p>
           <div class="flex" style="margin-top:.4rem">
@@ -459,37 +351,16 @@
         </div>
         <form class="card" onsubmit="sendWhatsApp(event)">
           <div class="grid" style="grid-template-columns:1fr 1fr; gap:.8rem">
-            <div>
-              <label for="name">Name</label>
-              <input id="name" required placeholder="Your name" />
-            </div>
-            <div>
-              <label for="phone">Phone</label>
-              <input id="phone" required placeholder="Your phone" />
-            </div>
+            <div><label for="name">Name</label><input id="name" required placeholder="Your name" /></div>
+            <div><label for="phone">Phone</label><input id="phone" required placeholder="Your phone" /></div>
           </div>
           <div class="grid" style="grid-template-columns:1fr 1fr; gap:.8rem; margin-top:.8rem">
-            <div>
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@example.com" />
-            </div>
-            <div>
-              <label for="service">Service</label>
-              <select id="service" style="width:100%; padding:.9rem 1rem; border-radius:12px; border:1px solid color-mix(in oklab, var(--brand) 30%, var(--text)); background:color-mix(in oklab, var(--bg) 88%, var(--brand) 4%); color:var(--text)">
-                <option>App Development & Play Store</option>
-                <option>Website Development</option>
-                <option>Amazon/Flipkart Seller Setup</option>
-                <option>Premium Logo & Branding</option>
-                <option>Visiting Cards & Print</option>
-                <option>Maintenance & SEO</option>
-                <option>Custom Package</option>
-              </select>
+            <div><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" /></div>
+            <div><label for="service">Service</label>
+              <select id="service"><option>App Development & Play Store</option><option>Website Development</option><option>Amazon/Flipkart Seller Setup</option><option>Premium Logo & Branding</option><option>Visiting Cards & Print</option><option>Maintenance & SEO</option><option>Custom Package</option></select>
             </div>
           </div>
-          <div style="margin-top:.8rem">
-            <label for="message">Message</label>
-            <textarea id="message" rows="4" placeholder="Tell us about your project…"></textarea>
-          </div>
+          <div style="margin-top:.8rem"><label for="message">Message</label><textarea id="message" rows="4" placeholder="Tell us about your project…"></textarea></div>
           <div class="flex" style="justify-content:space-between; margin-top:.9rem">
             <button type="submit" class="btn primary">Send on WhatsApp</button>
             <a class="btn ghost" href="#pricing">See pricing</a>
@@ -504,7 +375,7 @@
       <div class="split">
         <div>
           <div class="logo" style="margin-bottom:.6rem">
-            <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#6d28d9"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs><rect rx="14" width="64" height="64" fill="url(#g2)"/><text x="50%" y="54%" text-anchor="middle" fill="#fff" font-size="36" font-weight="900" font-family="system-ui">SG</text></svg>
+            <svg viewBox="0 0 64 64" width="28" height="28" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#0067b8"/><stop offset="100%" stop-color="#50e6ff"/></linearGradient></defs><rect rx="14" width="64" height="64" fill="url(#g2)"/><text x="50%" y="54%" text-anchor="middle" fill="#fff" font-size="36" font-weight="900" font-family="Segoe UI">SG</text></svg>
             <strong>Shridhar Group of Company</strong>
           </div>
           <p class="muted">We help founders and SMEs build, launch, and grow — across apps, websites, marketplaces, and brand identity.</p>
@@ -530,7 +401,7 @@
       </div>
       <p class="muted" style="margin-top:1.2rem">© <span id="y"></span> Shridhar Group of Company. All rights reserved.</p>
     </div>
-    <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
   </footer>
 
   <!-- Structured data -->
@@ -541,20 +412,10 @@
     "name": "Shridhar Group of Company",
     "url": "https://example.com",
     "telephone": "+91 7483640694",
-    "sameAs": [
-      "https://wa.me/917483640694"
-    ],
+    "sameAs": [ "https://wa.me/917483640694" ],
     "logo": "https://example.com/logo.png",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
-    },
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+91 7483640694",
-      "contactType": "customer service",
-      "areaServed": "IN"
-    }]
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+91 7483640694", "contactType": "customer service", "areaServed": "IN" }]
   }
   </script>
 </body>
