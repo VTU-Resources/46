@@ -2,435 +2,404 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>Shridhar Group — App-style Web App</title>
-  <meta name="theme-color" content="#071026">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Shridhar Group of Company — App</title>
+  <meta name="theme-color" content="#0a0a0b" />
   <style>
-    /* ---------------------- ROOT THEME ---------------------- */
     :root{
-      --bg: #071026;        /* dark background */
-      --card: #0d1624;
-      --text: #e6eef7;
-      --muted: rgba(230,238,247,0.68);
-      --accent-1: #6dd3ff;
-      --accent-2: #a78bfa;
-      --glass: rgba(255,255,255,0.03);
-      --radius: 16px;
-      --nav-h: 82px;
+      --bg:#0b0c10;
+      --bg-elev:#121318;
+      --card:#171923;
+      --text:#e8ebf1;
+      --sub:#b8c2d9;
+      --brand:#6aa5ff;
+      --brand-2:#7ef6d2;
+      --accent:#b388ff;
+      --ok:#39d98a;
+      --warn:#ffd166;
+      --danger:#ff6b6b;
+      --muted: #3a3f54;
+      --glass: rgba(255,255,255,0.06);
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --ring: 0 0 0 6px rgba(106,165,255,.12);
+      --grad: linear-gradient(140deg, var(--brand) 0%, var(--accent) 50%, var(--brand-2) 100%);
     }
-    .light{
-      --bg: #f7fafc;
-      --card: #ffffff;
-      --text: #0b1220;
-      --muted: rgba(11,18,32,0.6);
-      --accent-1: #2563eb;
-      --accent-2: #7c3aed;
-      --glass: rgba(2,6,23,0.03);
-    }
-
-    /* ---------------------- RESET ---------------------- */
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;color:var(--text);background:radial-gradient(800px 400px at 10% 0%, rgba(167,139,250,0.08), transparent 20%),radial-gradient(700px 350px at 95% 100%, rgba(109,211,255,0.06), transparent 20%),var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    img{max-width:100%;display:block}
-    a{color:inherit}
-    button{font:inherit}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 50% -200px, #1a1f33 0%, transparent 60%) , var(--bg);
+      color:var(--text);
+      letter-spacing:.2px;
+    }
 
-    /* ---------------------- LAYOUT ---------------------- */
-    .app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto}
-    header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(6px) saturate(1.1);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.03)}
-    .top-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .badge{width:44px;height:44px;border-radius:10px;background:conic-gradient(from 140deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:0 8px 30px rgba(0,0,0,0.35);}
-    .brand h1{font-size:15px;margin:0}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    /* Phone preview wrapper (centers app on desktop) */
+    .frame{
+      min-height:100vh; display:grid; place-items:center; padding:22px;
+    }
+    .phone{
+      width:min(480px, 100%); height:calc(100vh - 44px); background:var(--bg-elev); border-radius:28px;
+      border:1px solid rgba(255,255,255,.08); overflow:hidden; box-shadow: var(--shadow);
+      position:relative;
+    }
 
-    .theme-toggle{display:inline-grid;grid-auto-flow:column;align-items:center;gap:8px;padding:8px;border-radius:999px;background:var(--card);border:1px solid rgba(255,255,255,0.03)}
-    .theme-toggle input{display:none}
-    .knob{width:28px;height:28px;border-radius:999px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+    /* Top brand header */
+    header.appbar{
+      position:sticky; top:0; z-index:5; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0));
+      padding:16px 18px 8px; backdrop-filter: blur(10px);
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:50%; background:var(--grad); box-shadow:var(--ring);
+      display:grid; place-items:center; font-weight:800; color:#0a0a0a; letter-spacing:.4px;
+    }
+    .brand h1{margin:0; font-size:18px}
+    .brand p{margin:2px 0 0; color:var(--sub); font-size:12px}
 
-    main.content{padding:16px;padding-bottom:calc(var(--nav-h) + 28px)}
+    /* Main scroll area */
+    main{height:calc(100% - 110px); overflow:auto; scroll-behavior:smooth; padding:8px 16px 120px}
 
-    .row{display:grid;gap:12px}
-    @media(min-width:700px){.grid-2{grid-template-columns:repeat(2,1fr)}}
+    /* Cards */
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius); padding:16px; box-shadow: var(--shadow);
+    }
+    .card + .card{margin-top:14px}
 
-    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));border-radius:calc(var(--radius) + 4px);padding:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.45)}
-    h2{margin:0 0 8px}
-    .muted{color:var(--muted);font-size:13px}
+    .hero{
+      position:relative; overflow:hidden; padding:18px; border-radius:24px; background:var(--card);
+    }
+    .hero h2{margin:6px 0 6px; font-size:22px}
+    .hero p{margin:0; color:var(--sub)}
+    .ribbon{
+      position:absolute; inset:auto 12px 12px auto; background:var(--grad); color:#0a0a0a; font-weight:700; border-radius:999px;
+      padding:6px 12px; font-size:12px; box-shadow: var(--ring);
+    }
 
-    /* ---------------------- HERO / CTA ---------------------- */
-    .hero{display:grid;gap:12px;align-items:center;padding:18px;border-radius:18px;background:linear-gradient(135deg, rgba(109,211,255,0.08), rgba(167,139,250,0.06));border:1px solid rgba(255,255,255,0.03)}
-    .hero h1{font-size:20px;margin:0}
-    .cta{display:flex;gap:10px}
-    .btn{padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:var(--card);cursor:pointer}
-    .btn.primary{background:linear-gradient(180deg,var(--accent-1),var(--accent-2));color:white;font-weight:700;box-shadow:0 12px 30px rgba(109,211,255,0.12)}
+    .grid{display:grid; gap:12px}
+    .grid.cols-2{grid-template-columns: 1fr 1fr}
 
-    /* ---------------------- FEATURES GRID ---------------------- */
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    @media(min-width:640px){.features{grid-template-columns:repeat(4,1fr)}}
-    .feature{display:flex;gap:10px;align-items:flex-start}
-    .feat-ico{width:42px;height:42px;border-radius:10px;background:linear-gradient(180deg,rgba(109,211,255,0.08),rgba(167,139,250,0.06));display:grid;place-items:center;border:1px solid rgba(255,255,255,0.03)}
+    .service{
+      display:flex; gap:12px; padding:14px; border-radius:16px; background:var(--glass); border:1px solid rgba(255,255,255,.06)
+    }
+    .ico{width:40px; height:40px; border-radius:12px; background:var(--grad); display:grid; place-items:center; box-shadow: var(--ring)}
+    .service h4{margin:0; font-size:15px}
+    .service p{margin:4px 0 0; color:var(--sub); font-size:12px}
 
-    /* ---------------------- PORTFOLIO CARDS ---------------------- */
-    .portfolio{display:grid;gap:10px}
-    @media(min-width:640px){.portfolio{grid-template-columns:repeat(2,1fr)}}
-    .proj{display:flex;gap:12px;align-items:center}
-    .proj-thumb{width:64px;height:52px;border-radius:8px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;color:#07203a;font-weight:700}
+    .cta-row{display:flex; gap:10px; margin-top:12px}
+    .btn{
+      appearance:none; border:0; border-radius:14px; padding:12px 16px; font-weight:700; cursor:pointer;
+      background:var(--grad); color:#0a0a0a; box-shadow: var(--ring); transition:transform .08s ease;
+    }
+    .btn.ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.14)}
+    .btn:active{transform: translateY(1px) scale(.995)}
 
-    /* ---------------------- PROCESS / STEPS ---------------------- */
-    .steps{display:grid;gap:10px}
-    .step{display:flex;gap:12px;align-items:start}
-    .step .num{width:36px;height:36px;border-radius:10px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;font-weight:700;color:#022}
+    .list{display:flex; flex-direction:column; gap:10px}
+    .list .item{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:12px; background:var(--glass); border:1px solid rgba(255,255,255,.06)}
+    .pill{font-size:11px; padding:6px 10px; border-radius:999px; background:#121420; color:var(--sub); border:1px solid rgba(255,255,255,.08)}
 
-    /* ---------------------- TESTIMONIALS ---------------------- */
-    .testi{display:grid;gap:10px}
-    @media(min-width:700px){.testi{grid-template-columns:repeat(3,1fr)}}
+    /* QR section */
+    .qr-wrap{display:grid; place-items:center; gap:10px; text-align:center}
+    .qr-box{width:180px; height:180px; border-radius:16px; background:#fff; display:grid; place-items:center; overflow:hidden}
+    .qr-box img{width:100%; height:100%; object-fit:cover}
+    .qr-actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
 
-    /* ---------------------- FAQ ---------------------- */
-    .faq .q{border-top:1px solid rgba(255,255,255,0.03);padding:12px 0;cursor:pointer}
-    .faq .a{color:var(--muted);font-size:13px;display:none;margin-top:8px}
-    .faq .q.open .a{display:block}
+    /* Bottom Nav + Center FAB */
+    .bottom{
+      position:fixed; left:50%; transform:translateX(-50%); bottom:14px; width:min(500px, 92vw);
+      height:74px; background:rgba(18,19,24,.82); backdrop-filter: blur(14px);
+      border:1px solid rgba(255,255,255,.08); border-radius:22px; display:flex; align-items:center; justify-content:space-around;
+      box-shadow: var(--shadow);
+    }
+    .nav-btn{width:58px; height:58px; border-radius:50%; display:grid; place-items:center; cursor:pointer; position:relative;
+      transition: transform .18s ease;
+    }
+    .nav-btn:active{transform:scale(.97)}
+    .nav-btn .label{position:absolute; bottom:-18px; font-size:11px; color:var(--sub)}
 
-    /* ---------------------- BOTTOM NAV / TABBAR ---------------------- */
-    .nav-wrap{position:fixed;left:0;right:0;bottom:12px;display:grid;place-items:center;pointer-events:none;z-index:60}
-    .tabbar{width:min(560px,94%);height:var(--nav-h);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;position:relative;pointer-events:auto;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.03)}
+    /* icons */
+    .nav-btn svg{width:22px; height:22px; opacity:.9}
 
-    .tab{position:relative;display:grid;place-items:center;height:100%;gap:6px;border-radius:14px;border:none;background:transparent;cursor:pointer;padding-bottom:6px}
-    .tab .ic{width:22px;height:22px;display:grid;place-items:center;transition:transform .28s cubic-bezier(.2,.9,.3,1)}
-    .tab span{font-size:11px;color:var(--muted);margin-top:6px;display:block}
+    /* Center Home FAB */
+    .fab{
+      width:82px; height:82px; margin-top:-34px; border-radius:50%; background:var(--grad); color:#0a0a0a; box-shadow: 0 12px 30px rgba(106,165,255,.45);
+      display:grid; place-items:center; position:relative; outline: none; border:0; cursor:pointer;
+      transition: transform .18s ease;
+    }
+    .fab:active{transform:translateY(1px) scale(.99)}
+    .pulse{position:absolute; inset:0; border-radius:50%; pointer-events:none;}
+    .pulse::before, .pulse::after{
+      content:""; position:absolute; inset:0; border-radius:50%; box-shadow: 0 0 0 0 rgba(106,165,255,.35); animation: pulse 2.4s infinite;
+    }
+    .pulse::after{animation-delay:1.2s}
+    @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(106,165,255,.35)} 70%{ box-shadow: 0 0 0 22px rgba(106,165,255,0)} 100%{ box-shadow: 0 0 0 0 rgba(106,165,255,0)} }
 
-    .tab.active span{color:var(--text);font-weight:700}
-    .tab.active .ic{transform:translateY(-6px) scale(1.14)}
+    /* Active state highlight ring under nav items */
+    .ring{position:absolute; width:58px; height:58px; border-radius:50%; border:1px solid rgba(106,165,255,.35); top:8px; transform:translateX(calc(var(--x,0) * 1px)); transition: transform .25s ease}
 
-    /* Indicator circle that moves under active tab */
-    .indicator{position:absolute;bottom:12px;width:52px;height:52px;border-radius:50%;transform:translateX(0);left:0;transition:transform .42s cubic-bezier(.2,.9,.3,1),box-shadow .28s;pointer-events:none;display:block}
-    .indicator .core{width:44px;height:44px;border-radius:50%;margin:auto;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 12px 30px rgba(109,211,255,0.12);display:grid;place-items:center}
+    /* Sections */
+    section{display:none}
+    section.active{display:block; animation:fade .18s ease}
+    @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
 
-    /* FAB */
-    .center-slot{position:relative;display:grid;place-items:center}
-    .fab{position:absolute;left:50%;top:-26px;transform:translateX(-50%);width:72px;height:72px;border-radius:999px;border:none;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:0 18px 40px rgba(109,211,255,0.12);cursor:pointer}
+    .contact-card{display:grid; gap:10px}
+    .contact-row{display:flex; gap:10px; flex-wrap:wrap}
+    .mini{font-size:12px; color:var(--sub)}
 
-    /* small screens: tighten spacing */
-    @media(max-width:360px){.indicator{width:46px;height:46px}.indicator .core{width:40px;height:40px}.fab{width:64px;height:64px}}
+    a.link{color:var(--brand); text-decoration:none}
+    a.link:hover{text-decoration:underline}
 
-    /* page & animations */
-    .page{display:none}
-    .page.active{display:block;animation:fadeIn .32s ease}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-    /* forms */
-    input,textarea{border-radius:12px;border:1px solid rgba(255,255,255,0.03);padding:10px;background:var(--card);color:var(--text)}
-
-    /* small utilities */
-    .muted-quiet{color:rgba(255,255,255,0.06);font-size:11px}
+    @media (min-width:900px){
+      .phone{height:860px}
+    }
   </style>
 </head>
 <body>
-  <div class="app" id="app">
-    <header class="top">
-      <div class="top-inner">
+  <div class="frame">
+    <div class="phone" id="app">
+      <header class="appbar">
+        <div class="logo" aria-hidden="true">SG</div>
         <div class="brand">
-          <div class="badge" aria-hidden="true">SG</div>
-          <div>
-            <h1>Shridhar Group of Company</h1>
-            <p class="muted">App Development · Play Store Publish · Branding</p>
-          </div>
+          <h1>Shridhar Group of Company</h1>
+          <p>App Development • Websites • Amazon/Flipkart Seller Setup • Branding</p>
         </div>
-        <label class="theme-toggle" title="Toggle theme">
-          <input id="themeToggle" type="checkbox">
-          <div style="font-size:13px">Theme</div>
-          <div class="knob" aria-hidden="true"></div>
-        </label>
-      </div>
-    </header>
+      </header>
 
-    <main class="content">
-      <!-- HOME -->
-      <section id="home" class="page active">
-        <div class="hero card">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-            <div>
-              <h1>Build. Launch. Brand — with confidence.</h1>
-              <p class="muted">End-to-end product studio: apps, websites, marketplace onboarding and premium brand kits.</p>
-            </div>
-            <div style="min-width:140px;display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-              <a class="btn primary" href="#contact" data-tab="contact">Contact Now</a>
-              <a class="btn" href="#services" data-tab="services">View Services</a>
+      <main>
+        <!-- HOME -->
+        <section id="home" class="active">
+          <div class="hero card">
+            <span class="ribbon">1000% Brand Focus</span>
+            <h2>Make your brand real, fast</h2>
+            <p>We design, build, and launch: Android apps, responsive websites, premium logos, and complete seller onboarding for Amazon & Flipkart.</p>
+            <div class="cta-row">
+              <button class="btn" id="ctaTalk">Talk to Shridhar</button>
+              <button class="btn ghost" id="ctaPortfolio">View Services</button>
             </div>
           </div>
 
-          <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-            <div style="display:flex;gap:10px;align-items:center">
-              <div style="width:86px;height:86px;border-radius:12px;background:white;overflow:hidden;display:grid;place-items:center;border:1px solid rgba(255,255,255,0.04)">
-                <!-- placeholder QR: replace with your real QR image -->
-                <img alt="QR" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='100%25' height='100%25' fill='white'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' fill='black' font-family='monospace' font-size='14'%3EQR%3C/text%3E%3C/svg%3E">
-              </div>
+          <div class="grid cols-2" style="margin-top:14px">
+            <div class="service">
+              <div class="ico">🏗️</div>
               <div>
-                <div style="font-weight:700">Open our App</div>
-                <div class="muted">Scan or tap to open on Play Store</div>
-                <div style="margin-top:8px"><a class="btn" id="appLink" href="https://play.google.com/store/apps/details?id=com.shridhar.group" target="_blank" rel="noopener">Open App →</a></div>
+                <h4>App Development</h4>
+                <p>Play Store publish, updates, screenshots, ASO.</p>
               </div>
             </div>
-            <div style="flex:1;min-width:220px">
-              <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <span class="muted chip">App Development</span>
-                <span class="muted chip">Play Store Publish</span>
-                <span class="muted chip">Website</span>
-                <span class="muted chip">Amazon & Flipkart</span>
-                <span class="muted chip">Branding</span>
-                <span class="muted chip">Cards & Print</span>
+            <div class="service">
+              <div class="ico">🛒</div>
+              <div>
+                <h4>Amazon/Flipkart</h4>
+                <p>Seller account setup, listing, catalog, A+.</p>
+              </div>
+            </div>
+            <div class="service">
+              <div class="ico">🖥️</div>
+              <div>
+                <h4>Websites</h4>
+                <p>Lightning‑fast, SEO, analytics & hosting.</p>
+              </div>
+            </div>
+            <div class="service">
+              <div class="ico">🏷️</div>
+              <div>
+                <h4>Branding</h4>
+                <p>Logo, color system, guidelines, visiting cards.</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div style="height:12px"></div>
-
-        <div class="row grid-2">
-          <article class="card">
-            <h2>Premium by default</h2>
-            <p class="muted">We focus on clarity, fast performance, store-ready assets and brand coherence so you can present like a leader.</p>
-            <div style="margin-top:12px;display:grid;gap:8px">
-              <div class="feature"><div class="feat-ico">⚡</div><div><strong>Speed & stability</strong><div class="muted">Optimised code and assets.</div></div></div>
-              <div class="feature"><div class="feat-ico">🔒</div><div><strong>Privacy & compliance</strong><div class="muted">Store & marketplace ready.</div></div></div>
-              <div class="feature"><div class="feat-ico">🎨</div><div><strong>Brand system</strong><div class="muted">Logo, palette, typography, mockups.</div></div></div>
-              <div class="feature"><div class="feat-ico">📦</div><div><strong>Marketplace setup</strong><div class="muted">Amazon/Flipkart listing & onboarding.</div></div></div>
-            </div>
-          </article>
-
-          <article class="card">
-            <h2>Recent work</h2>
-            <p class="muted">A selection of store-ready projects and branded launches.</p>
-            <div class="portfolio" style="margin-top:12px">
-              <div class="proj card"><div class="proj-thumb">A1</div><div><strong>EduLearn App</strong><div class="muted">Mobile-first learning app, Play Store launch</div></div></div>
-              <div class="proj card"><div class="proj-thumb">S2</div><div><strong>ShopNow Store</strong><div class="muted">Ecommerce listing + A+ pages</div></div></div>
-              <div class="proj card"><div class="proj-thumb">B3</div><div><strong>Brand Pack</strong><div class="muted">Logo + stationery + mockups</div></div></div>
-              <div class="proj card"><div class="proj-thumb">W4</div><div><strong>Corporate Site</strong><div class="muted">Fast, SEO-ready landing site</div></div></div>
-            </div>
-          </article>
-        </div>
-
-        <div style="height:12px"></div>
-
-        <article class="card">
-          <h2>How we work</h2>
-          <div class="steps" style="margin-top:10px">
-            <div class="step"><div class="num">1</div><div><strong>Discover</strong><div class="muted">We learn your goals & constraints.</div></div></div>
-            <div class="step"><div class="num">2</div><div><strong>Design</strong><div class="muted">Brand direction, screens & assets.</div></div></div>
-            <div class="step"><div class="num">3</div><div><strong>Develop</strong><div class="muted">Fast builds, CI, testing & signing.</div></div></div>
-            <div class="step"><div class="num">4</div><div><strong>Launch</strong><div class="muted">Play Store release and marketplace onboarding.</div></div></div>
-          </div>
-        </article>
-
-        <div style="height:12px"></div>
-
-        <article class="card testi">
-          <h2>What clients say</h2>
-          <div class="testi" style="margin-top:10px">
-            <div class="card">"Shridhar Group shipped our MVP in 3 weeks — clean & store-ready."<div class="muted">— Priya, EduStart</div></div>
-            <div class="card">"Branding and packaging looked premium on day one."<div class="muted">— Karan, Seller</div></div>
-            <div class="card">"Handled our Amazon onboarding end-to-end."<div class="muted">— Rahul, Retail</div></div>
-          </div>
-        </article>
-
-      </section>
-
-      <!-- SERVICES -->
-      <section id="services" class="page">
-        <div class="card">
-          <h2>Services (detailed)</h2>
-          <div style="margin-top:10px;display:grid;gap:10px">
-            <div class="card"><strong>App Development</strong>
-              <div class="muted">Android/iOS hybrid or native, store assets, privacy, release pipeline.</div>
-            </div>
-            <div class="card"><strong>Play Store Publishing</strong>
-              <div class="muted">Listing creation, screenshots, store optimization and release.</div>
-            </div>
-            <div class="card"><strong>Website Development</strong>
-              <div class="muted">Landing pages, CMS integration, hosting and SEO basics.</div>
-            </div>
-            <div class="card"><strong>Marketplace Onboarding</strong>
-              <div class="muted">Amazon/Flipkart: account setup, listings, A+ content guidance.</div>
-            </div>
-            <div class="card"><strong>Branding & Print</strong>
-              <div class="muted">Logo, color system, business cards and print-ready files.</div>
+          <div class="card" style="margin-top:14px">
+            <h3 style="margin:0 0 6px">Install our app</h3>
+            <p class="mini">Attach your Play Store QR code below or paste the app link to share.</p>
+            <div class="qr-wrap" style="margin-top:10px">
+              <div class="qr-box">
+                <img id="qrPreview" alt="App QR preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='100%25' height='100%25' fill='%23ffffff'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23000' font-family='monospace' font-size='12'%3EUpload QR%3C/text%3E%3C/svg%3E"/>
+              </div>
+              <div class="qr-actions">
+                <label class="btn ghost" for="qrFile">Upload QR</label>
+                <input id="qrFile" type="file" accept="image/*" hidden />
+                <button class="btn ghost" id="btnDownloadQR">Download QR</button>
+              </div>
+              <div style="width:100%">
+                <input id="appLink" type="url" placeholder="https://play.google.com/store/apps/details?id=your.app" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:#0f1117; color:var(--text)" />
+                <div class="cta-row" style="justify-content:center">
+                  <button class="btn" id="btnShare">Share App Link</button>
+                  <button class="btn ghost" id="btnCopy">Copy Link</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- PORTFOLIO -->
-      <section id="portfolio" class="page">
-        <div class="card">
-          <h2>Portfolio</h2>
-          <div class="portfolio" style="margin-top:10px">
-            <div class="proj card"><div class="proj-thumb">P1</div><div><strong>Example App</strong><div class="muted">Store-ready with in-app purchases</div></div></div>
-            <div class="proj card"><div class="proj-thumb">P2</div><div><strong>Merchant Site</strong><div class="muted">Catalog, checkout, analytics</div></div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact" class="page">
-        <div class="card">
-          <h2>Contact</h2>
-          <div style="display:grid;gap:10px;margin-top:10px">
-            <div class="feature"><div class="feat-ico">📞</div><div><strong>Call</strong><div class="muted"><a href="tel:+917483640694">+91 74836 40694</a></div></div></div>
-            <div class="feature"><div class="feat-ico">💬</div><div><strong>WhatsApp</strong><div class="muted"><a target="_blank" rel="noopener" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group">Start chat</a></div></div></div>
-            <div class="feature"><div class="feat-ico">✉️</div><div><strong>Email</strong><div class="muted"><a href="mailto:hello@shridhar.group">hello@shridhar.group</a></div></div></div>
-          </div>
-        </div>
-
-        <div style="height:12px"></div>
-
-        <div class="card">
-          <h2>Quick Enquiry</h2>
-          <form id="enq" style="display:grid;gap:10px;margin-top:10px">
-            <input name="name" placeholder="Your name" required />
-            <input name="phone" placeholder="Phone" inputmode="tel" required />
-            <textarea name="message" placeholder="Tell us about the project..." rows="4"></textarea>
-            <div style="display:flex;gap:8px;align-items:center">
-              <button class="btn primary" type="submit">Send</button>
-              <div id="formNote" class="muted" style="display:none">Saved locally — we'll reach out.</div>
+        <!-- SERVICES -->
+        <section id="services">
+          <div class="card">
+            <h3 style="margin:0 0 10px">What we deliver</h3>
+            <div class="list">
+              <div class="item"><span>Android App + Play Store Publishing</span><span class="pill">End‑to‑End</span></div>
+              <div class="item"><span>Website Design & Development</span><span class="pill">SEO Ready</span></div>
+              <div class="item"><span>Amazon Seller Registration & Listing</span><span class="pill">A‑to‑Z</span></div>
+              <div class="item"><span>Flipkart Seller Onboarding</span><span class="pill">Guided</span></div>
+              <div class="item"><span>Premium Logo & Brand Kit</span><span class="pill">Pro</span></div>
+              <div class="item"><span>Visiting Cards + Print‑ready Files</span><span class="pill">CMYK</span></div>
             </div>
-          </form>
+          </div>
+
+          <div class="card">
+            <h3 style="margin:0 0 10px">Why choose us</h3>
+            <div class="grid cols-2">
+              <div class="service"><div class="ico">⚡</div><div><h4>Fast Launch</h4><p>Quick go‑to‑market with clean handover.</p></div></div>
+              <div class="service"><div class="ico">🔒</div><div><h4>Secure</h4><p>Best practices, privacy and store‑ready.</p></div></div>
+              <div class="service"><div class="ico">🎯</div><div><h4>Result‑Driven</h4><p>ASO, SEO, tracking and growth hooks.</p></div></div>
+              <div class="service"><div class="ico">💬</div><div><h4>Support</h4><p>Clear communication and updates.</p></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BRANDING -->
+        <section id="branding">
+          <div class="card">
+            <h3 style="margin:0 0 10px">Branding Suite</h3>
+            <p class="mini">Everything you need to look premium across app, web, and print.</p>
+            <div class="grid cols-2" style="margin-top:12px">
+              <div class="service"><div class="ico">🎨</div><div><h4>Logo & Identity</h4><p>Primary, secondary, monogram.</p></div></div>
+              <div class="service"><div class="ico">🌈</div><div><h4>Color System</h4><p>Accessible and modern palette.</p></div></div>
+              <div class="service"><div class="ico">🧭</div><div><h4>Brand Guide</h4><p>Fonts, spacing, do’s & don’ts.</p></div></div>
+              <div class="service"><div class="ico">💳</div><div><h4>Visiting Cards</h4><p>Print‑ready, premium finishes.</p></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+          <div class="card contact-card">
+            <h3 style="margin:0">Contact</h3>
+            <div class="contact-row">
+              <button class="btn" id="btnCall">Call 7483640694</button>
+              <button class="btn ghost" id="btnWhatsApp">WhatsApp</button>
+              <button class="btn ghost" id="btnEmail">Email</button>
+            </div>
+            <p class="mini">Office Hours: 10:00–19:00 IST • Response within minutes on WhatsApp.</p>
+            <p class="mini">Prefer email? Write to <a class="link" href="mailto:hello@shridhar-group.example">hello@shridhar-group.example</a> (change this).</p>
+          </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="profile">
+          <div class="card">
+            <h3 style="margin:0 0 8px">About Shridhar Group</h3>
+            <p class="mini">We build for speed, stability and brand trust. From idea to live product, our process is transparent with measurable milestones.</p>
+            <div class="list" style="margin-top:12px">
+              <div class="item"><span>Founded</span><span class="pill">2025</span></div>
+              <div class="item"><span>HQ</span><span class="pill">Karnataka, India</span></div>
+              <div class="item"><span>Core Stack</span><span class="pill">HTML • CSS • JS</span></div>
+              <div class="item"><span>Publishing</span><span class="pill">Google Play</span></div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom" aria-label="Primary">
+        <div class="ring" id="ring"></div>
+        <div class="nav-btn" data-tab="services" data-x="20">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13l-2 5-3 2 3-7 3-3 4-2 3 3-2 4-3 3"/></svg>
+          <span class="label">Services</span>
+        </div>
+        <div class="nav-btn" data-tab="branding" data-x="90">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V22a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H2a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.06A1.65 1.65 0 0 0 10 2.09V2a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.06a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.06A1.65 1.65 0 0 0 21.91 10H22a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="label">Branding</span>
         </div>
 
-        <div style="height:60px"></div>
-      </section>
-
-      <!-- FAQ compact -->
-      <section class="card faq" style="margin-top:12px">
-        <h2>FAQ</h2>
-        <div class="q"><div style="display:flex;justify-content:space-between;align-items:center"><div><strong>How long to launch an app?</strong></div><div class="muted">—</div></div><div class="a muted">Depends on scope. Typical small app 3–6 weeks.</div></div>
-        <div class="q"><div style="display:flex;justify-content:space-between;align-items:center"><div><strong>Do you publish to Play Store?</strong></div><div class="muted">—</div></div><div class="a muted">Yes — we prepare listing, assets and release builds.</div></div>
-      </section>
-
-    </main>
-
-    <!-- BOTTOM NAV -->
-    <div class="nav-wrap">
-      <nav class="tabbar" role="tablist" aria-label="Main navigation">
-        <div class="indicator" id="indicator" aria-hidden="true"><div class="core"></div></div>
-
-        <button class="tab" role="tab" data-target="services" data-accent1="#6dd3ff" data-accent2="#a78bfa" aria-selected="false">
-          <div class="ic">🧩</div>
-          <span>Services</span>
+        <button class="fab" data-tab="home" aria-label="Home">
+          <div class="pulse"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
         </button>
 
-        <button class="tab" role="tab" data-target="portfolio" data-accent1="#ffd36d" data-accent2="#ff9b6d" aria-selected="false">
-          <div class="ic">💼</div>
-          <span>Work</span>
-        </button>
-
-        <div class="center-slot" aria-hidden="true">
-          <button class="fab" id="homeFab" title="Home" aria-label="Home">
-            <div style="font-weight:700;color:#fff">Home</div>
-          </button>
+        <div class="nav-btn" data-tab="contact" data-x="270">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2h-4l-4 4v-4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="label">Contact</span>
         </div>
-
-        <button class="tab" role="tab" data-target="home" data-accent1="#8ef29a" data-accent2="#3dd17a" aria-selected="true">
-          <div class="ic">🏠</div>
-          <span>About</span>
-        </button>
-
-        <button class="tab" role="tab" data-target="contact" data-accent1="#ffd36d" data-accent2="#ff6d9b" aria-selected="false">
-          <div class="ic">✉️</div>
-          <span>Contact</span>
-        </button>
+        <div class="nav-btn" data-tab="profile" data-x="340">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M4 21v-2a4 4 0 0 1 3-3.87"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="label">Profile</span>
+        </div>
       </nav>
     </div>
   </div>
 
   <script>
-    // THEME
-    const themeToggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('sg_theme');
-    if (saved) document.body.classList.toggle('light', saved === 'light');
-    else document.body.classList.toggle('light', window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
-    themeToggle.checked = document.body.classList.contains('light');
-    themeToggle.addEventListener('change', ()=>{
-      document.body.classList.toggle('light', themeToggle.checked);
-      localStorage.setItem('sg_theme', themeToggle.checked ? 'light' : 'dark');
-    });
+    const tabs = ["services","branding","home","contact","profile"];
+    const sections = Object.fromEntries(tabs.map(id=>[id, document.getElementById(id)]));
+    const ring = document.getElementById('ring');
 
-    // PAGES & NAV
-    const tabbar = document.querySelector('.tabbar');
-    const tabs = Array.from(document.querySelectorAll('.tabbar .tab'));
-    const fab = document.getElementById('homeFab');
-    const pages = Array.from(document.querySelectorAll('.page'));
-    const indicator = document.getElementById('indicator');
-
-    function setActive(target){
-      pages.forEach(p=>p.classList.toggle('active', p.id===target));
-      tabs.forEach(t=>{
-        const is = t.dataset.target===target;
-        t.classList.toggle('active', is);
-        t.setAttribute('aria-selected', is? 'true':'false');
-      });
-      // move indicator
-      const activeEl = tabs.find(t=>t.dataset.target===target) || document.querySelector('.tabbar .tab[aria-selected="true"]');
-      if(activeEl){
-        const barRect = tabbar.getBoundingClientRect();
-        const rect = activeEl.getBoundingClientRect();
-        const centerX = rect.left + rect.width/2 - barRect.left;
-        const indW = indicator.offsetWidth;
-        const x = centerX - indW/2;
-        indicator.style.transform = `translateX(${x}px)`;
-        // change indicator gradient based on data attributes
-        const a1 = activeEl.dataset.accent1 || getComputedStyle(document.documentElement).getPropertyValue('--accent-1');
-        const a2 = activeEl.dataset.accent2 || getComputedStyle(document.documentElement).getPropertyValue('--accent-2');
-        indicator.querySelector('.core').style.background = `linear-gradient(180deg, ${a1}, ${a2})`;
-        // little pop effect
-        indicator.style.boxShadow = '0 18px 48px rgba(0,0,0,0.28)';
-      }
-      // update url hash
-      if(location.hash !== '#'+target) history.replaceState(null,'','#'+target);
+    function activate(tab){
+      for(const s of Object.values(sections)){ s.classList.remove('active'); }
+      sections[tab].classList.add('active');
+      const el = document.querySelector(`[data-tab="${tab}"]`);
+      if(el && el.dataset.x){ ring.style.setProperty('--x', el.dataset.x); }
+      if(tab==='home'){ ring.style.setProperty('--x', 180); } // center under FAB
+      window.scrollTo({top:0, behavior:'smooth'});
     }
 
-    // initial route
-    const initial = (location.hash && location.hash.replace('#','')) || 'home';
-    setTimeout(()=>setActive(initial), 30);
-
-    // attach events
-    tabs.forEach(t=>t.addEventListener('click', ()=> setActive(t.dataset.target)));
-    fab.addEventListener('click', ()=> setActive('home'));
-    // any element with data-tab attribute can navigate
-    document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click', (e)=>{ e.preventDefault(); setActive(el.getAttribute('data-tab')); }));
-
-    // recompute on resize
-    window.addEventListener('resize', ()=>{ const cur = pages.find(p=>p.classList.contains('active')); if(cur) setActive(cur.id); });
-
-    // form handling (local save)
-    const form = document.getElementById('enq');
-    const note = document.getElementById('formNote');
-    form.addEventListener('submit', e=>{
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      const list = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
-      list.push({...data,ts:new Date().toISOString()});
-      localStorage.setItem('sg_enquiries', JSON.stringify(list));
-      form.reset();
-      note.style.display='block';
-      setTimeout(()=>note.style.display='none',2500);
+    document.querySelectorAll('[data-tab]').forEach(btn=>{
+      btn.addEventListener('click', ()=> activate(btn.dataset.tab));
     });
 
-    // FAQ accordion
-    document.querySelectorAll('.faq .q').forEach(q=>q.addEventListener('click', ()=>{ q.classList.toggle('open'); }));
+    // Default ring position under FAB
+    ring.style.setProperty('--x', 180);
 
-    // Accessibility: allow left/right on bottom nav
-    let navIndex = tabs.findIndex(t=>t.classList.contains('active'));
-    document.addEventListener('keydown', e=>{
-      if(['ArrowLeft','ArrowRight'].includes(e.key)){
-        e.preventDefault();
-        if(e.key==='ArrowLeft') navIndex = Math.max(0, navIndex-1);
-        else navIndex = Math.min(tabs.length-1, navIndex+1);
-        const t = tabs[navIndex]; if(t) setActive(t.dataset.target);
-      }
+    // CTA actions
+    document.getElementById('ctaTalk').addEventListener('click', ()=> {
+      window.location.href = 'tel:+917483640694';
+    });
+    document.getElementById('ctaPortfolio').addEventListener('click', ()=> activate('services'));
+
+    // Contact actions
+    document.getElementById('btnCall').addEventListener('click', ()=> window.location.href='tel:+917483640694');
+    document.getElementById('btnWhatsApp').addEventListener('click', ()=> {
+      const msg = encodeURIComponent('Hi Shridhar, I want to build my brand and launch my app/website.');
+      window.open(`https://wa.me/917483640694?text=${msg}`, '_blank');
+    });
+    document.getElementById('btnEmail').addEventListener('click', ()=> {
+      const subject = encodeURIComponent('Project enquiry — Shridhar Group');
+      const body = encodeURIComponent('Hello Shridhar,\n\nI want help with: [App / Website / Amazon / Flipkart / Branding].\nBudget & timeline: ____.\n\nThanks,');
+      window.location.href = `mailto:hello@shridhar-group.example?subject=${subject}&body=${body}`;
     });
 
+    // QR upload/preview + download
+    const qrInput = document.getElementById('qrFile');
+    const qrPreview = document.getElementById('qrPreview');
+    const btnDownloadQR = document.getElementById('btnDownloadQR');
+    qrInput.addEventListener('change', (e)=>{
+      const file = e.target.files?.[0];
+      if(!file) return; const url = URL.createObjectURL(file); qrPreview.src = url;
+    });
+    btnDownloadQR.addEventListener('click', ()=>{
+      const a = document.createElement('a'); a.href = qrPreview.src; a.download = 'shridhar-app-qr.png'; a.click();
+    });
+
+    // Share/copy app link
+    const appLink = document.getElementById('appLink');
+    document.getElementById('btnCopy').addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(appLink.value || ''); toast('Link copied'); }catch{ toast('Copy failed'); }
+    });
+    document.getElementById('btnShare').addEventListener('click', async ()=>{
+      const url = appLink.value || window.location.href;
+      if(navigator.share){
+        try{ await navigator.share({ title:'Shridhar Group App', text:'Install our app on Google Play', url}); }catch{}
+      } else { await navigator.clipboard.writeText(url); toast('Link copied (share not supported)'); }
+    });
+
+    // Tiny toast
+    function toast(text){
+      const t = document.createElement('div');
+      t.textContent = text; t.style.cssText = `position:fixed; left:50%; transform:translateX(-50%); bottom:100px; padding:10px 14px; background:#151825; color:#fff; border:1px solid rgba(255,255,255,.12); border-radius:12px; z-index:99; box-shadow:${getComputedStyle(document.documentElement).getPropertyValue('--shadow')}`;
+      document.body.appendChild(t); setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .2s'; }, 1200); setTimeout(()=> t.remove(), 1500);
+    }
   </script>
 </body>
 </html>
-
-analize this completely and make it pro give me full source code perfect working with decrease font sizes and change ffont styles and make best view leave spaces where required and onces clicks it should moves smoothly like bob or canera bank apps bank apps thats rounds or refer any othere but make it work as like brand no changes give me full perfect source code add still more contents in all that tabs and give me full source code 
