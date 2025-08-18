@@ -2,404 +2,697 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Shridhar Group of Company — App</title>
-  <meta name="theme-color" content="#0a0a0b" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Shridhar Group — App‑style Web App (Pro)</title>
+  <meta name="theme-color" content="#071026">
+  <meta name="description" content="Shridhar Group — App development, Play Store publishing, branding, marketplace onboarding. Build. Launch. Brand.">
+  <meta property="og:title" content="Shridhar Group — Build. Launch. Brand."/>
+  <meta property="og:description" content="End‑to‑end product studio: apps, websites, marketplace onboarding and premium brand kits."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="/icon.png"/>
+  <link rel="icon" href="/favicon.ico"/>
+
+  <!-- Font: Plus Jakarta Sans (clean, professional); Inter as fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
+    /* ---------------------- ROOT THEME ---------------------- */
     :root{
-      --bg:#0b0c10;
-      --bg-elev:#121318;
-      --card:#171923;
-      --text:#e8ebf1;
-      --sub:#b8c2d9;
-      --brand:#6aa5ff;
-      --brand-2:#7ef6d2;
-      --accent:#b388ff;
-      --ok:#39d98a;
-      --warn:#ffd166;
-      --danger:#ff6b6b;
-      --muted: #3a3f54;
-      --glass: rgba(255,255,255,0.06);
-      --radius: 18px;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-      --ring: 0 0 0 6px rgba(106,165,255,.12);
-      --grad: linear-gradient(140deg, var(--brand) 0%, var(--accent) 50%, var(--brand-2) 100%);
+      --bg: #071026;        /* dark background */
+      --card: #0b1421;
+      --card-2: #0d1624;
+      --text: #e6eef7;
+      --muted: rgba(230,238,247,0.72);
+      --accent-1: #6dd3ff;
+      --accent-2: #a78bfa;
+      --accent-ok: #35d48c;
+      --accent-warn: #ffd36d;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 16px;
+      --nav-h: 78px;
+      --shadow-1: 0 8px 30px rgba(2,6,23,0.38);
+      --shadow-2: 0 18px 48px rgba(2,6,23,0.46);
     }
+    .light{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --card-2: #ffffff;
+      --text: #0b1220;
+      --muted: rgba(11,18,32,0.66);
+      --accent-1: #2563eb;
+      --accent-2: #7c3aed;
+      --glass: rgba(2,6,23,0.06);
+      --shadow-1: 0 8px 24px rgba(2,6,23,0.12);
+      --shadow-2: 0 18px 38px rgba(2,6,23,0.16);
+    }
+
+    /* ---------------------- RESET ---------------------- */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 50% -200px, #1a1f33 0%, transparent 60%) , var(--bg);
+      margin:0;
+      font-family:"Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-size:14.6px; /* ↓ slightly smaller */
+      line-height:1.5;
+      letter-spacing:.1px;
       color:var(--text);
-      letter-spacing:.2px;
+      background:
+        radial-gradient(850px 420px at 10% 0%, rgba(167,139,250,0.10), transparent 22%),
+        radial-gradient(740px 360px at 95% 100%, rgba(109,211,255,0.08), transparent 22%),
+        var(--bg);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
 
-    /* Phone preview wrapper (centers app on desktop) */
-    .frame{
-      min-height:100vh; display:grid; place-items:center; padding:22px;
-    }
-    .phone{
-      width:min(480px, 100%); height:calc(100vh - 44px); background:var(--bg-elev); border-radius:28px;
-      border:1px solid rgba(255,255,255,.08); overflow:hidden; box-shadow: var(--shadow);
-      position:relative;
-    }
+    /* Visually hidden (for a11y) */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* Top brand header */
-    header.appbar{
-      position:sticky; top:0; z-index:5; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0));
-      padding:16px 18px 8px; backdrop-filter: blur(10px);
-      display:flex; align-items:center; gap:12px;
-    }
-    .logo{
-      width:36px; height:36px; border-radius:50%; background:var(--grad); box-shadow:var(--ring);
-      display:grid; place-items:center; font-weight:800; color:#0a0a0a; letter-spacing:.4px;
-    }
-    .brand h1{margin:0; font-size:18px}
-    .brand p{margin:2px 0 0; color:var(--sub); font-size:12px}
+    /* ---------------------- LAYOUT ---------------------- */
+    .app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto}
+    header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px) saturate(1.08);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.05)}
+    .top-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .badge{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 140deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow-1);font-weight:800}
+    .brand h1{font-size:16px;margin:0;letter-spacing:.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-    /* Main scroll area */
-    main{height:calc(100% - 110px); overflow:auto; scroll-behavior:smooth; padding:8px 16px 120px}
+    .theme-toggle{display:inline-grid;grid-auto-flow:column;align-items:center;gap:8px;padding:6px 8px;border-radius:999px;background:var(--card-2);border:1px solid rgba(255,255,255,0.06)}
+    .theme-toggle input{display:none}
+    .knob{width:26px;height:26px;border-radius:999px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 10px 24px rgba(0,0,0,0.22)}
 
-    /* Cards */
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius); padding:16px; box-shadow: var(--shadow);
-    }
-    .card + .card{margin-top:14px}
+    main.content{padding:14px;padding-bottom:calc(var(--nav-h) + 34px)}
 
-    .hero{
-      position:relative; overflow:hidden; padding:18px; border-radius:24px; background:var(--card);
-    }
-    .hero h2{margin:6px 0 6px; font-size:22px}
-    .hero p{margin:0; color:var(--sub)}
-    .ribbon{
-      position:absolute; inset:auto 12px 12px auto; background:var(--grad); color:#0a0a0a; font-weight:700; border-radius:999px;
-      padding:6px 12px; font-size:12px; box-shadow: var(--ring);
-    }
+    .row{display:grid;gap:12px}
+    @media(min-width:720px){.grid-2{grid-template-columns:repeat(2,1fr)}}
 
-    .grid{display:grid; gap:12px}
-    .grid.cols-2{grid-template-columns: 1fr 1fr}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));border-radius:calc(var(--radius) + 4px);padding:14px;border:1px solid rgba(255,255,255,0.06);box-shadow:var(--shadow-1)}
+    h2{margin:0 0 8px;font-size:16px}
+    .muted{color:var(--muted);font-size:12.6px}
 
-    .service{
-      display:flex; gap:12px; padding:14px; border-radius:16px; background:var(--glass); border:1px solid rgba(255,255,255,.06)
-    }
-    .ico{width:40px; height:40px; border-radius:12px; background:var(--grad); display:grid; place-items:center; box-shadow: var(--ring)}
-    .service h4{margin:0; font-size:15px}
-    .service p{margin:4px 0 0; color:var(--sub); font-size:12px}
+    /* ---------------------- HERO / CTA ---------------------- */
+    .hero{display:grid;gap:12px;align-items:center;padding:16px;border-radius:18px;background:linear-gradient(135deg, rgba(109,211,255,0.10), rgba(167,139,250,0.08));border:1px solid rgba(255,255,255,0.06)}
+    .hero h1{font-size:18px;margin:0;font-weight:800;letter-spacing:.1px}
+    .cta{display:flex;gap:10px}
+    .btn{position:relative;overflow:hidden;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--card-2);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{background:linear-gradient(180deg,var(--accent-1),var(--accent-2));color:white;font-weight:800;box-shadow:0 12px 28px rgba(109,211,255,0.15)}
+    .btn.round{border-radius:999px;padding:10px 14px}
 
-    .cta-row{display:flex; gap:10px; margin-top:12px}
-    .btn{
-      appearance:none; border:0; border-radius:14px; padding:12px 16px; font-weight:700; cursor:pointer;
-      background:var(--grad); color:#0a0a0a; box-shadow: var(--ring); transition:transform .08s ease;
-    }
-    .btn.ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.14)}
-    .btn:active{transform: translateY(1px) scale(.995)}
+    /* Ripple effect */
+    .btn::after{content:"";position:absolute;inset:auto auto 0 50%;transform:translate(-50%,50%) scale(0);width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.22);opacity:0;pointer-events:none}
+    .btn:active::after{animation:ripple .6s ease}
+    @keyframes ripple{from{transform:translate(-50%,50%) scale(.05);opacity:.45}to{transform:translate(-50%,50%) scale(1);opacity:0}}
 
-    .list{display:flex; flex-direction:column; gap:10px}
-    .list .item{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:12px; background:var(--glass); border:1px solid rgba(255,255,255,.06)}
-    .pill{font-size:11px; padding:6px 10px; border-radius:999px; background:#121420; color:var(--sub); border:1px solid rgba(255,255,255,.08)}
+    /* Chips */
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;border:1px dashed rgba(255,255,255,0.18);background:rgba(255,255,255,0.02);font-size:12px}
 
-    /* QR section */
-    .qr-wrap{display:grid; place-items:center; gap:10px; text-align:center}
-    .qr-box{width:180px; height:180px; border-radius:16px; background:#fff; display:grid; place-items:center; overflow:hidden}
-    .qr-box img{width:100%; height:100%; object-fit:cover}
-    .qr-actions{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
+    /* ---------------------- FEATURES GRID ---------------------- */
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(min-width:640px){.features{grid-template-columns:repeat(4,1fr)}}
+    .feature{display:flex;gap:10px;align-items:flex-start}
+    .feat-ico{width:40px;height:40px;border-radius:10px;background:linear-gradient(180deg,rgba(109,211,255,0.10),rgba(167,139,250,0.08));display:grid;place-items:center;border:1px solid rgba(255,255,255,0.08)}
 
-    /* Bottom Nav + Center FAB */
-    .bottom{
-      position:fixed; left:50%; transform:translateX(-50%); bottom:14px; width:min(500px, 92vw);
-      height:74px; background:rgba(18,19,24,.82); backdrop-filter: blur(14px);
-      border:1px solid rgba(255,255,255,.08); border-radius:22px; display:flex; align-items:center; justify-content:space-around;
-      box-shadow: var(--shadow);
-    }
-    .nav-btn{width:58px; height:58px; border-radius:50%; display:grid; place-items:center; cursor:pointer; position:relative;
-      transition: transform .18s ease;
-    }
-    .nav-btn:active{transform:scale(.97)}
-    .nav-btn .label{position:absolute; bottom:-18px; font-size:11px; color:var(--sub)}
+    /* ---------------------- PORTFOLIO CARDS ---------------------- */
+    .portfolio{display:grid;gap:10px}
+    @media(min-width:640px){.portfolio{grid-template-columns:repeat(2,1fr)}}
+    .proj{display:flex;gap:12px;align-items:center}
+    .proj-thumb{width:62px;height:50px;border-radius:10px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;color:#07203a;font-weight:800}
 
-    /* icons */
-    .nav-btn svg{width:22px; height:22px; opacity:.9}
+    /* ---------------------- PROCESS / STEPS ---------------------- */
+    .steps{display:grid;gap:10px}
+    .step{display:flex;gap:12px;align-items:start}
+    .step .num{width:34px;height:34px;border-radius:10px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;font-weight:800;color:#022}
 
-    /* Center Home FAB */
-    .fab{
-      width:82px; height:82px; margin-top:-34px; border-radius:50%; background:var(--grad); color:#0a0a0a; box-shadow: 0 12px 30px rgba(106,165,255,.45);
-      display:grid; place-items:center; position:relative; outline: none; border:0; cursor:pointer;
-      transition: transform .18s ease;
-    }
-    .fab:active{transform:translateY(1px) scale(.99)}
-    .pulse{position:absolute; inset:0; border-radius:50%; pointer-events:none;}
-    .pulse::before, .pulse::after{
-      content:""; position:absolute; inset:0; border-radius:50%; box-shadow: 0 0 0 0 rgba(106,165,255,.35); animation: pulse 2.4s infinite;
-    }
-    .pulse::after{animation-delay:1.2s}
-    @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(106,165,255,.35)} 70%{ box-shadow: 0 0 0 22px rgba(106,165,255,0)} 100%{ box-shadow: 0 0 0 0 rgba(106,165,255,0)} }
+    /* ---------------------- STATS ---------------------- */
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
+    .stat{padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,0.01));display:grid;gap:6px}
+    .stat .big{font-size:20px;font-weight:800}
 
-    /* Active state highlight ring under nav items */
-    .ring{position:absolute; width:58px; height:58px; border-radius:50%; border:1px solid rgba(106,165,255,.35); top:8px; transform:translateX(calc(var(--x,0) * 1px)); transition: transform .25s ease}
+    /* ---------------------- TESTIMONIALS ---------------------- */
+    .testi{display:grid;gap:10px}
+    @media(min-width:720px){.testi{grid-template-columns:repeat(3,1fr)}}
 
-    /* Sections */
-    section{display:none}
-    section.active{display:block; animation:fade .18s ease}
-    @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:none}}
+    /* ---------------------- PRICING ---------------------- */
+    .pricing{display:grid;gap:10px}
+    @media(min-width:900px){.pricing{grid-template-columns:repeat(3,1fr)}}
+    .price-card{position:relative;overflow:hidden}
+    .price{font-size:22px;font-weight:800}
 
-    .contact-card{display:grid; gap:10px}
-    .contact-row{display:flex; gap:10px; flex-wrap:wrap}
-    .mini{font-size:12px; color:var(--sub)}
+    /* ---------------------- FAQ ---------------------- */
+    .faq .q{border-top:1px solid rgba(255,255,255,0.08);padding:12px 0;cursor:pointer}
+    .faq .a{color:var(--muted);font-size:12.6px;display:none;margin-top:8px}
+    .faq .q.open .a{display:block}
+    .faq .toggle{transition:transform .24s ease}
+    .faq .q.open .toggle{transform:rotate(45deg)}
 
-    a.link{color:var(--brand); text-decoration:none}
-    a.link:hover{text-decoration:underline}
+    /* ---------------------- BOTTOM NAV / TABBAR ---------------------- */
+    .nav-wrap{position:fixed;left:0;right:0;bottom:12px;display:grid;place-items:center;pointer-events:none;z-index:60}
+    .tabbar{width:min(560px,94%);height:var(--nav-h);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;position:relative;pointer-events:auto;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow-2)}
 
-    @media (min-width:900px){
-      .phone{height:860px}
-    }
+    .tab{position:relative;display:grid;place-items:center;height:100%;gap:4px;border-radius:14px;border:none;background:transparent;cursor:pointer;padding-bottom:6px;user-select:none;touch-action:manipulation}
+    .tab .ic{width:22px;height:22px;display:grid;place-items:center;transition:transform .34s cubic-bezier(.2,1.1,.3,1)}
+    .tab span{font-size:10.8px;color:var(--muted);margin-top:4px;display:block}
+
+    .tab.active span{color:var(--text);font-weight:700}
+    .tab.active .ic{transform:translateY(-6px) scale(1.12)}
+
+    /* Indicator circle that moves under active tab (springy) */
+    .indicator{position:absolute;bottom:12px;width:50px;height:50px;border-radius:50%;transform:translateX(0);left:0;transition:transform .44s cubic-bezier(.17,1.2,.35,1), box-shadow .28s;pointer-events:none;display:block}
+    .indicator .core{width:44px;height:44px;border-radius:50%;margin:auto;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 14px 32px rgba(109,211,255,0.24);display:grid;place-items:center}
+
+    /* FAB */
+    .center-slot{position:relative;display:grid;place-items:center}
+    .fab{position:absolute;left:50%;top:-26px;transform:translateX(-50%);width:70px;height:70px;border-radius:999px;border:none;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:0 20px 40px rgba(109,211,255,0.18);cursor:pointer;will-change:transform}
+    .fab > div{font-weight:800;color:#fff}
+
+    /* Bobbing animation (subtle) */
+    @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
+    .fab{animation: bob 3.2s ease-in-out infinite}
+
+    /* small screens: tighten spacing */
+    @media(max-width:360px){.indicator{width:46px;height:46px}.indicator .core{width:40px;height:40px}.fab{width:64px;height:64px}}
+
+    /* page & animations */
+    .page{display:none}
+    .page.active{display:block;animation:fadeIn .28s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+    /* forms */
+    input,textarea,select{border-radius:12px;border:1px solid rgba(255,255,255,0.08);padding:10px;background:var(--card-2);color:var(--text)}
+    label.small{font-size:12px;color:var(--muted)}
+
+    /* utilities */
+    .muted-quiet{color:rgba(255,255,255,0.20);font-size:10.8px}
+    .vspace-12{height:12px}
   </style>
 </head>
 <body>
-  <div class="frame">
-    <div class="phone" id="app">
-      <header class="appbar">
-        <div class="logo" aria-hidden="true">SG</div>
-        <div class="brand">
-          <h1>Shridhar Group of Company</h1>
-          <p>App Development • Websites • Amazon/Flipkart Seller Setup • Branding</p>
+  <div class="app" id="app">
+    <header class="top" role="banner">
+      <div class="top-inner">
+        <div class="brand" aria-label="Brand">
+          <div class="badge" aria-hidden="true">SG</div>
+          <div>
+            <h1 style="margin-bottom:2px">Shridhar Group of Company</h1>
+            <p class="muted">App Development · Play Store Publish · Branding</p>
+          </div>
         </div>
-      </header>
+        <label class="theme-toggle" title="Toggle theme" aria-label="Toggle light theme">
+          <input id="themeToggle" type="checkbox" aria-hidden="true">
+          <div style="font-size:12px">Theme</div>
+          <div class="knob" aria-hidden="true"></div>
+        </label>
+      </div>
+    </header>
 
-      <main>
-        <!-- HOME -->
-        <section id="home" class="active">
-          <div class="hero card">
-            <span class="ribbon">1000% Brand Focus</span>
-            <h2>Make your brand real, fast</h2>
-            <p>We design, build, and launch: Android apps, responsive websites, premium logos, and complete seller onboarding for Amazon & Flipkart.</p>
-            <div class="cta-row">
-              <button class="btn" id="ctaTalk">Talk to Shridhar</button>
-              <button class="btn ghost" id="ctaPortfolio">View Services</button>
+    <main class="content" id="content" role="main">
+      <!-- HOME -->
+      <section id="home" class="page active" aria-label="Home">
+        <div class="hero card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div>
+              <h1>Build. Launch. Brand — with confidence.</h1>
+              <p class="muted">End‑to‑end product studio: apps, websites, marketplace onboarding and premium brand kits.</p>
+            </div>
+            <div style="min-width:140px;display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+              <a class="btn primary round" href="#contact" data-tab="contact" aria-label="Contact now">Contact Now</a>
+              <a class="btn round" href="#services" data-tab="services" aria-label="View services">View Services</a>
             </div>
           </div>
 
-          <div class="grid cols-2" style="margin-top:14px">
-            <div class="service">
-              <div class="ico">🏗️</div>
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+            <div style="display:flex;gap:10px;align-items:center">
+              <div style="width:84px;height:84px;border-radius:12px;background:white;overflow:hidden;display:grid;place-items:center;border:1px solid rgba(255,255,255,0.08)">
+                <!-- placeholder QR: replace with your real QR image -->
+                <img alt="QR to open app" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='100%25' height='100%25' fill='white'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' fill='black' font-family='monospace' font-size='14'%3EQR%3C/text%3E%3C/svg%3E">
+              </div>
               <div>
-                <h4>App Development</h4>
-                <p>Play Store publish, updates, screenshots, ASO.</p>
+                <div style="font-weight:800">Open our App</div>
+                <div class="muted">Scan or tap to open on Play Store</div>
+                <div style="margin-top:8px"><a class="btn round" id="appLink" href="https://play.google.com/store/apps/details?id=com.shridhar.group" target="_blank" rel="noopener">Open App →</a></div>
               </div>
             </div>
-            <div class="service">
-              <div class="ico">🛒</div>
-              <div>
-                <h4>Amazon/Flipkart</h4>
-                <p>Seller account setup, listing, catalog, A+.</p>
-              </div>
-            </div>
-            <div class="service">
-              <div class="ico">🖥️</div>
-              <div>
-                <h4>Websites</h4>
-                <p>Lightning‑fast, SEO, analytics & hosting.</p>
-              </div>
-            </div>
-            <div class="service">
-              <div class="ico">🏷️</div>
-              <div>
-                <h4>Branding</h4>
-                <p>Logo, color system, guidelines, visiting cards.</p>
+            <div style="flex:1;min-width:220px">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span class="muted chip">App Development</span>
+                <span class="muted chip">Play Store Publish</span>
+                <span class="muted chip">Website</span>
+                <span class="muted chip">Amazon & Flipkart</span>
+                <span class="muted chip">Branding</span>
+                <span class="muted chip">Cards & Print</span>
               </div>
             </div>
           </div>
-
-          <div class="card" style="margin-top:14px">
-            <h3 style="margin:0 0 6px">Install our app</h3>
-            <p class="mini">Attach your Play Store QR code below or paste the app link to share.</p>
-            <div class="qr-wrap" style="margin-top:10px">
-              <div class="qr-box">
-                <img id="qrPreview" alt="App QR preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='100%25' height='100%25' fill='%23ffffff'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23000' font-family='monospace' font-size='12'%3EUpload QR%3C/text%3E%3C/svg%3E"/>
-              </div>
-              <div class="qr-actions">
-                <label class="btn ghost" for="qrFile">Upload QR</label>
-                <input id="qrFile" type="file" accept="image/*" hidden />
-                <button class="btn ghost" id="btnDownloadQR">Download QR</button>
-              </div>
-              <div style="width:100%">
-                <input id="appLink" type="url" placeholder="https://play.google.com/store/apps/details?id=your.app" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:#0f1117; color:var(--text)" />
-                <div class="cta-row" style="justify-content:center">
-                  <button class="btn" id="btnShare">Share App Link</button>
-                  <button class="btn ghost" id="btnCopy">Copy Link</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- SERVICES -->
-        <section id="services">
-          <div class="card">
-            <h3 style="margin:0 0 10px">What we deliver</h3>
-            <div class="list">
-              <div class="item"><span>Android App + Play Store Publishing</span><span class="pill">End‑to‑End</span></div>
-              <div class="item"><span>Website Design & Development</span><span class="pill">SEO Ready</span></div>
-              <div class="item"><span>Amazon Seller Registration & Listing</span><span class="pill">A‑to‑Z</span></div>
-              <div class="item"><span>Flipkart Seller Onboarding</span><span class="pill">Guided</span></div>
-              <div class="item"><span>Premium Logo & Brand Kit</span><span class="pill">Pro</span></div>
-              <div class="item"><span>Visiting Cards + Print‑ready Files</span><span class="pill">CMYK</span></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 style="margin:0 0 10px">Why choose us</h3>
-            <div class="grid cols-2">
-              <div class="service"><div class="ico">⚡</div><div><h4>Fast Launch</h4><p>Quick go‑to‑market with clean handover.</p></div></div>
-              <div class="service"><div class="ico">🔒</div><div><h4>Secure</h4><p>Best practices, privacy and store‑ready.</p></div></div>
-              <div class="service"><div class="ico">🎯</div><div><h4>Result‑Driven</h4><p>ASO, SEO, tracking and growth hooks.</p></div></div>
-              <div class="service"><div class="ico">💬</div><div><h4>Support</h4><p>Clear communication and updates.</p></div></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- BRANDING -->
-        <section id="branding">
-          <div class="card">
-            <h3 style="margin:0 0 10px">Branding Suite</h3>
-            <p class="mini">Everything you need to look premium across app, web, and print.</p>
-            <div class="grid cols-2" style="margin-top:12px">
-              <div class="service"><div class="ico">🎨</div><div><h4>Logo & Identity</h4><p>Primary, secondary, monogram.</p></div></div>
-              <div class="service"><div class="ico">🌈</div><div><h4>Color System</h4><p>Accessible and modern palette.</p></div></div>
-              <div class="service"><div class="ico">🧭</div><div><h4>Brand Guide</h4><p>Fonts, spacing, do’s & don’ts.</p></div></div>
-              <div class="service"><div class="ico">💳</div><div><h4>Visiting Cards</h4><p>Print‑ready, premium finishes.</p></div></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact">
-          <div class="card contact-card">
-            <h3 style="margin:0">Contact</h3>
-            <div class="contact-row">
-              <button class="btn" id="btnCall">Call 7483640694</button>
-              <button class="btn ghost" id="btnWhatsApp">WhatsApp</button>
-              <button class="btn ghost" id="btnEmail">Email</button>
-            </div>
-            <p class="mini">Office Hours: 10:00–19:00 IST • Response within minutes on WhatsApp.</p>
-            <p class="mini">Prefer email? Write to <a class="link" href="mailto:hello@shridhar-group.example">hello@shridhar-group.example</a> (change this).</p>
-          </div>
-        </section>
-
-        <!-- PROFILE -->
-        <section id="profile">
-          <div class="card">
-            <h3 style="margin:0 0 8px">About Shridhar Group</h3>
-            <p class="mini">We build for speed, stability and brand trust. From idea to live product, our process is transparent with measurable milestones.</p>
-            <div class="list" style="margin-top:12px">
-              <div class="item"><span>Founded</span><span class="pill">2025</span></div>
-              <div class="item"><span>HQ</span><span class="pill">Karnataka, India</span></div>
-              <div class="item"><span>Core Stack</span><span class="pill">HTML • CSS • JS</span></div>
-              <div class="item"><span>Publishing</span><span class="pill">Google Play</span></div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- Bottom Navigation -->
-      <nav class="bottom" aria-label="Primary">
-        <div class="ring" id="ring"></div>
-        <div class="nav-btn" data-tab="services" data-x="20">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13l-2 5-3 2 3-7 3-3 4-2 3 3-2 4-3 3"/></svg>
-          <span class="label">Services</span>
-        </div>
-        <div class="nav-btn" data-tab="branding" data-x="90">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V22a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H2a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.06A1.65 1.65 0 0 0 10 2.09V2a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.06a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.06A1.65 1.65 0 0 0 21.91 10H22a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          <span class="label">Branding</span>
         </div>
 
-        <button class="fab" data-tab="home" aria-label="Home">
-          <div class="pulse"></div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
+        <div class="vspace-12"></div>
+
+        <div class="row grid-2">
+          <article class="card">
+            <h2>Premium by default</h2>
+            <p class="muted">We focus on clarity, fast performance, store‑ready assets and brand coherence so you can present like a leader.</p>
+            <div style="margin-top:10px;display:grid;gap:8px" class="features">
+              <div class="feature"><div class="feat-ico">⚡</div><div><strong>Speed & stability</strong><div class="muted">Optimised code and assets, CI ready.</div></div></div>
+              <div class="feature"><div class="feat-ico">🔒</div><div><strong>Privacy & compliance</strong><div class="muted">Store & marketplace ready.</div></div></div>
+              <div class="feature"><div class="feat-ico">🎨</div><div><strong>Brand system</strong><div class="muted">Logo, palette, typography, mockups.</div></div></div>
+              <div class="feature"><div class="feat-ico">📦</div><div><strong>Marketplace setup</strong><div class="muted">Amazon/Flipkart listing & onboarding.</div></div></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Recent work</h2>
+            <p class="muted">A selection of store‑ready projects and branded launches.</p>
+            <div class="portfolio" style="margin-top:10px">
+              <div class="proj card"><div class="proj-thumb">A1</div><div><strong>EduLearn App</strong><div class="muted">Mobile‑first learning app, Play Store launch</div></div></div>
+              <div class="proj card"><div class="proj-thumb">S2</div><div><strong>ShopNow Store</strong><div class="muted">E‑commerce listing + A+ pages</div></div></div>
+              <div class="proj card"><div class="proj-thumb">B3</div><div><strong>Brand Pack</strong><div class="muted">Logo + stationery + mockups</div></div></div>
+              <div class="proj card"><div class="proj-thumb">W4</div><div><strong>Corporate Site</strong><div class="muted">Fast, SEO‑ready landing site</div></div></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="vspace-12"></div>
+
+        <article class="card">
+          <h2>How we work</h2>
+          <div class="steps" style="margin-top:8px">
+            <div class="step"><div class="num">1</div><div><strong>Discover</strong><div class="muted">We learn your goals & constraints.</div></div></div>
+            <div class="step"><div class="num">2</div><div><strong>Design</strong><div class="muted">Brand direction, screens & assets.</div></div></div>
+            <div class="step"><div class="num">3</div><div><strong>Develop</strong><div class="muted">Fast builds, CI, testing & signing.</div></div></div>
+            <div class="step"><div class="num">4</div><div><strong>Launch</strong><div class="muted">Play Store release and marketplace onboarding.</div></div></div>
+          </div>
+        </article>
+
+        <div class="vspace-12"></div>
+
+        <section class="card">
+          <h2>Quick Stats</h2>
+          <div class="stats" style="margin-top:8px">
+            <div class="stat"><div class="big" data-count="42">0</div><div class="muted">Apps shipped</div></div>
+            <div class="stat"><div class="big" data-count="97">0</div><div class="muted">% 5★ rating avg</div></div>
+            <div class="stat"><div class="big" data-count="18">0</div><div class="muted">Marketplace onboardings</div></div>
+            <div class="stat"><div class="big" data-count="12">0</div><div class="muted">Brand kits this year</div></div>
+          </div>
+        </section>
+
+        <div class="vspace-12"></div>
+
+        <article class="card testi">
+          <h2>What clients say</h2>
+          <div class="testi" style="margin-top:8px">
+            <div class="card">"Shridhar Group shipped our MVP in 3 weeks — clean & store‑ready."<div class="muted">— Priya, EduStart</div></div>
+            <div class="card">"Branding and packaging looked premium on day one."<div class="muted">— Karan, Seller</div></div>
+            <div class="card">"Handled our Amazon onboarding end‑to‑end."<div class="muted">— Rahul, Retail</div></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services" class="page" aria-label="Services">
+        <div class="card">
+          <h2>Services (detailed)</h2>
+          <div style="margin-top:8px;display:grid;gap:10px">
+            <div class="card price-card"><strong>App Development</strong>
+              <div class="muted">Android/iOS hybrid or native, store assets, privacy, release pipeline.</div>
+              <div class="vspace-12"></div>
+              <div class="pricing">
+                <div class="card"><div class="price">₹49,000</div><div class="muted">Starter App (5–8 screens)</div><ul class="muted" style="margin:8px 0 0 16px;line-height:1.6">
+                  <li>Design system + logo</li>
+                  <li>Play Store ready build</li>
+                  <li>Basic analytics</li>
+                </ul><div class="vspace-12"></div><button class="btn primary" data-ask="Starter App">Get quote</button></div>
+                <div class="card"><div class="price">₹99,000</div><div class="muted">Business App</div><ul class="muted" style="margin:8px 0 0 16px;line-height:1.6">
+                  <li>Auth + API integration</li>
+                  <li>CI/CD + crash reporting</li>
+                  <li>Basic SEO website</li>
+                </ul><div class="vspace-12"></div><button class="btn primary" data-ask="Business App">Get quote</button></div>
+                <div class="card"><div class="price">₹1.8L+</div><div class="muted">Scale‑up</div><ul class="muted" style="margin:8px 0 0 16px;line-height:1.6">
+                  <li>Custom features</li>
+                  <li>Load + security audit</li>
+                  <li>Dedicated support</li>
+                </ul><div class="vspace-12"></div><button class="btn primary" data-ask="Scale-up">Get quote</button></div>
+              </div>
+            </div>
+
+            <div class="card"><strong>Play Store Publishing</strong>
+              <div class="muted">Listing creation, screenshots, store optimization and release.</div>
+              <div class="vspace-12"></div>
+              <div class="features">
+                <div class="feature"><div class="feat-ico">🖼️</div><div><strong>Assets</strong><div class="muted">Screens, icon, feature graphic</div></div></div>
+                <div class="feature"><div class="feat-ico">📝</div><div><strong>Policy</strong><div class="muted">Privacy, permissions, content</div></div></div>
+                <div class="feature"><div class="feat-ico">🚀</div><div><strong>Release</strong><div class="muted">Signed builds, rollouts</div></div></div>
+                <div class="feature"><div class="feat-ico">📈</div><div><strong>ASO</strong><div class="muted">Keywords + description</div></div></div>
+              </div>
+            </div>
+
+            <div class="card"><strong>Website Development</strong>
+              <div class="muted">Landing pages, CMS integration, hosting and SEO basics.</div>
+              <div class="vspace-12"></div>
+              <div class="portfolio">
+                <div class="proj card"><div class="proj-thumb">LP</div><div><strong>Landing + Forms</strong><div class="muted">Ultra‑fast static or Next.js</div></div></div>
+                <div class="proj card"><div class="proj-thumb">CMS</div><div><strong>Headless CMS</strong><div class="muted">Contentful/Sanity/Strapi</div></div></div>
+              </div>
+            </div>
+
+            <div class="card"><strong>Marketplace Onboarding</strong>
+              <div class="muted">Amazon/Flipkart: account setup, listings, A+ content guidance.</div>
+              <div class="vspace-12"></div>
+              <div class="features">
+                <div class="feature"><div class="feat-ico">🏪</div><div><strong>Store setup</strong><div class="muted">GST, bank, KYC</div></div></div>
+                <div class="feature"><div class="feat-ico">📦</div><div><strong>Catalog</strong><div class="muted">Listings, variations</div></div></div>
+                <div class="feature"><div class="feat-ico">🖊️</div><div><strong>A+ Content</strong><div class="muted">Premium brand pages</div></div></div>
+                <div class="feature"><div class="feat-ico">🚚</div><div><strong>Logistics</strong><div class="muted">FBA, returns, SLA</div></div></div>
+              </div>
+            </div>
+
+            <div class="card"><strong>Branding & Print</strong>
+              <div class="muted">Logo, color system, business cards and print‑ready files.</div>
+              <div class="vspace-12"></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span class="chip">Logo Suite</span>
+                <span class="chip">Typography</span>
+                <span class="chip">Packaging</span>
+                <span class="chip">Stationery</span>
+                <span class="chip">Social Templates</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section id="portfolio" class="page" aria-label="Portfolio">
+        <div class="card">
+          <h2>Portfolio</h2>
+          <p class="muted">Selected launches across apps, web and marketplaces.</p>
+          <div class="portfolio" style="margin-top:8px">
+            <div class="proj card"><div class="proj-thumb">P1</div><div><strong>Example App</strong><div class="muted">Store‑ready with in‑app purchases</div></div></div>
+            <div class="proj card"><div class="proj-thumb">P2</div><div><strong>Merchant Site</strong><div class="muted">Catalog, checkout, analytics</div></div></div>
+            <div class="proj card"><div class="proj-thumb">P3</div><div><strong>Health Tracker</strong><div class="muted">Wearable sync + charts</div></div></div>
+            <div class="proj card"><div class="proj-thumb">P4</div><div><strong>POS Suite</strong><div class="muted">Inventory + billing + GST</div></div></div>
+          </div>
+          <div class="vspace-12"></div>
+          <div class="features">
+            <div class="feature"><div class="feat-ico">🧪</div><div><strong>QA & Testing</strong><div class="muted">Automated flows + devices</div></div></div>
+            <div class="feature"><div class="feat-ico">🧰</div><div><strong>Stack</strong><div class="muted">Flutter/React Native/Next.js</div></div></div>
+            <div class="feature"><div class="feat-ico">🔌</div><div><strong>Integrations</strong><div class="muted">Razorpay, Firebase, Maps</div></div></div>
+            <div class="feature"><div class="feat-ico">🧭</div><div><strong>Guidance</strong><div class="muted">ASO, SEO, analytics, funnels</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="page" aria-label="Contact">
+        <div class="card">
+          <h2>Contact</h2>
+          <div style="display:grid;gap:10px;margin-top:8px">
+            <div class="feature"><div class="feat-ico">📞</div><div><strong>Call</strong><div class="muted"><a href="tel:+917483640694">+91 74836 40694</a></div></div></div>
+            <div class="feature"><div class="feat-ico">💬</div><div><strong>WhatsApp</strong><div class="muted"><a target="_blank" rel="noopener" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group">Start chat</a></div></div></div>
+            <div class="feature"><div class="feat-ico">✉️</div><div><strong>Email</strong><div class="muted"><a href="mailto:hello@shridhar.group">hello@shridhar.group</a></div></div></div>
+            <div class="feature"><div class="feat-ico">📍</div><div><strong>Address</strong><div class="muted">Bengaluru, Karnataka, India</div></div></div>
+          </div>
+        </div>
+
+        <div class="vspace-12"></div>
+
+        <div class="card">
+          <h2>Quick Enquiry</h2>
+          <form id="enq" style="display:grid;gap:10px;margin-top:8px">
+            <input name="name" placeholder="Your name" required aria-label="Your name" />
+            <input name="phone" placeholder="Phone" inputmode="tel" required aria-label="Phone" />
+            <select name="service" aria-label="Service">
+              <option value="App Development">App Development</option>
+              <option value="Play Store Publishing">Play Store Publishing</option>
+              <option value="Website Development">Website Development</option>
+              <option value="Marketplace Onboarding">Marketplace Onboarding</option>
+              <option value="Branding & Print">Branding & Print</option>
+            </select>
+            <textarea name="message" placeholder="Tell us about the project..." rows="4" aria-label="Message"></textarea>
+            <label class="small"><input type="checkbox" id="consent" required> I agree to be contacted and to the privacy policy.</label>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button class="btn primary round" type="submit">Send</button>
+              <button class="btn round" type="button" id="saveDraft">Save Draft</button>
+              <div id="formNote" class="muted" style="display:none">Saved — we'll reach out.</div>
+            </div>
+          </form>
+        </div>
+
+        <div class="vspace-12"></div>
+
+        <section class="card faq">
+          <h2>FAQ</h2>
+          <div class="q"><div style="display:flex;justify-content:space-between;align-items:center"><div><strong>How long to launch an app?</strong></div><div class="muted toggle">＋</div></div><div class="a muted">Depends on scope. Typical small app 3–6 weeks.</div></div>
+          <div class="q"><div style="display:flex;justify-content:space-between;align-items:center"><div><strong>Do you publish to Play Store?</strong></div><div class="muted toggle">＋</div></div><div class="a muted">Yes — we prepare listing, assets and release builds.</div></div>
+          <div class="q"><div style="display:flex;justify-content:space-between;align-items:center"><div><strong>Do you provide support?</strong></div><div class="muted toggle">＋</div></div><div class="a muted">We offer maintenance plans and on‑demand fixes.</div></div>
+        </section>
+
+        <div style="height:60px"></div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <div class="nav-wrap" role="navigation" aria-label="Main navigation">
+      <nav class="tabbar" role="tablist" aria-label="Tabs">
+        <div class="indicator" id="indicator" aria-hidden="true"><div class="core"></div></div>
+
+        <button class="tab" role="tab" aria-label="Services" data-target="services" data-accent1="#6dd3ff" data-accent2="#a78bfa" aria-selected="false">
+          <div class="ic" aria-hidden="true">🧩</div>
+          <span>Services</span>
         </button>
 
-        <div class="nav-btn" data-tab="contact" data-x="270">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2h-4l-4 4v-4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <span class="label">Contact</span>
+        <button class="tab" role="tab" aria-label="Work" data-target="portfolio" data-accent1="#ffd36d" data-accent2="#ff9b6d" aria-selected="false">
+          <div class="ic" aria-hidden="true">💼</div>
+          <span>Work</span>
+        </button>
+
+        <div class="center-slot" aria-hidden="true">
+          <button class="fab" id="homeFab" title="Home" aria-label="Home">
+            <div>Home</div>
+          </button>
         </div>
-        <div class="nav-btn" data-tab="profile" data-x="340">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M4 21v-2a4 4 0 0 1 3-3.87"/><circle cx="12" cy="7" r="4"/></svg>
-          <span class="label">Profile</span>
-        </div>
+
+        <button class="tab" role="tab" aria-label="About" data-target="home" data-accent1="#8ef29a" data-accent2="#3dd17a" aria-selected="true">
+          <div class="ic" aria-hidden="true">🏠</div>
+          <span>About</span>
+        </button>
+
+        <button class="tab" role="tab" aria-label="Contact" data-target="contact" data-accent1="#ffd36d" data-accent2="#ff6d9b" aria-selected="false">
+          <div class="ic" aria-hidden="true">✉️</div>
+          <span>Contact</span>
+        </button>
       </nav>
     </div>
   </div>
 
   <script>
-    const tabs = ["services","branding","home","contact","profile"];
-    const sections = Object.fromEntries(tabs.map(id=>[id, document.getElementById(id)]));
-    const ring = document.getElementById('ring');
+    // ============================
+    // CONFIG
+    // ============================
+    // If you have an Apps Script endpoint, paste it here to send enquiries to Google Sheets.
+    // Leave empty to use localStorage fallback only.
+    const APPS_SCRIPT_URL = ""; // e.g., "https://script.google.com/macros/s/AKfycbx.../exec"
 
-    function activate(tab){
-      for(const s of Object.values(sections)){ s.classList.remove('active'); }
-      sections[tab].classList.add('active');
-      const el = document.querySelector(`[data-tab="${tab}"]`);
-      if(el && el.dataset.x){ ring.style.setProperty('--x', el.dataset.x); }
-      if(tab==='home'){ ring.style.setProperty('--x', 180); } // center under FAB
-      window.scrollTo({top:0, behavior:'smooth'});
+    // ============================
+    // THEME
+    // ============================
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('sg_theme');
+    if (savedTheme) document.body.classList.toggle('light', savedTheme === 'light');
+    else document.body.classList.toggle('light', window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+    themeToggle.checked = document.body.classList.contains('light');
+    themeToggle.addEventListener('change', ()=>{
+      document.body.classList.toggle('light', themeToggle.checked);
+      localStorage.setItem('sg_theme', themeToggle.checked ? 'light' : 'dark');
+      try{ if('vibrate' in navigator) navigator.vibrate(10); }catch(e){}
+    });
+
+    // ============================
+    // PAGES & NAV (Springy indicator)
+    // ============================
+    const tabbar = document.querySelector('.tabbar');
+    const tabs = Array.from(document.querySelectorAll('.tabbar .tab'));
+    const fab = document.getElementById('homeFab');
+    const pages = Array.from(document.querySelectorAll('.page'));
+    const indicator = document.getElementById('indicator');
+
+    function setActive(target){
+      // pages
+      pages.forEach(p=>p.classList.toggle('active', p.id===target));
+      // tabs
+      tabs.forEach((t,i)=>{
+        const is = t.dataset.target===target;
+        t.classList.toggle('active', is);
+        t.setAttribute('aria-selected', is? 'true':'false');
+        if(is) navIndex = i; // sync keyboard index
+      });
+
+      // move indicator (with subtle overshoot)
+      const activeEl = tabs.find(t=>t.dataset.target===target) || document.querySelector('.tabbar .tab[aria-selected="true"]');
+      if(activeEl){
+        const barRect = tabbar.getBoundingClientRect();
+        const rect = activeEl.getBoundingClientRect();
+        const centerX = rect.left + rect.width/2 - barRect.left;
+        const indW = indicator.offsetWidth;
+        const x = centerX - indW/2;
+        // springy move
+        indicator.animate([
+          { transform: indicator.style.transform || `translateX(${x}px)` },
+          { transform: `translateX(${x + 6}px)` },
+          { transform: `translateX(${x}px)` }
+        ], { duration: 380, easing: 'cubic-bezier(.17,1.2,.35,1)' });
+        indicator.style.transform = `translateX(${x}px)`;
+        const a1 = activeEl.dataset.accent1 || getComputedStyle(document.documentElement).getPropertyValue('--accent-1');
+        const a2 = activeEl.dataset.accent2 || getComputedStyle(document.documentElement).getPropertyValue('--accent-2');
+        indicator.querySelector('.core').style.background = `linear-gradient(180deg, ${a1}, ${a2})`;
+        indicator.style.boxShadow = '0 18px 48px rgba(0,0,0,0.28)';
+      }
+      // update url hash
+      if(location.hash !== '#'+target) history.replaceState(null,'','#'+target);
+      // accessibility: announce
+      const live = document.getElementById('live');
+      if(live){ live.textContent = `${target} tab active`; }
     }
 
-    document.querySelectorAll('[data-tab]').forEach(btn=>{
-      btn.addEventListener('click', ()=> activate(btn.dataset.tab));
-    });
+    // initial route
+    const initial = (location.hash && location.hash.replace('#','')) || 'home';
+    setTimeout(()=>setActive(initial), 20);
 
-    // Default ring position under FAB
-    ring.style.setProperty('--x', 180);
+    // attach events
+    tabs.forEach(t=>t.addEventListener('click', ()=> { setActive(t.dataset.target); try{ if('vibrate' in navigator) navigator.vibrate(8);}catch(e){} }));
+    fab.addEventListener('click', ()=> { setActive('home'); try{ if('vibrate' in navigator) navigator.vibrate(12);}catch(e){} });
+    // any element with data-tab attribute can navigate
+    document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click', (e)=>{ e.preventDefault(); setActive(el.getAttribute('data-tab')); }));
 
-    // CTA actions
-    document.getElementById('ctaTalk').addEventListener('click', ()=> {
-      window.location.href = 'tel:+917483640694';
-    });
-    document.getElementById('ctaPortfolio').addEventListener('click', ()=> activate('services'));
+    // recompute on resize
+    window.addEventListener('resize', ()=>{ const cur = pages.find(p=>p.classList.contains('active')); if(cur) setActive(cur.id); });
 
-    // Contact actions
-    document.getElementById('btnCall').addEventListener('click', ()=> window.location.href='tel:+917483640694');
-    document.getElementById('btnWhatsApp').addEventListener('click', ()=> {
-      const msg = encodeURIComponent('Hi Shridhar, I want to build my brand and launch my app/website.');
-      window.open(`https://wa.me/917483640694?text=${msg}`, '_blank');
-    });
-    document.getElementById('btnEmail').addEventListener('click', ()=> {
-      const subject = encodeURIComponent('Project enquiry — Shridhar Group');
-      const body = encodeURIComponent('Hello Shridhar,\n\nI want help with: [App / Website / Amazon / Flipkart / Branding].\nBudget & timeline: ____.\n\nThanks,');
-      window.location.href = `mailto:hello@shridhar-group.example?subject=${subject}&body=${body}`;
-    });
+    // ============================
+    // FORM handling (Google Sheets optional + local fallback)
+    // ============================
+    const form = document.getElementById('enq');
+    const note = document.getElementById('formNote');
+    const saveDraftBtn = document.getElementById('saveDraft');
 
-    // QR upload/preview + download
-    const qrInput = document.getElementById('qrFile');
-    const qrPreview = document.getElementById('qrPreview');
-    const btnDownloadQR = document.getElementById('btnDownloadQR');
-    qrInput.addEventListener('change', (e)=>{
-      const file = e.target.files?.[0];
-      if(!file) return; const url = URL.createObjectURL(file); qrPreview.src = url;
-    });
-    btnDownloadQR.addEventListener('click', ()=>{
-      const a = document.createElement('a'); a.href = qrPreview.src; a.download = 'shridhar-app-qr.png'; a.click();
-    });
-
-    // Share/copy app link
-    const appLink = document.getElementById('appLink');
-    document.getElementById('btnCopy').addEventListener('click', async ()=>{
-      try{ await navigator.clipboard.writeText(appLink.value || ''); toast('Link copied'); }catch{ toast('Copy failed'); }
-    });
-    document.getElementById('btnShare').addEventListener('click', async ()=>{
-      const url = appLink.value || window.location.href;
-      if(navigator.share){
-        try{ await navigator.share({ title:'Shridhar Group App', text:'Install our app on Google Play', url}); }catch{}
-      } else { await navigator.clipboard.writeText(url); toast('Link copied (share not supported)'); }
-    });
-
-    // Tiny toast
-    function toast(text){
-      const t = document.createElement('div');
-      t.textContent = text; t.style.cssText = `position:fixed; left:50%; transform:translateX(-50%); bottom:100px; padding:10px 14px; background:#151825; color:#fff; border:1px solid rgba(255,255,255,.12); border-radius:12px; z-index:99; box-shadow:${getComputedStyle(document.documentElement).getPropertyValue('--shadow')}`;
-      document.body.appendChild(t); setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .2s'; }, 1200); setTimeout(()=> t.remove(), 1500);
+    function showNote(text){
+      note.textContent = text; note.style.display='block';
+      setTimeout(()=>note.style.display='none',2600);
     }
+
+    function saveLocal(data){
+      const list = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
+      list.push({...data,ts:new Date().toISOString()});
+      localStorage.setItem('sg_enquiries', JSON.stringify(list));
+    }
+
+    async function sendToAppsScript(data){
+      if(!APPS_SCRIPT_URL) return { ok:false, reason:'No endpoint' };
+      try{
+        const res = await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', body: JSON.stringify(data), headers:{'Content-Type':'application/json'} });
+        // with no-cors you can't read status reliably; assume success
+        return { ok:true };
+      }catch(err){ return { ok:false, reason: String(err) } }
+    }
+
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      if(!document.getElementById('consent').checked){ showNote('Please accept the consent.'); return; }
+      // optimistic UI
+      form.reset();
+      showNote('Sending…');
+      // send
+      const sent = await sendToAppsScript(data);
+      if(!sent.ok){
+        saveLocal(data);
+        showNote('Saved locally — we\'ll reach out.');
+      } else {
+        showNote('Received — we\'ll contact you.');
+      }
+    });
+
+    saveDraftBtn.addEventListener('click', ()=>{
+      const data = Object.fromEntries(new FormData(form).entries());
+      saveLocal({...data, draft:true});
+      showNote('Draft saved on this device.');
+    });
+
+    // Prefill if draft exists
+    try{
+      const drafts = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
+      const last = drafts.reverse().find(x=>x.draft);
+      if(last){
+        form.name.value = last.name||'';
+        form.phone.value = last.phone||'';
+        form.service.value = last.service||'App Development';
+        form.message.value = last.message||'';
+      }
+    }catch(e){}
+
+    // ============================
+    // FAQ accordion
+    // ============================
+    document.querySelectorAll('.faq .q').forEach(q=>q.addEventListener('click', ()=>{ q.classList.toggle('open'); }));
+
+    // ============================
+    // Accessibility: allow left/right on bottom nav
+    // ============================
+    let navIndex = tabs.findIndex(t=>t.classList.contains('active'));
+    document.addEventListener('keydown', e=>{
+      if(['ArrowLeft','ArrowRight'].includes(e.key)){
+        e.preventDefault();
+        if(e.key==='ArrowLeft') navIndex = Math.max(0, navIndex-1);
+        else navIndex = Math.min(tabs.length-1, navIndex+1);
+        const t = tabs[navIndex]; if(t) setActive(t.dataset.target);
+      }
+    });
+
+    // Live region for screen readers
+    const live = document.createElement('div'); live.id='live'; live.setAttribute('aria-live','polite'); live.className='sr-only'; document.body.appendChild(live);
+
+    // ============================
+    // Fun: Count‑up stats on first view
+    // ============================
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const el = entry.target; const target = Number(el.dataset.count||0);
+          let cur = 0; const step = Math.max(1, Math.round(target/30));
+          const tick = ()=>{ cur += step; if(cur>=target){ el.textContent = target; return; } el.textContent = cur; requestAnimationFrame(tick); };
+          tick(); io.unobserve(el);
+        }
+      });
+    }, { threshold: .4 });
+    document.querySelectorAll('[data-count]').forEach(el=>io.observe(el));
+
+    // ============================
+    // Reduce motion preference
+    // ============================
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if(reduceMotion.matches){
+      document.querySelectorAll('*').forEach(el=>el.style.animationDuration='.001ms');
+    }
+
+    // ============================
+    // Deep links: scroll into view smoothly
+    // ============================
+    function smoothScrollIntoView(id){
+      const el = document.getElementById(id); if(!el) return;
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    window.addEventListener('hashchange', ()=>{
+      const id = location.hash.replace('#','');
+      if(['home','services','portfolio','contact'].includes(id)) smoothScrollIntoView(id);
+    });
+
+    // Prefill service from pricing buttons
+    document.querySelectorAll('[data-ask]').forEach(btn=>btn.addEventListener('click', ()=>{
+      setActive('contact');
+      form.service.value = btn.dataset.ask;
+    }));
   </script>
 </body>
 </html>
