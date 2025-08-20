@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>Shridhar Group — App‑style Web App (Pro v2)</title>
-  <meta name="theme-color" content="#071026" id="metaThemeColor">
+  <title>Shridhar Group — App‑style Web App (Pro)</title>
+  <meta name="theme-color" content="#071026">
   <meta name="description" content="Shridhar Group — App development, Play Store publishing, branding, marketplace onboarding. Build. Launch. Brand.">
   <meta property="og:title" content="Shridhar Group — Build. Launch. Brand."/>
   <meta property="og:description" content="End‑to‑end product studio: apps, websites, marketplace onboarding and premium brand kits."/>
@@ -12,17 +12,15 @@
   <meta property="og:image" content="/icon.png"/>
   <link rel="icon" href="/favicon.ico"/>
 
-  <!-- Font performance: preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Fonts: Plus Jakarta Sans, Inter -->
+  <!-- Font: Plus Jakarta Sans (clean, professional); Inter as fallback -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ✅ Tap polish */
-    * { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; box-sizing: border-box; }
-    html,body{height:100%}
-
+    /* ✅ Put this at the very top of your CSS */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
     /* ---------------------- ROOT THEME ---------------------- */
     :root{
       --bg: #071026;        /* dark background */
@@ -39,7 +37,6 @@
       --nav-h: 78px;
       --shadow-1: 0 8px 30px rgba(2,6,23,0.38);
       --shadow-2: 0 18px 48px rgba(2,6,23,0.46);
-      --focus: #6dd3ff;
     }
     .light{
       --bg: #f6f8fb;
@@ -52,14 +49,15 @@
       --glass: rgba(2,6,23,0.06);
       --shadow-1: 0 8px 24px rgba(2,6,23,0.12);
       --shadow-2: 0 18px 38px rgba(2,6,23,0.16);
-      --focus: #2563eb;
     }
 
-    /* ---------------------- BASE ---------------------- */
+    /* ---------------------- RESET ---------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       font-family:"Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      font-size:14.6px;
+      font-size:14.6px; /* ↓ slightly smaller */
       line-height:1.5;
       letter-spacing:.1px;
       color:var(--text);
@@ -74,15 +72,12 @@
     a{color:inherit;text-decoration:none}
     button{font:inherit}
 
-    /* Focus visible */
-    :is(button,a,[role="tab"]):focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:12px}
-
-    /* Visually hidden */
+    /* Visually hidden (for a11y) */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     /* ---------------------- LAYOUT ---------------------- */
     .app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto}
-    header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px) saturate(1.08);-webkit-backdrop-filter:blur(8px) saturate(1.08);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.05)}
+    header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px) saturate(1.08);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.05)}
     .top-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
     .brand{display:flex;gap:12px;align-items:center}
     .badge{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 140deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow-1);font-weight:800}
@@ -93,7 +88,7 @@
     .theme-toggle input{display:none}
     .knob{width:26px;height:26px;border-radius:999px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 10px 24px rgba(0,0,0,0.22)}
 
-    main.content{padding:14px;padding-bottom:calc(var(--nav-h) + 34px + env(safe-area-inset-bottom,0px))}
+    main.content{padding:14px;padding-bottom:calc(var(--nav-h) + 34px)}
 
     .row{display:grid;gap:12px}
     @media(min-width:720px){.grid-2{grid-template-columns:repeat(2,1fr)}}
@@ -103,7 +98,7 @@
     .muted{color:var(--muted);font-size:12.6px}
 
     /* ---------------------- HERO / CTA ---------------------- */
-    .hero{display:grid;gap:12px;align-items:center;padding:16px;border-radius:18px;background:linear-gradient(135deg, rgba(109,211,255,0.10), rgba(167,139,250,0.08));border:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden}
+    .hero{display:grid;gap:12px;align-items:center;padding:16px;border-radius:18px;background:linear-gradient(135deg, rgba(109,211,255,0.10), rgba(167,139,250,0.08));border:1px solid rgba(255,255,255,0.06)}
     .hero h1{font-size:18px;margin:0;font-weight:800;letter-spacing:.1px}
     .cta{display:flex;gap:10px}
     .btn{position:relative;overflow:hidden;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--card-2);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease}
@@ -115,9 +110,6 @@
     .btn::after{content:"";position:absolute;inset:auto auto 0 50%;transform:translate(-50%,50%) scale(0);width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.22);opacity:0;pointer-events:none}
     .btn:active::after{animation:ripple .6s ease}
     @keyframes ripple{from{transform:translate(-50%,50%) scale(.05);opacity:.45}to{transform:translate(-50%,50%) scale(1);opacity:0}}
-
-    /* Copy badge */
-    .copy-badge{margin-left:6px;font-size:11px;padding:4px 6px;border-radius:999px;border:1px dashed rgba(255,255,255,0.18)}
 
     /* Chips */
     .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;border:1px dashed rgba(255,255,255,0.18);background:rgba(255,255,255,0.02);font-size:12px}
@@ -155,12 +147,6 @@
     .price-card{position:relative;overflow:hidden}
     .price{font-size:22px;font-weight:800}
 
-    /* ---------------------- CONNECT (social) ---------------------- */
-    .connect{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .social{display:flex;gap:10px;align-items:center}
-    .social a{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;border:1px solid rgba(255,255,255,0.10);background:linear-gradient(180deg,rgba(109,211,255,0.08),rgba(167,139,250,0.06));transition:transform .18s ease}
-    .social a:active{transform:translateY(1px)}
-
     /* ---------------------- FAQ ---------------------- */
     .faq .q{border-top:1px solid rgba(255,255,255,0.08);padding:12px 0;cursor:pointer}
     .faq .a{color:var(--muted);font-size:12.6px;display:none;margin-top:8px}
@@ -169,8 +155,8 @@
     .faq .q.open .toggle{transform:rotate(45deg)}
 
     /* ---------------------- BOTTOM NAV / TABBAR ---------------------- */
-    .nav-wrap{position:fixed;left:0;right:0;bottom:calc(12px + env(safe-area-inset-bottom,0px));display:grid;place-items:center;pointer-events:none;z-index:60}
-    .tabbar{width:min(560px,94%);height:var(--nav-h);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;position:relative;pointer-events:auto;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow-2)}
+    .nav-wrap{position:fixed;left:0;right:0;bottom:12px;display:grid;place-items:center;pointer-events:none;z-index:60}
+    .tabbar{width:min(560px,94%);height:var(--nav-h);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;position:relative;pointer-events:auto;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow-2)}
 
     .tab{position:relative;display:grid;place-items:center;height:100%;gap:4px;border-radius:14px;border:none;background:transparent;cursor:pointer;padding-bottom:6px;user-select:none;touch-action:manipulation}
     .tab .ic{width:22px;height:22px;display:grid;place-items:center;transition:transform .34s cubic-bezier(.2,1.1,.3,1)}
@@ -179,44 +165,32 @@
     .tab.active span{color:var(--text);font-weight:700}
     .tab.active .ic{transform:translateY(-6px) scale(1.12)}
 
-    /* Indicator circle */
+    /* Indicator circle that moves under active tab (springy) */
     .indicator{position:absolute;bottom:12px;width:50px;height:50px;border-radius:50%;transform:translateX(0);left:0;transition:transform .44s cubic-bezier(.17,1.2,.35,1), box-shadow .28s;pointer-events:none;display:block}
-    .indicator .core{width:44px;height:44px;border-radius:50%;margin:auto;background:linear-gradient(180deg, var(--accent-1), var(--accent-2));box-shadow:0 14px 32px rgba(109,211,255,0.24);display:grid;place-items:center}
+    .indicator .core{width:44px;height:44px;border-radius:50%;margin:auto;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 14px 32px rgba(109,211,255,0.24);display:grid;place-items:center}
 
-    /* FAB (now acts as a tab too) */
-    .fab{position:absolute;left:50%;top:-26px;transform:translateX(-50%);width:70px;height:70px;border-radius:999px;border:none;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:0 20px 40px rgba(109,211,255,0.18);cursor:pointer}
+    /* FAB */
+    .center-slot{position:relative;display:grid;place-items:center}
+    .fab{position:absolute;left:50%;top:-26px;transform:translateX(-50%);width:70px;height:70px;border-radius:999px;border:none;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:0 20px 40px rgba(109,211,255,0.18);cursor:pointer;will-change:transform}
     .fab > div{font-weight:800;color:#fff}
-    /* Pulse halo around FAB */
-    .fab::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(109,211,255,0.35);animation:fabholo 2.4s ease-out infinite}
-    @keyframes fabholo{0%{box-shadow:0 0 0 0 rgba(109,211,255,0.35)}70%{box-shadow:0 0 0 16px rgba(109,211,255,0)}100%{box-shadow:0 0 0 0 rgba(109,211,255,0)}}
+
+    /* Bobbing animation (subtle) */
+    @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
+    .fab{animation: bob 3.2s ease-in-out infinite}
+
+    /* small screens: tighten spacing */
     @media(max-width:360px){.indicator{width:46px;height:46px}.indicator .core{width:40px;height:40px}.fab{width:64px;height:64px}}
 
-    /* ---------------------- PAGES & TRANSITIONS ---------------------- */
+    /* page & animations */
     .page{display:none}
-    .page.active{display:block}
-    .anim-enter{animation:pageIn .28s ease both}
-    .anim-exit{animation:pageOut .20s ease both}
-    @keyframes pageIn{from{opacity:0;transform:translateY(8px) scale(.995)}to{opacity:1;transform:none}}
-    @keyframes pageOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(6px) scale(.995)}}
+    .page.active{display:block;animation:fadeIn .28s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-    /* ---------------------- FORMS ---------------------- */
+    /* forms */
     input,textarea,select{border-radius:12px;border:1px solid rgba(255,255,255,0.08);padding:10px;background:var(--card-2);color:var(--text)}
     label.small{font-size:12px;color:var(--muted)}
 
-    /* Toast */
-    .toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 34px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--card-2);border:1px solid rgba(255,255,255,0.12);padding:10px 12px;border-radius:12px;box-shadow:var(--shadow-1);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:70}
-    .toast.show{opacity:1;transform:translate(-50%,-6px)}
-
-    /* ---------------------- QUOTE BUILDER (bottom sheet) ---------------------- */
-    .sheet{position:fixed;left:0;right:0;bottom:-100%;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));border-top-left-radius:18px;border-top-right-radius:18px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 -18px 48px rgba(2,6,23,0.46);padding:14px;z-index:65;transition:bottom .32s cubic-bezier(.2,.9,.2,1)}
-    .sheet.open{bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom,0px))}
-    .sheet h3{margin:0 0 6px;font-size:16px}
-    .addons{display:grid;gap:8px;margin-top:6px}
-    .addon{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--card-2)}
-    .total{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-weight:800}
-    .sheet-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-
-    /* Utilities */
+    /* utilities */
     .muted-quiet{color:rgba(255,255,255,0.20);font-size:10.8px}
     .vspace-12{height:12px}
   </style>
@@ -228,11 +202,11 @@
         <div class="brand" aria-label="Brand">
           <div class="badge" aria-hidden="true">SG</div>
           <div>
-            <h1 style="margin-bottom:2px">Shridhar Group</h1>
+            <h1 style="margin-bottom:2px">Shridhar Group of Company</h1>
             <p class="muted">App Development · Play Store Publish · Branding</p>
           </div>
         </div>
-        <label class="theme-toggle" title="Toggle theme" aria-label="Toggle light theme" role="switch" aria-checked="false">
+        <label class="theme-toggle" title="Toggle theme" aria-label="Toggle light theme">
           <input id="themeToggle" type="checkbox" aria-hidden="true">
           <div style="font-size:12px">Theme</div>
           <div class="knob" aria-hidden="true"></div>
@@ -242,7 +216,7 @@
 
     <main class="content" id="content" role="main">
       <!-- HOME -->
-      <section id="home" class="page active" aria-label="Home" role="tabpanel" tabindex="0" aria-labelledby="tab-home">
+      <section id="home" class="page active" aria-label="Home">
         <div class="hero card">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
             <div>
@@ -258,7 +232,8 @@
           <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
             <div style="display:flex;gap:10px;align-items:center">
               <div style="width:84px;height:84px;border-radius:12px;background:white;overflow:hidden;display:grid;place-items:center;border:1px solid rgba(255,255,255,0.08)">
-                <img alt="QR to open app" src="1.jpg" width="84" height="84" loading="lazy">
+                <!-- placeholder QR: replaced with 1.jpg -->
+                <img alt="QR to open app" src="1.jpg">
               </div>
               <div>
                 <div style="font-weight:800">Open our App</div>
@@ -269,12 +244,12 @@
 
             <div style="flex:1;min-width:220px">
               <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <span class="muted chip">App Development <button class="btn copy-badge" data-copy="App Development">Copy</button></span>
-                <span class="muted chip">Play Store Publish <button class="btn copy-badge" data-copy="Play Store Publish">Copy</button></span>
-                <span class="muted chip">Website <button class="btn copy-badge" data-copy="Website">Copy</button></span>
-                <span class="muted chip">Amazon & Flipkart <button class="btn copy-badge" data-copy="Amazon & Flipkart">Copy</button></span>
-                <span class="muted chip">Branding <button class="btn copy-badge" data-copy="Branding">Copy</button></span>
-                <span class="muted chip">Cards & Print <button class="btn copy-badge" data-copy="Cards & Print">Copy</button></span>
+                <span class="muted chip">App Development</span>
+                <span class="muted chip">Play Store Publish</span>
+                <span class="muted chip">Website</span>
+                <span class="muted chip">Amazon & Flipkart</span>
+                <span class="muted chip">Branding</span>
+                <span class="muted chip">Cards & Print</span>
               </div>
             </div>
           </div>
@@ -292,7 +267,6 @@
               <div class="feature"><div class="feat-ico">🎨</div><div><strong>Brand system</strong><div class="muted">Logo, palette, typography, mockups.</div></div></div>
               <div class="feature"><div class="feat-ico">📦</div><div><strong>Marketplace setup</strong><div class="muted">Amazon/Flipkart listing & onboarding.</div></div></div>
             </div>
-            <div style="margin-top:8px"><button class="btn round" id="copyHomeFeatures">Copy all features</button></div>
           </article>
 
           <article class="card">
@@ -306,19 +280,6 @@
             </div>
           </article>
         </div>
-
-        <div class="vspace-12"></div>
-
-        <article class="card">
-          <h2>Trending Concepts</h2>
-          <p class="muted">Hot requests right now — one‑tap copy ready.</p>
-          <div class="features" style="margin-top:8px">
-            <div class="feature"><div class="feat-ico">🤖</div><div><strong>AI Chatbot</strong><div class="muted">Support & lead capture</div><button class="btn copy-badge" data-copy="AI Chatbot Integration">Copy</button></div></div>
-            <div class="feature"><div class="feat-ico">💳</div><div><strong>UPI / Payment Gateway</strong><div class="muted">Razorpay/Stripe/PhonePe</div><button class="btn copy-badge" data-copy="UPI / Payment Gateway Integration">Copy</button></div></div>
-            <div class="feature"><div class="feat-ico">🟢</div><div><strong>WhatsApp Commerce</strong><div class="muted">Catalog + order flow</div><button class="btn copy-badge" data-copy="WhatsApp Commerce (Green Tick optional)">Copy</button></div></div>
-            <div class="feature"><div class="feat-ico">🖼️</div><div><strong>3D Product Viewer</strong><div class="muted">AR/three.js mockups</div><button class="btn copy-badge" data-copy="3D Product Viewer">Copy</button></div></div>
-          </div>
-        </article>
 
         <div class="vspace-12"></div>
 
@@ -346,7 +307,7 @@
 
         <div class="vspace-12"></div>
 
-        <article class="card" id="homeTesti">
+        <article class="card testi">
           <h2>What clients say</h2>
           <div class="testi" style="margin-top:8px">
             <div class="card">"Shridhar Group shipped our MVP in 3 weeks — clean & store‑ready."<div class="muted">— Priya, EduStart</div></div>
@@ -357,7 +318,7 @@
       </section>
 
       <!-- SERVICES -->
-      <section id="services" class="page" aria-label="Services" role="tabpanel" tabindex="0" aria-labelledby="tab-services">
+      <section id="services" class="page" aria-label="Services">
         <div class="card">
           <h2>Services (detailed)</h2>
           <div style="margin-top:8px;display:grid;gap:10px">
@@ -369,17 +330,17 @@
                   <li>Design system + logo</li>
                   <li>Play Store ready build</li>
                   <li>Basic analytics</li>
-                </ul><div class="vspace-12"></div><button class="btn primary" data-plan="Starter App" data-price="49000">Select</button></div>
+                </ul><div class="vspace-12"></div><button class="btn primary" data-ask="Starter App">Get quote</button></div>
                 <div class="card"><div class="price">₹99,000</div><div class="muted">Business App</div><ul class="muted" style="margin:8px 0 0 16px;line-height:1.6">
                   <li>Auth + API integration</li>
                   <li>CI/CD + crash reporting</li>
                   <li>Basic SEO website</li>
-                </ul><div class="vspace-12"></div><button class="btn primary" data-plan="Business App" data-price="99000">Select</button></div>
-                <div class="card"><div class="price">₹180,000</div><div class="muted">Scale‑up</div><ul class="muted" style="margin:8px 0 0 16px;line-height:1.6">
+                </ul><div class="vspace-12"></div><button class="btn primary" data-ask="Business App">Get quote</button></div>
+                <div class="card"><div class="price">₹1.8L+</div><div class="muted">Scale‑up</div><ul class="muted" style="margin:8px 0 0 16px;line-height:1.6">
                   <li>Custom features</li>
                   <li>Load + security audit</li>
                   <li>Dedicated support</li>
-                </ul><div class="vspace-12"></div><button class="btn primary" data-plan="Scale-up" data-price="180000">Select</button></div>
+                </ul><div class="vspace-12"></div><button class="btn primary" data-ask="Scale-up">Get quote</button></div>
               </div>
             </div>
 
@@ -387,10 +348,10 @@
               <div class="muted">Listing creation, screenshots, store optimization and release.</div>
               <div class="vspace-12"></div>
               <div class="features">
-                <div class="feature"><div class="feat-ico">🖼️</div><div><strong>Assets</strong><div class="muted">Screens, icon, feature graphic</div><button class="btn copy-badge" data-copy="Store assets: screenshots, icon, feature graphic">Copy</button></div></div>
-                <div class="feature"><div class="feat-ico">📝</div><div><strong>Policy</strong><div class="muted">Privacy, permissions, content</div><button class="btn copy-badge" data-copy="Policy compliance: privacy, permissions, content">Copy</button></div></div>
-                <div class="feature"><div class="feat-ico">🚀</div><div><strong>Release</strong><div class="muted">Signed builds, rollouts</div><button class="btn copy-badge" data-copy="Release management: signed builds, staged rollouts">Copy</button></div></div>
-                <div class="feature"><div class="feat-ico">📈</div><div><strong>ASO</strong><div class="muted">Keywords + description</div><button class="btn copy-badge" data-copy="ASO: keywords, description, localization">Copy</button></div></div>
+                <div class="feature"><div class="feat-ico">🖼️</div><div><strong>Assets</strong><div class="muted">Screens, icon, feature graphic</div></div></div>
+                <div class="feature"><div class="feat-ico">📝</div><div><strong>Policy</strong><div class="muted">Privacy, permissions, content</div></div></div>
+                <div class="feature"><div class="feat-ico">🚀</div><div><strong>Release</strong><div class="muted">Signed builds, rollouts</div></div></div>
+                <div class="feature"><div class="feat-ico">📈</div><div><strong>ASO</strong><div class="muted">Keywords + description</div></div></div>
               </div>
             </div>
 
@@ -430,7 +391,7 @@
       </section>
 
       <!-- PORTFOLIO -->
-      <section id="portfolio" class="page" aria-label="Portfolio" role="tabpanel" tabindex="0" aria-labelledby="tab-work">
+      <section id="portfolio" class="page" aria-label="Portfolio">
         <div class="card">
           <h2>Portfolio</h2>
           <p class="muted">Selected launches across apps, web and marketplaces.</p>
@@ -450,23 +411,8 @@
         </div>
       </section>
 
-      <!-- ABOUT (new, separate from Home) -->
-      <section id="about" class="page" aria-label="About" role="tabpanel" tabindex="0" aria-labelledby="tab-about">
-        <div class="card">
-          <h2>About Shridhar Group</h2>
-          <p class="muted">We are a product studio focused on high‑quality mobile apps, fast web experiences, and store‑ready launches. Our promise: predictable timelines, transparent pricing, and premium branding from day one.</p>
-          <div class="vspace-12"></div>
-          <div class="features">
-            <div class="feature"><div class="feat-ico">🧩</div><div><strong>End‑to‑end</strong><div class="muted">From brief to Play Store</div></div></div>
-            <div class="feature"><div class="feat-ico">🛡️</div><div><strong>Secure</strong><div class="muted">Privacy, policy, compliance</div></div></div>
-            <div class="feature"><div class="feat-ico">📊</div><div><strong>Data‑driven</strong><div class="muted">Analytics & funnels</div></div></div>
-            <div class="feature"><div class="feat-ico">🤝</div><div><strong>Support</strong><div class="muted">Maintenance & updates</div></div></div>
-          </div>
-        </div>
-      </section>
-
       <!-- CONTACT -->
-      <section id="contact" class="page" aria-label="Contact" role="tabpanel" tabindex="0" aria-labelledby="tab-contact">
+      <section id="contact" class="page" aria-label="Contact">
         <div class="card">
           <h2>Contact</h2>
           <div style="display:grid;gap:10px;margin-top:8px">
@@ -512,23 +458,6 @@
 
         <div style="height:60px"></div>
       </section>
-
-      <!-- Connect template (injected into all pages) -->
-      <template id="connectTpl">
-        <section class="card connect">
-          <div>
-            <div style="font-weight:800">Connect with us</div>
-            <div class="muted">Follow for updates, trends & tips</div>
-          </div>
-          <div class="social" aria-label="Social links">
-            <a href="#" title="YouTube" aria-label="YouTube" target="_blank" rel="noopener" class="yt" data-social="YouTube" aria-hidden="false">▶</a>
-            <a href="#" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener" class="ig" data-social="Instagram">⌾</a>
-            <a href="#" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener" class="li" data-social="LinkedIn">in</a>
-            <a href="#" title="X" aria-label="X" target="_blank" rel="noopener" class="x" data-social="X">𝕏</a>
-            <a href="#" title="Facebook" aria-label="Facebook" target="_blank" rel="noopener" class="fb" data-social="Facebook">f</a>
-          </div>
-        </section>
-      </template>
     </main>
 
     <!-- BOTTOM NAV -->
@@ -536,29 +465,28 @@
       <nav class="tabbar" role="tablist" aria-label="Tabs">
         <div class="indicator" id="indicator" aria-hidden="true"><div class="core"></div></div>
 
-        <button class="tab" id="tab-services" role="tab" aria-label="Services" aria-controls="services" data-target="services" data-accent1="#6dd3ff" data-accent2="#a78bfa" aria-selected="false">
+        <button class="tab" role="tab" aria-label="Services" data-target="services" data-accent1="#6dd3ff" data-accent2="#a78bfa" aria-selected="false">
           <div class="ic" aria-hidden="true">🧩</div>
           <span>Services</span>
         </button>
 
-        <button class="tab" id="tab-work" role="tab" aria-label="Work" aria-controls="portfolio" data-target="portfolio" data-accent1="#ffd36d" data-accent2="#ff9b6d" aria-selected="false">
+        <button class="tab" role="tab" aria-label="Work" data-target="portfolio" data-accent1="#ffd36d" data-accent2="#ff9b6d" aria-selected="false">
           <div class="ic" aria-hidden="true">💼</div>
           <span>Work</span>
         </button>
 
-        <div class="center-slot">
-          <!-- FAB doubles as a tab -->
-          <button class="fab tab" id="tab-home" role="tab" aria-label="Home" aria-controls="home" data-target="home" aria-selected="true">
+        <div class="center-slot" aria-hidden="true">
+          <button class="fab" id="homeFab" title="Home" aria-label="Home">
             <div>Home</div>
           </button>
         </div>
 
-        <button class="tab" id="tab-about" role="tab" aria-label="About" aria-controls="about" data-target="about" data-accent1="#8ef29a" data-accent2="#3dd17a" aria-selected="false">
-          <div class="ic" aria-hidden="true">ℹ️</div>
+        <button class="tab" role="tab" aria-label="About" data-target="home" data-accent1="#8ef29a" data-accent2="#3dd17a" aria-selected="true">
+          <div class="ic" aria-hidden="true">🏠</div>
           <span>About</span>
         </button>
 
-        <button class="tab" id="tab-contact" role="tab" aria-label="Contact" aria-controls="contact" data-target="contact" data-accent1="#ffd36d" data-accent2="#ff6d9b" aria-selected="false">
+        <button class="tab" role="tab" aria-label="Contact" data-target="contact" data-accent1="#ffd36d" data-accent2="#ff6d9b" aria-selected="false">
           <div class="ic" aria-hidden="true">✉️</div>
           <span>Contact</span>
         </button>
@@ -566,144 +494,158 @@
     </div>
   </div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <!-- Quote Builder Sheet -->
-  <div class="sheet" id="quote">
-    <h3>Quote Builder</h3>
-    <div class="muted" id="quotePlan">Selected: —</div>
-    <div class="addons">
-      <label class="addon"><span>UPI / Payment Gateway</span><input type="checkbox" data-addon="PG" data-price="9000"></label>
-      <label class="addon"><span>WhatsApp Commerce</span><input type="checkbox" data-addon="WA" data-price="7000"></label>
-      <label class="addon"><span>Push Notifications</span><input type="checkbox" data-addon="PN" data-price="5000"></label>
-      <label class="addon"><span>Admin Panel</span><input type="checkbox" data-addon="ADMIN" data-price="12000"></label>
-      <label class="addon"><span>Analytics + Events</span><input type="checkbox" data-addon="ANALYTICS" data-price="6000"></label>
-    </div>
-    <div class="total"><span>Total</span><span id="quoteTotal">₹0</span></div>
-    <div class="sheet-actions">
-      <a class="btn round" id="whatsQuote" target="_blank" rel="noopener">Get quote on WhatsApp</a>
-      <button class="btn" id="closeQuote">Close</button>
-    </div>
-    <div class="muted-quiet">Tip: Toggle add‑ons to customise your build. Totals are indicative.</div>
-  </div>
-
   <script>
     // ============================
     // CONFIG
     // ============================
-    const APPS_SCRIPT_URL = ""; // Optional endpoint
-
-    // Helper: toast
-    const toast = document.getElementById('toast');
-    function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 2200); try{ if('vibrate' in navigator) navigator.vibrate(8);}catch(e){} }
+    // If you have an Apps Script endpoint, paste it here to send enquiries to Google Sheets.
+    // Leave empty to use localStorage fallback only.
+    const APPS_SCRIPT_URL = ""; // e.g., "https://script.google.com/macros/s/AKfycbx.../exec"
 
     // ============================
     // THEME
     // ============================
     const themeToggle = document.getElementById('themeToggle');
-    const themeSwitch = document.querySelector('.theme-toggle');
     const savedTheme = localStorage.getItem('sg_theme');
-    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
     if (savedTheme) document.body.classList.toggle('light', savedTheme === 'light');
-    else document.body.classList.toggle('light', prefersLight);
+    else document.body.classList.toggle('light', window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
     themeToggle.checked = document.body.classList.contains('light');
-    themeSwitch.setAttribute('aria-checked', themeToggle.checked ? 'true' : 'false');
-
-    // Dynamic theme-color meta
-    function setMetaTheme(){
-      const col = getComputedStyle(document.body).getPropertyValue('--bg').trim();
-      const mt = document.getElementById('metaThemeColor');
-      if(mt) mt.setAttribute('content', col || '#071026');
-    }
-    setMetaTheme();
-
     themeToggle.addEventListener('change', ()=>{
       document.body.classList.toggle('light', themeToggle.checked);
       localStorage.setItem('sg_theme', themeToggle.checked ? 'light' : 'dark');
-      themeSwitch.setAttribute('aria-checked', themeToggle.checked ? 'true' : 'false');
-      setMetaTheme();
       try{ if('vibrate' in navigator) navigator.vibrate(10); }catch(e){}
     });
 
     // ============================
-    // PAGES & NAV (Springy indicator + transitions)
+    // PAGES & NAV (Springy indicator)
     // ============================
     const tabbar = document.querySelector('.tabbar');
     const tabs = Array.from(document.querySelectorAll('.tabbar .tab'));
+    const fab = document.getElementById('homeFab');
     const pages = Array.from(document.querySelectorAll('.page'));
     const indicator = document.getElementById('indicator');
 
-    // Live region for screen readers
-    const live = document.createElement('div'); live.id='live'; live.setAttribute('aria-live','polite'); live.className='sr-only'; document.body.appendChild(live);
+    function setActive(target){
+      // pages
+      pages.forEach(p=>p.classList.toggle('active', p.id===target));
+      // tabs
+      tabs.forEach((t,i)=>{
+        const is = t.dataset.target===target;
+        t.classList.toggle('active', is);
+        t.setAttribute('aria-selected', is? 'true':'false');
+        if(is) navIndex = i; // sync keyboard index
+      });
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function moveIndicatorTo(el){
-      const barRect = tabbar.getBoundingClientRect();
-      const rect = el.getBoundingClientRect();
-      const centerX = rect.left + rect.width/2 - barRect.left;
-      const indW = indicator.offsetWidth;
-      const x = centerX - indW/2;
-      if(!reduceMotion.matches){
+      // move indicator (with subtle overshoot)
+      const activeEl = tabs.find(t=>t.dataset.target===target) || document.querySelector('.tabbar .tab[aria-selected="true"]');
+      if(activeEl){
+        const barRect = tabbar.getBoundingClientRect();
+        const rect = activeEl.getBoundingClientRect();
+        const centerX = rect.left + rect.width/2 - barRect.left;
+        const indW = indicator.offsetWidth;
+        const x = centerX - indW/2;
+        // springy move
         indicator.animate([
           { transform: indicator.style.transform || `translateX(${x}px)` },
           { transform: `translateX(${x + 6}px)` },
           { transform: `translateX(${x}px)` }
         ], { duration: 380, easing: 'cubic-bezier(.17,1.2,.35,1)' });
+        indicator.style.transform = `translateX(${x}px)`;
+        const a1 = activeEl.dataset.accent1 || getComputedStyle(document.documentElement).getPropertyValue('--accent-1');
+        const a2 = activeEl.dataset.accent2 || getComputedStyle(document.documentElement).getPropertyValue('--accent-2');
+        indicator.querySelector('.core').style.background = `linear-gradient(180deg, ${a1}, ${a2})`;
+        indicator.style.boxShadow = '0 18px 48px rgba(0,0,0,0.28)';
       }
-      indicator.style.transform = `translateX(${x}px)`;
-      const a1 = el.dataset.accent1 || getComputedStyle(document.documentElement).getPropertyValue('--accent-1');
-      const a2 = el.dataset.accent2 || getComputedStyle(document.documentElement).getPropertyValue('--accent-2');
-      indicator.querySelector('.core').style.background = `linear-gradient(180deg, ${a1}, ${a2})`;
-      indicator.style.boxShadow = '0 18px 48px rgba(0,0,0,0.28)';
-    }
-
-    let currentPage = 'home';
-    function setActive(target){
-      const old = pages.find(p=>p.classList.contains('active'));
-      const next = pages.find(p=>p.id===target);
-      if(!next) return;
-
-      // Page transition
-      if(old && old!==next){
-        old.classList.remove('active');
-        old.classList.add('anim-exit');
-        old.addEventListener('animationend', ()=> old.classList.remove('anim-exit'), { once:true });
-      }
-      next.classList.add('active');
-      if(!reduceMotion.matches){ next.classList.add('anim-enter'); next.addEventListener('animationend', ()=> next.classList.remove('anim-enter'), { once:true }); }
-
-      // Tabs state
-      tabs.forEach((t)=>{
-        const is = t.dataset.target===target;
-        t.classList.toggle('active', is);
-        t.setAttribute('aria-selected', is ? 'true' : 'false');
-      });
-
-      // Move indicator
-      const activeEl = tabs.find(t=>t.dataset.target===target) || tabs[0];
-      if(activeEl) moveIndicatorTo(activeEl);
-
-      // URL
+      // update url hash
       if(location.hash !== '#'+target) history.replaceState(null,'','#'+target);
-
-      // A11y announce & focus panel
-      live.textContent = `${target} tab active`;
-      const panel = document.getElementById(target);
-      if(panel) panel.focus({ preventScroll: false });
-
-      currentPage = target;
+      // accessibility: announce
+      const live = document.getElementById('live');
+      if(live){ live.textContent = `${target} tab active`; }
     }
 
     // initial route
     const initial = (location.hash && location.hash.replace('#','')) || 'home';
-    setTimeout(()=> setActive(initial), 20);
+    setTimeout(()=>setActive(initial), 20);
 
     // attach events
-    tabs.forEach(t=> t.addEventListener('click', ()=>{ setActive(t.dataset.target); try{ if('vibrate' in navigator) navigator.vibrate(8);}catch(e){} }));
+    tabs.forEach(t=>t.addEventListener('click', ()=> { setActive(t.dataset.target); try{ if('vibrate' in navigator) navigator.vibrate(8);}catch(e){} }));
+    fab.addEventListener('click', ()=> { setActive('home'); try{ if('vibrate' in navigator) navigator.vibrate(12);}catch(e){} });
+    // any element with data-tab attribute can navigate
+    document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click', (e)=>{ e.preventDefault(); setActive(el.getAttribute('data-tab')); }));
 
-    // keyboard nav
+    // recompute on resize
+    window.addEventListener('resize', ()=>{ const cur = pages.find(p=>p.classList.contains('active')); if(cur) setActive(cur.id); });
+
+    // ============================
+    // FORM handling (Google Sheets optional + local fallback)
+    // ============================
+    const form = document.getElementById('enq');
+    const note = document.getElementById('formNote');
+    const saveDraftBtn = document.getElementById('saveDraft');
+
+    function showNote(text){
+      note.textContent = text; note.style.display='block';
+      setTimeout(()=>note.style.display='none',2600);
+    }
+
+    function saveLocal(data){
+      const list = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
+      list.push({...data,ts:new Date().toISOString()});
+      localStorage.setItem('sg_enquiries', JSON.stringify(list));
+    }
+
+    async function sendToAppsScript(data){
+      if(!APPS_SCRIPT_URL) return { ok:false, reason:'No endpoint' };
+      try{
+        const res = await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', body: JSON.stringify(data), headers:{'Content-Type':'application/json'} });
+        // with no-cors you can't read status reliably; assume success
+        return { ok:true };
+      }catch(err){ return { ok:false, reason: String(err) } }
+    }
+
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      if(!document.getElementById('consent').checked){ showNote('Please accept the consent.'); return; }
+      // optimistic UI
+      form.reset();
+      showNote('Sending…');
+      // send
+      const sent = await sendToAppsScript(data);
+      if(!sent.ok){
+        saveLocal(data);
+        showNote('Saved locally — we\'ll reach out.');
+      } else {
+        showNote('Received — we\'ll contact you.');
+      }
+    });
+
+    saveDraftBtn.addEventListener('click', ()=>{
+      const data = Object.fromEntries(new FormData(form).entries());
+      saveLocal({...data, draft:true});
+      showNote('Draft saved on this device.');
+    });
+
+    // Prefill if draft exists
+    try{
+      const drafts = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
+      const last = drafts.reverse().find(x=>x.draft);
+      if(last){
+        form.name.value = last.name||'';
+        form.phone.value = last.phone||'';
+        form.service.value = last.service||'App Development';
+        form.message.value = last.message||'';
+      }
+    }catch(e){}
+
+    // ============================
+    // FAQ accordion
+    // ============================
+    document.querySelectorAll('.faq .q').forEach(q=>q.addEventListener('click', ()=>{ q.classList.toggle('open'); }));
+
+    // ============================
+    // Accessibility: allow left/right on bottom nav
+    // ============================
     let navIndex = tabs.findIndex(t=>t.classList.contains('active'));
     document.addEventListener('keydown', e=>{
       if(['ArrowLeft','ArrowRight'].includes(e.key)){
@@ -714,75 +656,12 @@
       }
     });
 
-    // external data-tab links
-    document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click', (e)=>{ e.preventDefault(); setActive(el.getAttribute('data-tab')); }));
-
-    window.addEventListener('resize', ()=>{ const cur = pages.find(p=>p.classList.contains('active')); if(cur) setActive(cur.id); });
+    // Live region for screen readers
+    const live = document.createElement('div'); live.id='live'; live.setAttribute('aria-live','polite'); live.className='sr-only'; document.body.appendChild(live);
 
     // ============================
-    // FORM handling (Sheets optional + local fallback)
+    // Fun: Count‑up stats on first view
     // ============================
-    const form = document.getElementById('enq');
-    const note = document.getElementById('formNote');
-    const saveDraftBtn = document.getElementById('saveDraft');
-
-    function showNote(text){ if(!note) return; note.textContent = text; note.style.display='block'; setTimeout(()=>note.style.display='none',2600); }
-
-    function saveLocal(data){ const list = JSON.parse(localStorage.getItem('sg_enquiries')||'[]'); list.push({...data,ts:new Date().toISOString()}); localStorage.setItem('sg_enquiries', JSON.stringify(list)); }
-
-    async function sendToAppsScript(data){
-      if(!APPS_SCRIPT_URL) return { ok:false, reason:'No endpoint' };
-      try{
-        // Use form-encoded for better CORS simplicity
-        const res = await fetch(APPS_SCRIPT_URL, {
-          method:'POST',
-          headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(data).toString(),
-          mode: 'cors'
-        });
-        if(res.ok) return { ok:true };
-        return { ok:false, reason: res.status }
-      }catch(err){ return { ok:false, reason: String(err) } }
-    }
-
-    if(form){
-      form.addEventListener('submit', async e=>{
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
-        if(!document.getElementById('consent').checked){ showNote('Please accept the consent.'); return; }
-        form.reset();
-        showNote('Sending…');
-        const sent = await sendToAppsScript(data);
-        if(!sent.ok){ saveLocal(data); showNote('Saved locally — we\'ll reach out.'); }
-        else { showNote('Received — we\'ll contact you.'); }
-      });
-
-      saveDraftBtn && saveDraftBtn.addEventListener('click', ()=>{
-        const data = Object.fromEntries(new FormData(form).entries());
-        saveLocal({...data, draft:true});
-        showNote('Draft saved on this device.');
-      });
-
-      try{
-        const drafts = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
-        const last = drafts.reverse().find(x=>x.draft);
-        if(last){
-          form.name.value = last.name||'';
-          form.phone.value = last.phone||'';
-          form.service.value = last.service||'App Development';
-          form.message.value = last.message||'';
-        }
-      }catch(e){}
-    }
-
-    // FAQ accordion
-    document.querySelectorAll('.faq .q').forEach(q=>q.addEventListener('click', ()=>{ q.classList.toggle('open'); }));
-
-    // Deep links: smooth scroll
-    function smoothScrollIntoView(id){ const el = document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth', block:'start'}); }
-    window.addEventListener('hashchange', ()=>{ const id = location.hash.replace('#',''); if(['home','services','portfolio','contact','about'].includes(id)) smoothScrollIntoView(id); });
-
-    // Count-up stats when visible
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -796,66 +675,32 @@
     document.querySelectorAll('[data-count]').forEach(el=>io.observe(el));
 
     // ============================
-    // Copy in one tap
+    // Reduce motion preference
     // ============================
-    function copyText(t){
-      navigator.clipboard.writeText(t).then(()=>{ showToast('Copied'); }).catch(()=>{ showToast('Copy failed'); });
-    }
-    document.addEventListener('click', (e)=>{
-      const btn = e.target.closest('[data-copy]');
-      if(btn){ e.preventDefault(); copyText(btn.getAttribute('data-copy')||''); }
-    });
-    const copyHomeFeaturesBtn = document.getElementById('copyHomeFeatures');
-    copyHomeFeaturesBtn && copyHomeFeaturesBtn.addEventListener('click', ()=>{
-      const feats = Array.from(document.querySelectorAll('#home .features .feature strong')).map(x=>x.textContent.trim()).join(', ');
-      copyText(`Features: ${feats}`);
-    });
-
-    // ============================
-    // Quote Builder logic
-    // ============================
-    const sheet = document.getElementById('quote');
-    const quotePlan = document.getElementById('quotePlan');
-    const quoteTotal = document.getElementById('quoteTotal');
-    const whatsQuote = document.getElementById('whatsQuote');
-    const closeQuote = document.getElementById('closeQuote');
-    let base = 0; let planName = '';
-
-    function formatINR(v){ return '₹' + v.toLocaleString('en-IN'); }
-    function updateTotal(){
-      const add = Array.from(sheet.querySelectorAll('input[type="checkbox"]:checked')).reduce((s,el)=> s + Number(el.dataset.price||0), 0);
-      const tot = base + add;
-      quoteTotal.textContent = formatINR(tot);
-      const addOns = Array.from(sheet.querySelectorAll('input[type="checkbox"]')).map(el=> `${el.dataset.addon}:${el.checked?'Yes':'No'}`).join(', ');
-      const msg = encodeURIComponent(`Hi Shridhar Group, I want a quote. Plan: ${planName} (${formatINR(base)}). Add-ons -> ${addOns}. Total: ${formatINR(tot)}.`);
-      whatsQuote.href = `https://wa.me/917483640694?text=${msg}`;
-    }
-
-    document.querySelectorAll('[data-plan]').forEach(b=> b.addEventListener('click', ()=>{
-      planName = b.dataset.plan; base = Number(b.dataset.price||0);
-      quotePlan.textContent = `Selected: ${planName} — ${formatINR(base)}`;
-      sheet.classList.add('open');
-      sheet.querySelectorAll('input[type="checkbox"]').forEach(c=> c.checked=false);
-      updateTotal();
-      showToast('Plan selected');
-    }));
-    sheet.addEventListener('change', (e)=>{ if(e.target.matches('input[type="checkbox"]')) updateTotal(); });
-    closeQuote && closeQuote.addEventListener('click', ()=> sheet.classList.remove('open'));
-
-    // ============================
-    // Inject "Connect with us" into all pages
-    // ============================
-    const tpl = document.getElementById('connectTpl');
-    if(tpl){
-      pages.forEach(p=>{ const clone = tpl.content.cloneNode(true); p.appendChild(clone); });
-    }
-
-    // ============================
-    // Reduced motion: disable FAB pulse animation and indicator animation
-    // ============================
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     if(reduceMotion.matches){
-      document.querySelectorAll('.fab').forEach(f=> f.style.animation = 'none');
+      document.querySelectorAll('*').forEach(el=>el.style.animationDuration='.001ms');
     }
+
+    // ============================
+    // Deep links: scroll into view smoothly
+    // ============================
+    function smoothScrollIntoView(id){
+      const el = document.getElementById(id); if(!el) return;
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    window.addEventListener('hashchange', ()=>{
+      const id = location.hash.replace('#','');
+      if(['home','services','portfolio','contact'].includes(id)) smoothScrollIntoView(id);
+    });
+
+    // Prefill service from pricing buttons
+    document.querySelectorAll('[data-ask]').forEach(btn=>btn.addEventListener('click', ()=>{
+      setActive('contact');
+      form.service.value = btn.dataset.ask;
+    }));
   </script>
 </body>
 </html>
+
+
