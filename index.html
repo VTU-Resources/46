@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+/>
 <title>Shridhar Group — App-style Web App (Pro)</title>
 <meta name="theme-color" content="#071026">
 <meta name="description" content="Shridhar Group — Apps, Play Store publishing, websites, branding.">
@@ -13,32 +16,63 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 html,body{height:100%}
 :root{
+  /* Core colors */
   --bg:#071026; --card:#0b1421; --card-2:#0d1624; --text:#e6eef7; --muted:rgba(230,238,247,.72);
-  --a1:#6dd3ff; --a2:#a78bfa; --nav-h:88px; --fab:86px; --fab-rise:.64;
+  --a1:#6dd3ff; --a2:#a78bfa;
+
+  /* Layout scales (now responsive via clamp) */
+  --nav-h: clamp(64px, 12vw, 92px);
+  --fab: clamp(64px, 11.5vw, 92px);
+  --fab-rise:.64;
+
+  /* Radii / shadows */
   --radius:18px; --shadow-1:0 8px 30px rgba(2,6,23,.38); --shadow-2:0 20px 48px rgba(2,6,23,.46);
-  --tab-inactive:#e6eef7; --glow-color:rgba(109,211,255,0.55); --indicator-bg-opacity:.28;
-  /* Safe-area support for notches / system bars */
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  /* Indicator size scales per breakpoint */
-  --indicator: 72px;
+
+  /* Tab/inactive text */
+  --tab-inactive:#e6eef7;
+  --glow-color: rgba(109,211,255,0.55);
+  --indicator-bg-opacity: 0.28;
+
+  /* Safe area fallbacks (overridden by env() below) */
+  --safe-top: 0px;
+  --safe-bottom: 0px;
+
+  /* Typography scale */
+  --fs-hero: clamp(18px, 4.4vw, 28px);
+  --fs-h2: clamp(15px, 3.6vw, 20px);
+  --fs-body: clamp(12.5px, 3.3vw, 15px);
+  --fs-muted: clamp(11px, 2.9vw, 13px);
+  --fs-tab: clamp(10px, 2.8vw, 12px);
+
+  /* Spacing scale (tightened) */
+  --sp-xxs: 6px;
+  --sp-xs: 8px;
+  --sp-s: 10px;
+  --sp-m: 12px;
+  --sp-l: 14px;
+}
+@supports (padding: max(0px)) {
+  :root{
+    --safe-top: max(env(safe-area-inset-top), 0px);
+    --safe-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
 }
 .light{
   --bg:#f6f8fb; --card:#ffffff; --card-2:#ffffff; --text:#0b1220; --muted:rgba(11,18,32,.66);
   --a1:#2563eb; --a2:#7c3aed; --shadow-1:0 8px 24px rgba(2,6,23,.12); --shadow-2:0 18px 38px rgba(2,6,23,.16);
-  --tab-inactive:#0b1220; --glow-color:rgba(37,99,235,0.55); --indicator-bg-opacity:.22;
+  --tab-inactive:#0b1220; --glow-color: rgba(37,99,235,0.55);
+  --indicator-bg-opacity: 0.22;
   color-scheme: light;
 }
 body{
-  margin:0;font-family:"Plus Jakarta Sans",system-ui,Arial,sans-serif;font-size:clamp(12px,1.9vw,15px);color:var(--text);background:
+  margin:0;font-family:"Plus Jakarta Sans",system-ui,Arial,sans-serif;
+  font-size:var(--fs-body);line-height:1.35;color:var(--text);
+  background:
   radial-gradient(900px 420px at 10% 0%, rgba(167,139,250,.10), transparent 22%),
   radial-gradient(740px 360px at 95% 100%, rgba(109,211,255,.08), transparent 22%),var(--bg);
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;transition:background .32s ease,color .32s ease;
-  padding-top: var(--safe-top);
-  padding-right: var(--safe-right);
-  padding-left: var(--safe-left);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;
+  transition:background .32s ease,color .32s ease;
+  padding-bottom: calc(var(--safe-bottom) + 6px); /* space above iOS home bar */
 }
 a,button,input,select,textarea{outline:none;border:none;background:transparent;color:inherit;font:inherit}
 a,button{cursor:pointer} :focus{outline:none} :focus-visible{outline:none}
@@ -46,44 +80,78 @@ img{max-width:100%;display:block}
 
 /* LAYOUT */
 .app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr}
-header.top{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);backdrop-filter:blur(8px) saturate(1.08);border-bottom:1px solid rgba(255,255,255,.06);padding-top: max(0px, var(--safe-top));}
-.top-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 12px}
-.brand{display:flex;gap:10px;align-items:center}
-.badge{width:clamp(32px,10vw,44px);height:clamp(32px,10vw,44px);border-radius:12px;background:conic-gradient(from 140deg,var(--a1),var(--a2));display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow-1);font-size:clamp(12px,3.4vw,16px)}
-main.content{padding:10px 10px calc(var(--nav-h) + 32px + var(--safe-bottom))}
-.card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,.01));border-radius:var(--radius);padding:10px;border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow-1)}
-h1,h2{margin:0 0 6px}
-
-/* Headings compact & responsive */
-h1{font-size:clamp(16px,4.4vw,22px);line-height:1.22}
-h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
-.muted{color:var(--muted);font-size:clamp(11px,3.4vw,13px)}
+header.top{
+  position:sticky;top:0;z-index:40;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);
+  backdrop-filter:blur(8px) saturate(1.08);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding-top: var(--safe-top); /* space for notification/notch */
+}
+.top-inner{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-xs) var(--sp-m)}
+.brand{display:flex;gap:var(--sp-s);align-items:center}
+.badge{
+  width: clamp(32px, 8.4vw, 44px);height: clamp(32px, 8.4vw, 44px);
+  border-radius:12px;background:conic-gradient(from 140deg,var(--a1),var(--a2));
+  display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow-1);font-size: clamp(12px, 3.2vw, 16px);
+}
+main.content{
+  padding: var(--sp-s) var(--sp-s) calc(var(--nav-h) + 24px); /* tighter bottom to fit more content */
+}
+.card{
+  background:linear-gradient(180deg,var(--card),rgba(255,255,255,.01));
+  border-radius:var(--radius);
+  padding: var(--sp-s);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:var(--shadow-1)
+}
+h1,h2{margin:0 0 var(--sp-xs)}
+h1{font-size:var(--fs-hero);line-height:1.2}
+h2{font-size:var(--fs-h2);line-height:1.25}
+.muted{color:var(--muted);font-size:var(--fs-muted)}
 
 /* PAGES */
-.page{display:none} .page.active{display:block;animation:fadeIn .22s ease}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .22s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
+/* GRID */
+.row{display:grid;gap:var(--sp-s)}
+@media(min-width:720px){.grid-2{grid-template-columns:repeat(2,1fr)}}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* HOME specific compaction */
+#hero .qr-wrap{display:flex;gap:var(--sp-s);align-items:center;flex-wrap:nowrap}
+#hero .qr{width: clamp(62px, 16vw, 84px);height: clamp(62px, 16vw, 84px);border-radius:12px;background:#fff;overflow:hidden;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#0b1220;font-weight:800;font-size: clamp(14px, 3.8vw, 18px)}
+#hero .cta{display:inline-block;padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff}
+
 /* NAV */
-.nav-wrap{position:fixed;left:0;right:0;bottom:calc(8px + var(--safe-bottom));display:grid;place-items:center;z-index:50;pointer-events:none;padding:0 var(--safe-left) 0 var(--safe-right)}
+.nav-wrap{
+  position:fixed;left:0;right:0;bottom:calc(6px + var(--safe-bottom));
+  display:grid;place-items:center;z-index:50;pointer-events:none
+}
 .tabbar{
-  width:min(680px,96%);height:var(--nav-h);border-radius:24px;background:rgba(255,255,255,.10);
+  width:min(680px,94%);height:var(--nav-h);border-radius:22px;background:rgba(255,255,255,.10);
   backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.10);
   box-shadow:0 18px 40px rgba(2,6,23,.40), inset 0 1px 0 rgba(255,255,255,.08);
-  display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:8px 10px;pointer-events:auto;position:relative;overflow:visible
+  display:grid;grid-template-columns:repeat(5,1fr);align-items:center;
+  padding:8px 10px;pointer-events:auto;position:relative;overflow:visible
 }
 .tab{
-  position:relative;display:grid;place-items:center;gap:4px;height:100%;border:none;background:transparent;border-radius:14px;user-select:none;padding-bottom:4px;z-index:2;
+  position:relative;display:grid;place-items:center;gap:4px;height:100%;
+  border:none;background:transparent;border-radius:14px;user-select:none;padding-bottom:4px;z-index:2;
   transition:transform .12s ease, color .22s ease;
 }
 .tab:active{transform:scale(.96)}
-.tab span{font-size:clamp(10px,2.9vw,12px);color:var(--tab-inactive);font-weight:600}
-.tab .ic{width:clamp(18px,5.5vw,22px);height:clamp(18px,5.5vw,22px);display:inline-grid;place-items:center;color:var(--tab-inactive)}
+.tab span{font-size:var(--fs-tab);color:var(--tab-inactive);font-weight:600}
+.tab .ic{width: clamp(18px, 4.8vw, 22px);height: clamp(18px, 4.8vw, 22px);display:inline-grid;place-items:center;color:var(--tab-inactive)}
 .tab[aria-selected="true"] span,
 .tab[aria-selected="true"] .ic{color:#fff}
 
-/* Big round indicator centered on the tab (covers icon + text) */
+/* Indicator sized relative to nav (keeps centered under icon+text) */
 .indicator{
-  position:absolute;top:50%;left:0;width:var(--indicator);height:var(--indicator);border-radius:999px;transform:translateX(0) translateY(-50%);z-index:1;pointer-events:none;
+  position:absolute;top:50%;left:0;
+  width: clamp(54px, 11.4vw, 74px);height: clamp(54px, 11.4vw, 74px);
+  border-radius:999px;transform:translateX(0) translateY(-50%);z-index:1;pointer-events:none;
   filter:drop-shadow(0 18px 38px rgba(2,6,23,.36));
   opacity:1;will-change:transform
 }
@@ -97,7 +165,7 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
   content:"";position:absolute;inset:10px;border-radius:inherit;background:rgba(255,255,255,var(--indicator-bg-opacity));filter:blur(16px);opacity:.85;
 }
 
-/* CENTER HOME FAB — compact */
+/* CENTER HOME FAB — slightly smaller on compact screens */
 .center-slot{position:relative;display:grid;place-items:center;z-index:3;pointer-events:none}
 .fab{
   position:absolute;left:50%;
@@ -105,44 +173,39 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
   transform:translateX(-50%);width:var(--fab);height:var(--fab);border-radius:999px;
   background:radial-gradient(60% 60% at 50% 35%, var(--a1), var(--a2));
   display:grid;place-items:center;user-select:none;pointer-events:auto;
-  box-shadow:0 10px 30px rgba(0,0,0,.28);
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
   animation:fabGlow 2.6s ease-in-out infinite;
   transition:transform .18s ease;
 }
 .fab:active{transform:translateX(-50%) translateY(2px) scale(.98)}
-.fab div{font-weight:800;color:#fff;pointer-events:none;font-size:clamp(11px,3.2vw,13px)}
+.fab div{font-weight:800;color:#fff;pointer-events:none;font-size: clamp(12px, 3.2vw, 16px)}
 
 /* subtle glow keyed to theme via --glow-color */
 @keyframes fabGlow{
-  0%{ box-shadow:0 8px 30px rgba(0,0,0,.28), 0 0 18px 0 var(--glow-color); transform:translateX(-50%) translateY(0); }
-  50%{ box-shadow:0 18px 48px rgba(0,0,0,.36), 0 0 42px 6px color-mix(in srgb, var(--glow-color) 60%, transparent); transform:translateX(-50%) translateY(-3px); }
-  100%{ box-shadow:0 8px 30px rgba(0,0,0,.28), 0 0 18px 0 var(--glow-color); transform:translateX(-50%) translateY(0); }
+  0%{ box-shadow: 0 8px 30px rgba(0,0,0,.28), 0 0 18px 0 var(--glow-color); transform: translateX(-50%) translateY(0); }
+  50%{ box-shadow: 0 18px 48px rgba(0,0,0,.36), 0 0 42px 6px color-mix(in srgb, var(--glow-color) 60%, transparent); transform: translateX(-50%) translateY(-3px); }
+  100%{ box-shadow: 0 8px 30px rgba(0,0,0,.28), 0 0 18px 0 var(--glow-color); transform: translateX(-50%) translateY(0); }
 }
 
-/* THEME TOGGLE */
-.theme-toggle{display:flex;gap:6px;align-items:center;padding:6px 8px;border-radius:12px;background:var(--card-2);border:1px solid rgba(255,255,255,.06);cursor:pointer}
+/* THEME TOGGLE (more compact) */
+.theme-toggle{
+  display:flex;gap:6px;align-items:center;
+  padding:6px 8px;border-radius:12px;background:var(--card-2);
+  border:1px solid rgba(255,255,255,.06);cursor:pointer;font-size:var(--fs-tab)
+}
 .theme-toggle input{display:none}
 .theme-toggle .knob{width:22px;height:22px;border-radius:999px;background:linear-gradient(180deg,var(--a1),var(--a2))}
 
-/* GRID UTIL */
-.row{display:grid;gap:10px}
-@media(min-width:720px){.grid-2{grid-template-columns:repeat(2,1fr)}}
-.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
+/* Smallest devices hard tweaks */
+@media (max-width:380px){
+  :root{ --radius:16px; }
+  .tabbar{ border-radius:20px; padding:6px 8px; }
+  .indicator::after{ inset:8px; }
+}
 
-/* EXTRA SMALL phones: tighten further */
-@media (max-width:420px){
-  :root{--nav-h:82px; --fab:80px; --indicator:64px}
-  .tabbar{height:var(--nav-h)}
-}
-@media (max-width:360px){
-  :root{--nav-h:78px; --fab:74px; --indicator:58px}
-  .top-inner{padding:8px 10px}
-  main.content{padding:8px 8px calc(var(--nav-h) + 28px + var(--safe-bottom))}
-  .card{padding:8px;border-radius:16px}
-}
-@media (max-width:320px){
-  :root{--nav-h:74px; --fab:70px; --indicator:52px}
-  .tab span{font-size:11px}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition:none !important; scroll-behavior:auto !important; }
 }
 </style>
 </head>
@@ -153,13 +216,13 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
       <div class="brand">
         <div class="badge">SG</div>
         <div>
-          <h1 style="margin:0">Shridhar Group of Company</h1>
-          <div class="muted" style="font-size:clamp(10px,3.1vw,12px)">App Development · Play Store Publish · Branding</div>
+          <h1 style="margin:0;font-size:var(--fs-h2)">Shridhar Group of Company</h1>
+          <div class="muted">App Development · Play Store Publish · Branding</div>
         </div>
       </div>
       <label class="theme-toggle" title="Toggle theme" aria-label="Toggle light theme">
         <input id="themeToggle" type="checkbox" aria-hidden="true">
-        <div style="font-size:clamp(10px,3vw,12px)">Theme</div>
+        <div>Theme</div>
         <div class="knob" aria-hidden="true"></div>
       </label>
     </div>
@@ -189,27 +252,27 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
       <div class="card" id="hero">
         <h1>Build. Launch. Brand — with confidence.</h1>
         <div class="muted">End-to-end product studio: apps, websites, marketplace onboarding and premium brand kits.</div>
-        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <div style="display:flex;gap:10px;align-items:center">
-            <div style="width:clamp(64px,22vw,84px);height:clamp(64px,22vw,84px);border-radius:12px;background:#fff;overflow:hidden;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#0b1220;font-weight:800">QR</div>
+        <div style="margin-top:var(--sp-s);display:flex;gap:var(--sp-s);flex-wrap:wrap;align-items:center">
+          <div class="qr-wrap">
+            <div class="qr">QR</div>
             <div>
-              <div style="font-weight:800;font-size:clamp(12px,3.6vw,14px)">Open our App</div>
+              <div style="font-weight:800;font-size:clamp(13px,3.2vw,15px)">Open our App</div>
               <div class="muted">Scan or tap to open on Play Store</div>
               <div style="margin-top:8px">
-                <a class="card" style="padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;display:inline-block;font-size:clamp(11px,3.3vw,13px)" href="https://play.google.com/store/apps/details?id=com.myvtu.app" target="_blank" rel="noopener">Open App →</a>
+                <a class="card cta" href="https://play.google.com/store/apps/details?id=com.myvtu.app" target="_blank" rel="noopener">Open App →</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="homeFeed" class="row" style="margin-top:10px"></div>
+      <div id="homeFeed" class="row" style="margin-top:var(--sp-s)"></div>
     </section>
 
     <!-- SERVICES -->
     <section id="services" class="page" aria-label="Services">
       <div class="card">
         <h2>Services</h2>
-        <div class="row grid-2" style="margin-top:6px">
+        <div class="row grid-2" style="margin-top:var(--sp-xxs)">
           <div class="card"><strong>App Development</strong><div class="muted">Android/iOS · Native/Hybrid · CI/CD</div></div>
           <div class="card"><strong>Play Store Publishing</strong><div class="muted">Listing · Assets · Rollouts · ASO</div></div>
           <div class="card"><strong>Website Development</strong><div class="muted">Landing · CMS · SEO</div></div>
@@ -222,7 +285,7 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
     <section id="work" class="page" aria-label="Work">
       <div class="card">
         <h2>Work</h2>
-        <div class="row grid-2" style="margin-top:6px">
+        <div class="row grid-2" style="margin-top:var(--sp-xxs)">
           <div class="card"><strong>EduLearn App</strong><div class="muted">Play Store launch</div></div>
           <div class="card"><strong>Merchant Site</strong><div class="muted">Catalog + checkout</div></div>
           <div class="card"><strong>Health Tracker</strong><div class="muted">Wearable sync + charts</div></div>
@@ -236,7 +299,7 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
       <div class="card">
         <h2>About</h2>
         <p class="muted">We are a product studio focused on clarity, speed, stability and compliance. Our process is simple:</p>
-        <div class="row grid-2" style="margin-top:6px">
+        <div class="row grid-2" style="margin-top:var(--sp-xxs)">
           <div class="card"><strong>Discover</strong><div class="muted">Goals, constraints & success metrics.</div></div>
           <div class="card"><strong>Design</strong><div class="muted">Brand direction, screens & assets.</div></div>
           <div class="card"><strong>Develop</strong><div class="muted">Fast builds, testing & signing.</div></div>
@@ -249,7 +312,7 @@ h2{font-size:clamp(15px,4vw,20px);line-height:1.22}
     <section id="contact" class="page" aria-label="Contact">
       <div class="card">
         <h2>Contact</h2>
-        <div class="row" style="margin-top:6px">
+        <div class="row" style="margin-top:var(--sp-xxs)">
           <div class="card"><strong>Call</strong><div class="muted"><a href="tel:+917483640694">+91 74836 40694</a></div></div>
           <div class="card"><strong>WhatsApp</strong><div class="muted"><a target="_blank" rel="noopener" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group">Start chat</a></div></div>
           <div class="card"><strong>Email</strong><div class="muted"><a href="mailto:hello@shridhar.group">hello@shridhar.group</a></div></div>
@@ -318,11 +381,12 @@ function setActive(target){
   tabs.forEach((t)=>{const is=t.dataset.target===target; t.setAttribute('aria-selected',is?'true':'false');});
   document.body.classList.toggle('home-active', target==='home');
 
-  // Hide indicator when Home is active (to avoid overlap with FAB)
+  // Hide indicator when Home is active (to avoid any overlap with FAB)
   indicator.style.opacity = (target==='home') ? '0' : '1';
 
   if(target==='home'){
     buildHomeFeed();
+    // subtle additional pulse when switching to home
     document.body.classList.remove('home-pulse');
     void document.body.offsetWidth; // reflow to restart animation
     document.body.classList.add('home-pulse');
@@ -378,10 +442,11 @@ function buildHomeFeed(){
   });
 }
 
-// Reduced motion
+// Reduced motion already handled via CSS, but nuke remaining inline animations if set
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('*').forEach(el=>el.style.animationDuration='.001ms');
 }
 </script>
 </body>
 </html>
+
