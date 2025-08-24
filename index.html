@@ -12,18 +12,15 @@
   <meta property="og:image" content="/icon.png"/>
   <link rel="icon" href="/favicon.ico"/>
 
-  <!-- Font: Plus Jakarta Sans (clean, professional); Inter as fallback -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Fonts: Poppins for a slightly 'bank‑app' feel + Plus Jakarta fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ✅ Put this at the very top of your CSS */
-    * {
-      -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
-    }
-    /* ---------------------- ROOT THEME ---------------------- */
+    /* =========================
+       Theme tokens
+       ========================= */
     :root{
-      --bg: #071026;        /* dark background */
+      --bg: #071026;
       --card: #0b1421;
       --card-2: #0d1624;
       --text: #e6eef7;
@@ -33,60 +30,44 @@
       --accent-ok: #35d48c;
       --accent-warn: #ffd36d;
       --glass: rgba(255,255,255,0.04);
-      --radius: 16px;
+      --radius: 14px;
       --nav-h: 78px;
       --shadow-1: 0 8px 30px rgba(2,6,23,0.38);
       --shadow-2: 0 18px 48px rgba(2,6,23,0.46);
+      --brand-font: 'Poppins', 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
     }
-    .light{
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --card-2: #ffffff;
-      --text: #0b1220;
-      --muted: rgba(11,18,32,0.66);
-      --accent-1: #2563eb;
-      --accent-2: #7c3aed;
-      --glass: rgba(2,6,23,0.06);
-      --shadow-1: 0 8px 24px rgba(2,6,23,0.12);
-      --shadow-2: 0 18px 38px rgba(2,6,23,0.16);
-    }
+    .light{ --bg:#f6f8fb; --card:#fff; --card-2:#fff; --text:#071026; --muted:rgba(11,18,32,0.66); --accent-1:#2563eb; --accent-2:#7c3aed; --glass:rgba(2,6,23,0.06); --shadow-1:0 8px 24px rgba(2,6,23,0.12); --shadow-2:0 18px 38px rgba(2,6,23,0.16); }
 
-    /* ---------------------- RESET ---------------------- */
+    /* Reset */
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      font-size:14.6px; /* ↓ slightly smaller */
-      line-height:1.5;
-      letter-spacing:.1px;
-      color:var(--text);
-      background:
-        radial-gradient(850px 420px at 10% 0%, rgba(167,139,250,0.10), transparent 22%),
-        radial-gradient(740px 360px at 95% 100%, rgba(109,211,255,0.08), transparent 22%),
-        var(--bg);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-    }
+    body{margin:0;font-family:var(--brand-font);font-size:15px;line-height:1.45;color:var(--text);background:
+      radial-gradient(850px 420px at 10% 0%, rgba(167,139,250,0.10), transparent 22%),
+      radial-gradient(740px 360px at 95% 100%, rgba(109,211,255,0.06), transparent 22%),
+      var(--bg);
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
     img{max-width:100%;display:block}
     a{color:inherit;text-decoration:none}
     button{font:inherit}
 
-    /* Visually hidden (for a11y) */
+    /* Accessibility helper */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* ---------------------- LAYOUT ---------------------- */
+    /* App layout */
     .app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto}
     header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px) saturate(1.08);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.05)}
     .top-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+
+    /* Brand */
     .brand{display:flex;gap:12px;align-items:center}
-    .badge{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 140deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow-1);font-weight:800}
+    .badge{width:46px;height:46px;border-radius:14px;background:conic-gradient(from 140deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow-1);font-weight:800;color:#012; font-size:15px}
     .brand h1{font-size:16px;margin:0;letter-spacing:.2px}
     .brand p{margin:0;font-size:12px;color:var(--muted)}
 
+    /* Theme toggle */
     .theme-toggle{display:inline-grid;grid-auto-flow:column;align-items:center;gap:8px;padding:6px 8px;border-radius:999px;background:var(--card-2);border:1px solid rgba(255,255,255,0.06)}
     .theme-toggle input{display:none}
-    .knob{width:26px;height:26px;border-radius:999px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 10px 24px rgba(0,0,0,0.22)}
+    .knob{width:26px;height:26px;border-radius:999px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 18px rgba(0,0,0,0.15)}
 
     main.content{padding:14px;padding-bottom:calc(var(--nav-h) + 34px)}
 
@@ -95,93 +76,89 @@
 
     .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.01));border-radius:calc(var(--radius) + 4px);padding:14px;border:1px solid rgba(255,255,255,0.06);box-shadow:var(--shadow-1)}
     h2{margin:0 0 8px;font-size:16px}
-    .muted{color:var(--muted);font-size:12.6px}
+    .muted{color:var(--muted);font-size:13px}
 
-    /* ---------------------- HERO / CTA ---------------------- */
+    /* HERO */
     .hero{display:grid;gap:12px;align-items:center;padding:16px;border-radius:18px;background:linear-gradient(135deg, rgba(109,211,255,0.10), rgba(167,139,250,0.08));border:1px solid rgba(255,255,255,0.06)}
-    .hero h1{font-size:18px;margin:0;font-weight:800;letter-spacing:.1px}
+    .hero h1{font-size:20px;margin:0;font-weight:700}
     .cta{display:flex;gap:10px}
-    .btn{position:relative;overflow:hidden;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--card-2);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease}
+    .btn{position:relative;overflow:hidden;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--card-2);cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
     .btn:active{transform:translateY(1px)}
-    .btn.primary{background:linear-gradient(180deg,var(--accent-1),var(--accent-2));color:white;font-weight:800;box-shadow:0 12px 28px rgba(109,211,255,0.15)}
+    .btn.primary{background:linear-gradient(180deg,var(--accent-1),var(--accent-2));color:white;font-weight:700;box-shadow:0 12px 28px rgba(109,211,255,0.12)}
     .btn.round{border-radius:999px;padding:10px 14px}
 
-    /* Ripple effect */
-    .btn::after{content:"";position:absolute;inset:auto auto 0 50%;transform:translate(-50%,50%) scale(0);width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.22);opacity:0;pointer-events:none}
+    .btn::after{content:"";position:absolute;inset:auto auto 0 50%;transform:translate(-50%,50%) scale(0);width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.18);opacity:0;pointer-events:none}
     .btn:active::after{animation:ripple .6s ease}
     @keyframes ripple{from{transform:translate(-50%,50%) scale(.05);opacity:.45}to{transform:translate(-50%,50%) scale(1);opacity:0}}
 
-    /* Chips */
     .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;border:1px dashed rgba(255,255,255,0.18);background:rgba(255,255,255,0.02);font-size:12px}
 
-    /* ---------------------- FEATURES GRID ---------------------- */
+    /* Features grid */
     .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     @media(min-width:640px){.features{grid-template-columns:repeat(4,1fr)}}
     .feature{display:flex;gap:10px;align-items:flex-start}
-    .feat-ico{width:40px;height:40px;border-radius:10px;background:linear-gradient(180deg,rgba(109,211,255,0.10),rgba(167,139,250,0.08));display:grid;place-items:center;border:1px solid rgba(255,255,255,0.08)}
+    .feat-ico{width:44px;height:44px;border-radius:12px;background:linear-gradient(180deg,rgba(109,211,255,0.10),rgba(167,139,250,0.08));display:grid;place-items:center;border:1px solid rgba(255,255,255,0.08)}
 
-    /* ---------------------- PORTFOLIO CARDS ---------------------- */
+    /* Portfolio */
     .portfolio{display:grid;gap:10px}
     @media(min-width:640px){.portfolio{grid-template-columns:repeat(2,1fr)}}
     .proj{display:flex;gap:12px;align-items:center}
     .proj-thumb{width:62px;height:50px;border-radius:10px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;color:#07203a;font-weight:800}
 
-    /* ---------------------- PROCESS / STEPS ---------------------- */
+    /* Steps */
     .steps{display:grid;gap:10px}
     .step{display:flex;gap:12px;align-items:start}
     .step .num{width:34px;height:34px;border-radius:10px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;font-weight:800;color:#022}
 
-    /* ---------------------- STATS ---------------------- */
+    /* Stats */
     .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     @media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
     .stat{padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,0.01));display:grid;gap:6px}
     .stat .big{font-size:20px;font-weight:800}
 
-    /* ---------------------- TESTIMONIALS ---------------------- */
+    /* Testimonial */
     .testi{display:grid;gap:10px}
     @media(min-width:720px){.testi{grid-template-columns:repeat(3,1fr)}}
 
-    /* ---------------------- PRICING ---------------------- */
+    /* Pricing */
     .pricing{display:grid;gap:10px}
     @media(min-width:900px){.pricing{grid-template-columns:repeat(3,1fr)}}
     .price-card{position:relative;overflow:hidden}
     .price{font-size:22px;font-weight:800}
 
-    /* ---------------------- FAQ ---------------------- */
+    /* FAQ */
     .faq .q{border-top:1px solid rgba(255,255,255,0.08);padding:12px 0;cursor:pointer}
-    .faq .a{color:var(--muted);font-size:12.6px;display:none;margin-top:8px}
+    .faq .a{color:var(--muted);font-size:13px;display:none;margin-top:8px}
     .faq .q.open .a{display:block}
     .faq .toggle{transition:transform .24s ease}
     .faq .q.open .toggle{transform:rotate(45deg)}
 
-    /* ---------------------- BOTTOM NAV / TABBAR ---------------------- */
+    /* Bottom nav / tabbar */
     .nav-wrap{position:fixed;left:0;right:0;bottom:12px;display:grid;place-items:center;pointer-events:none;z-index:60}
-    .tabbar{width:min(560px,94%);height:var(--nav-h);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;position:relative;pointer-events:auto;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow-2)}
+    .tabbar{width:min(680px,96%);height:var(--nav-h);border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;position:relative;pointer-events:auto;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow-2)}
 
     .tab{position:relative;display:grid;place-items:center;height:100%;gap:4px;border-radius:14px;border:none;background:transparent;cursor:pointer;padding-bottom:6px;user-select:none;touch-action:manipulation}
-    .tab .ic{width:22px;height:22px;display:grid;place-items:center;transition:transform .34s cubic-bezier(.2,1.1,.3,1)}
-    .tab span{font-size:10.8px;color:var(--muted);margin-top:4px;display:block}
+    .tab .ic{width:36px;height:36px;display:grid;place-items:center;transition:transform .34s cubic-bezier(.2,1.1,.3,1)}
+    .tab span{font-size:11px;color:var(--muted);margin-top:4px;display:block}
 
     .tab.active span{color:var(--text);font-weight:700}
-    .tab.active .ic{transform:translateY(-6px) scale(1.12)}
+    .tab.active .ic{transform:translateY(-6px) scale(1.06)}
 
-    /* Indicator circle that moves under active tab (springy) */
-    .indicator{position:absolute;bottom:12px;width:50px;height:50px;border-radius:50%;transform:translateX(0);left:0;transition:transform .44s cubic-bezier(.17,1.2,.35,1), box-shadow .28s;pointer-events:none;display:block}
-    .indicator .core{width:44px;height:44px;border-radius:50%;margin:auto;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 14px 32px rgba(109,211,255,0.24);display:grid;place-items:center}
+    /* Indicator */
+    .indicator{position:absolute;bottom:12px;width:56px;height:56px;border-radius:50%;transform:translateX(0);left:0;transition:transform .44s cubic-bezier(.17,1.2,.35,1), box-shadow .28s;pointer-events:none;display:block}
+    .indicator .core{width:50px;height:50px;border-radius:50%;margin:auto;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));box-shadow:0 14px 32px rgba(109,211,255,0.24);display:grid;place-items:center}
 
     /* FAB */
     .center-slot{position:relative;display:grid;place-items:center}
     .fab{position:absolute;left:50%;top:-26px;transform:translateX(-50%);width:70px;height:70px;border-radius:999px;border:none;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:grid;place-items:center;box-shadow:0 20px 40px rgba(109,211,255,0.18);cursor:pointer;will-change:transform}
     .fab > div{font-weight:800;color:#fff}
-
-    /* Bobbing animation (subtle) */
     @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
     .fab{animation: bob 3.2s ease-in-out infinite}
 
-    /* small screens: tighten spacing */
-    @media(max-width:360px){.indicator{width:46px;height:46px}.indicator .core{width:40px;height:40px}.fab{width:64px;height:64px}}
+    /* smaller screens adjustments */
+    @media(max-width:420px){.tab .ic{width:28px;height:28px}.indicator{width:48px;height:48px}.indicator .core{width:44px;height:44px}.fab{width:64px;height:64px}}
 
-    /* page & animations */
+    /* show pages */
     .page{display:none}
     .page.active{display:block;animation:fadeIn .28s ease}
     @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -193,6 +170,15 @@
     /* utilities */
     .muted-quiet{color:rgba(255,255,255,0.20);font-size:10.8px}
     .vspace-12{height:12px}
+
+    /* ---------------------------
+       New: circular image icons
+       --------------------------- */
+    .tab-icon{width:36px;height:36px;border-radius:999px;object-fit:cover;border:2px solid rgba(255,255,255,0.06);background:var(--card-2);box-shadow:0 6px 18px rgba(2,6,23,0.35)}
+    .tab .ic img{display:block;border-radius:999px}
+
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
   </style>
 </head>
 <body>
@@ -232,11 +218,11 @@
           <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
             <div style="display:flex;gap:10px;align-items:center">
               <div style="width:84px;height:84px;border-radius:12px;background:white;overflow:hidden;display:grid;place-items:center;border:1px solid rgba(255,255,255,0.08)">
-                <!-- placeholder QR: replaced with 1.jpg -->
+                <!-- placeholder QR: replace with actual app QR image (1.jpg) -->
                 <img alt="QR to open app" src="1.jpg">
               </div>
               <div>
-                <div style="font-weight:800">Open our App</div>
+                <div style="font-weight:700">Open our App</div>
                 <div class="muted">Scan or tap to open on Play Store</div>
                 <div style="margin-top:8px"><a class="btn round" id="appLink" href="https://play.google.com/store/apps/details?id=com.myvtu.app" target="_blank" rel="noopener">Open App →</a></div>
               </div>
@@ -465,13 +451,14 @@
       <nav class="tabbar" role="tablist" aria-label="Tabs">
         <div class="indicator" id="indicator" aria-hidden="true"><div class="core"></div></div>
 
+        <!-- Replace the src attributes below with your circular icon images (SVG/PNG) -->
         <button class="tab" role="tab" aria-label="Services" data-target="services" data-accent1="#6dd3ff" data-accent2="#a78bfa" aria-selected="false">
-          <div class="ic" aria-hidden="true">🧩</div>
+          <div class="ic" aria-hidden="true"><img class="tab-icon" src="icons/services.png" alt="Services icon"></div>
           <span>Services</span>
         </button>
 
         <button class="tab" role="tab" aria-label="Work" data-target="portfolio" data-accent1="#ffd36d" data-accent2="#ff9b6d" aria-selected="false">
-          <div class="ic" aria-hidden="true">💼</div>
+          <div class="ic" aria-hidden="true"><img class="tab-icon" src="icons/work.png" alt="Work icon"></div>
           <span>Work</span>
         </button>
 
@@ -482,12 +469,12 @@
         </div>
 
         <button class="tab" role="tab" aria-label="About" data-target="home" data-accent1="#8ef29a" data-accent2="#3dd17a" aria-selected="true">
-          <div class="ic" aria-hidden="true">🏠</div>
+          <div class="ic" aria-hidden="true"><img class="tab-icon" src="icons/home.png" alt="Home icon"></div>
           <span>About</span>
         </button>
 
         <button class="tab" role="tab" aria-label="Contact" data-target="contact" data-accent1="#ffd36d" data-accent2="#ff6d9b" aria-selected="false">
-          <div class="ic" aria-hidden="true">✉️</div>
+          <div class="ic" aria-hidden="true"><img class="tab-icon" src="icons/contact.png" alt="Contact icon"></div>
           <span>Contact</span>
         </button>
       </nav>
@@ -544,10 +531,9 @@
         const centerX = rect.left + rect.width/2 - barRect.left;
         const indW = indicator.offsetWidth;
         const x = centerX - indW/2;
-        // springy move
         indicator.animate([
           { transform: indicator.style.transform || `translateX(${x}px)` },
-          { transform: `translateX(${x + 6}px)` },
+          { transform: `translateX(${x + 8}px)` },
           { transform: `translateX(${x}px)` }
         ], { duration: 380, easing: 'cubic-bezier(.17,1.2,.35,1)' });
         indicator.style.transform = `translateX(${x}px)`;
@@ -583,10 +569,7 @@
     const note = document.getElementById('formNote');
     const saveDraftBtn = document.getElementById('saveDraft');
 
-    function showNote(text){
-      note.textContent = text; note.style.display='block';
-      setTimeout(()=>note.style.display='none',2600);
-    }
+    function showNote(text){ note.textContent = text; note.style.display='block'; setTimeout(()=>note.style.display='none',2600); }
 
     function saveLocal(data){
       const list = JSON.parse(localStorage.getItem('sg_enquiries')||'[]');
@@ -598,7 +581,6 @@
       if(!APPS_SCRIPT_URL) return { ok:false, reason:'No endpoint' };
       try{
         const res = await fetch(APPS_SCRIPT_URL, { method:'POST', mode:'no-cors', body: JSON.stringify(data), headers:{'Content-Type':'application/json'} });
-        // with no-cors you can't read status reliably; assume success
         return { ok:true };
       }catch(err){ return { ok:false, reason: String(err) } }
     }
@@ -607,17 +589,10 @@
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
       if(!document.getElementById('consent').checked){ showNote('Please accept the consent.'); return; }
-      // optimistic UI
       form.reset();
       showNote('Sending…');
-      // send
       const sent = await sendToAppsScript(data);
-      if(!sent.ok){
-        saveLocal(data);
-        showNote('Saved locally — we\'ll reach out.');
-      } else {
-        showNote('Received — we\'ll contact you.');
-      }
+      if(!sent.ok){ saveLocal(data); showNote('Saved locally — we\'ll reach out.'); } else { showNote('Received — we\'ll contact you.'); }
     });
 
     saveDraftBtn.addEventListener('click', ()=>{
@@ -644,7 +619,7 @@
     document.querySelectorAll('.faq .q').forEach(q=>q.addEventListener('click', ()=>{ q.classList.toggle('open'); }));
 
     // ============================
-    // Accessibility: allow left/right on bottom nav
+    // Accessibility: keyboard nav for bottom nav
     // ============================
     let navIndex = tabs.findIndex(t=>t.classList.contains('active'));
     document.addEventListener('keydown', e=>{
@@ -660,7 +635,7 @@
     const live = document.createElement('div'); live.id='live'; live.setAttribute('aria-live','polite'); live.className='sr-only'; document.body.appendChild(live);
 
     // ============================
-    // Fun: Count‑up stats on first view
+    // Count‑up stats on first view
     // ============================
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
@@ -675,32 +650,22 @@
     document.querySelectorAll('[data-count]').forEach(el=>io.observe(el));
 
     // ============================
-    // Reduce motion preference
+    // Deep links: smooth scroll
     // ============================
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if(reduceMotion.matches){
-      document.querySelectorAll('*').forEach(el=>el.style.animationDuration='.001ms');
-    }
-
-    // ============================
-    // Deep links: scroll into view smoothly
-    // ============================
-    function smoothScrollIntoView(id){
-      const el = document.getElementById(id); if(!el) return;
-      el.scrollIntoView({behavior:'smooth', block:'start'});
-    }
-    window.addEventListener('hashchange', ()=>{
-      const id = location.hash.replace('#','');
-      if(['home','services','portfolio','contact'].includes(id)) smoothScrollIntoView(id);
-    });
+    function smoothScrollIntoView(id){ const el = document.getElementById(id); if(!el) return; el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    window.addEventListener('hashchange', ()=>{ const id = location.hash.replace('#',''); if(['home','services','portfolio','contact'].includes(id)) smoothScrollIntoView(id); });
 
     // Prefill service from pricing buttons
-    document.querySelectorAll('[data-ask]').forEach(btn=>btn.addEventListener('click', ()=>{
-      setActive('contact');
-      form.service.value = btn.dataset.ask;
-    }));
+    document.querySelectorAll('[data-ask]').forEach(btn=>btn.addEventListener('click', ()=>{ setActive('contact'); form.service.value = btn.dataset.ask; }));
+
+    // Small enhancement: ensure circular icons are nicely centered even if image not present
+    document.querySelectorAll('.tab-icon').forEach(img=>{
+      img.addEventListener('error', ()=>{ img.style.display='none'; });
+    });
+
+    // Accessibility: expose focus styles for keyboard users
+    document.addEventListener('keyup', (e)=>{ if(e.key==='Tab') document.documentElement.classList.add('show-focus'); });
+
   </script>
 </body>
 </html>
-
-
