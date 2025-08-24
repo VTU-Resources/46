@@ -9,40 +9,17 @@
 <link rel="icon" href="/favicon.ico"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-/* RESET & THEME */
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;margin:0;padding:0}
-html,body{height:100%}
+/* SAFE-AREA / THEME VARS */
 :root{
-  /* fluid variables that scale with viewport, clamped to sensible ranges */
-  --bg:#071026;
-  --card:#0b1421;
-  --card-2:#0d1624;
-  --text:#e6eef7;
-  --muted:rgba(230,238,247,.72);
-  --a1:#6dd3ff;
-  --a2:#a78bfa;
-
-  /* responsive sizes */
-  --nav-h: clamp(68px, 9.5vh, 92px);       /* nav bar height */
-  --fab:   clamp(64px, 16.5vw, 92px);      /* large center FAB */
-  --fab-rise: .64;
-  --badge-size: clamp(36px, 9.2vw, 44px);
-  --radius: clamp(12px, 2.4vw, 20px);
-
-  --shadow-1:0 8px 30px rgba(2,6,23,.38);
-  --shadow-2:0 20px 48px rgba(2,6,23,.46);
-  --tab-inactive: #e6eef7;
-  --glow-color: rgba(109,211,255,0.55);
-  --indicator-bg-opacity: 0.28;
-
-  /* font scales */
-  --h1-size: clamp(18px, 3.2vw, 22px);
-  --muted-size: clamp(11px, 2.2vw, 13px);
-  --tab-font: clamp(10px, 2.2vw, 12px);
-  --icon-size: clamp(18px, 2.6vw, 22px);
+  --bg:#071026; --card:#0b1421; --card-2:#0d1624; --text:#e6eef7; --muted:rgba(230,238,247,.72);
+  --a1:#6dd3ff; --a2:#a78bfa; --nav-h:92px; --fab:92px; --fab-rise:.64;
+  --radius:20px; --shadow-1:0 8px 30px rgba(2,6,23,.38); --shadow-2:0 20px 48px rgba(2,6,23,.46);
+  --tab-inactive: #e6eef7; --glow-color: rgba(109,211,255,0.55); --indicator-bg-opacity: 0.28;
+  /* safe-area insets (notch/status bar, bottom nav on iOS/Android) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 12px);
+  --base-pad: 14px;
 }
-
-/* light theme */
 .light{
   --bg:#f6f8fb; --card:#ffffff; --card-2:#ffffff; --text:#0b1220; --muted:rgba(11,18,32,.66);
   --a1:#2563eb; --a2:#7c3aed; --shadow-1:0 8px 24px rgba(2,6,23,.12); --shadow-2:0 18px 38px rgba(2,6,23,.16);
@@ -50,55 +27,59 @@ html,body{height:100%}
   color-scheme: light;
 }
 
+/* RESET & BASE */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{height:100%}
 body{
-  margin:0;font-family:"Plus Jakarta Sans",system-ui,Arial,sans-serif;font-size:15px;color:var(--text);
+  margin:0;font-family:"Plus Jakarta Sans",system-ui,Arial,sans-serif;
+  /* fluid font with clamps for better mobile fit */
+  font-size: clamp(13px, 1.6vw, 15px);
+  color:var(--text);
   background:
   radial-gradient(900px 420px at 10% 0%, rgba(167,139,250,.10), transparent 22%),
-  radial-gradient(740px 360px at 95% 100%, rgba(109,211,255,.08), transparent 22%),
-  var(--bg);
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;transition:background .32s ease,color .32s ease;
-  /* reserve the top safe area so header never overlaps the status bar */
-  padding-top: env(safe-area-inset-top);
+  radial-gradient(740px 360px at 95% 100%, rgba(109,211,255,.08), transparent 22%),var(--bg);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;transition:background .32s ease,color .32s ease;
+  /* reserve top safe area so header won't overlap status/notch */
+  padding-top: var(--safe-top);
 }
-
-/* accessible tap targets */
 a,button,input,select,textarea{outline:none;border:none;background:transparent;color:inherit;font:inherit}
 a,button{cursor:pointer} :focus{outline:none} :focus-visible{outline:none}
-img{max-width:100%;display:block;height:auto;}
+img{max-width:100%;display:block}
 
-/* LAYOUT */
+/* LAYOUT - app grid with header sticky */
 .app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr}
 header.top{
-  position:sticky;top:env(safe-area-inset-top);z-index:40;
+  position:sticky;top:0;z-index:60;
   background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);
   backdrop-filter:blur(8px) saturate(1.08);
   border-bottom:1px solid rgba(255,255,255,.06);
-  padding-left:12px;padding-right:12px;
 }
 .top-inner{
   display:flex;align-items:center;justify-content:space-between;
-  padding: clamp(8px,1.6vw,12px);
+  padding: clamp(8px, 2.4vw, 12px) var(--base-pad);
   gap:12px;
 }
 .brand{display:flex;gap:12px;align-items:center}
 .badge{
-  width:var(--badge-size);height:var(--badge-size);border-radius:12px;
-  background:conic-gradient(from 140deg,var(--a1),var(--a2));display:grid;place-items:center;font-weight:800;
-  box-shadow:var(--shadow-1);flex:0 0 auto;font-size: clamp(14px,3vw,18px)
+  width: clamp(40px, 9.6vw, 44px);
+  height: clamp(40px, 9.6vw, 44px);
+  border-radius:12px;background:conic-gradient(from 140deg,var(--a1),var(--a2));
+  display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow-1);flex:0 0 auto;
+  font-size: clamp(14px, 3.2vw, 18px);
 }
 main.content{
-  padding:14px 14px calc(var(--nav-h) + 36px + env(safe-area-inset-bottom));
-  min-height: calc(100dvh - var(--nav-h) - env(safe-area-inset-top));
+  padding: calc(var(--safe-top) + 12px) var(--base-pad) calc(var(--nav-h) + var(--safe-bottom) + 20px);
+  role:main;
 }
-
-/* cards */
 .card{
   background:linear-gradient(180deg,var(--card),rgba(255,255,255,.01));
-  border-radius:var(--radius);padding:14px;border:1px solid rgba(255,255,255,.06);
-  box-shadow:var(--shadow-1);overflow:hidden;
+  border-radius:var(--radius);padding: clamp(10px, 3vw, 14px);
+  border:1px solid rgba(255,255,255,.06);box-shadow:var(--shadow-1);
+  word-break:break-word;
 }
-h1{margin:0 0 8px;font-size:var(--h1-size)} h2{margin:0 0 8px;font-size:16px}
-.muted{color:var(--muted);font-size:var(--muted-size)}
+h1,h2{margin:0 0 8px;font-weight:800}
+.muted{color:var(--muted);font-size:clamp(12px,2.4vw,13px)}
 
 /* PAGES */
 .page{display:none} .page.active{display:block;animation:fadeIn .22s ease}
@@ -106,31 +87,30 @@ h1{margin:0 0 8px;font-size:var(--h1-size)} h2{margin:0 0 8px;font-size:16px}
 
 /* NAV */
 .nav-wrap{
-  position:fixed;left:0;right:0;bottom:calc(12px + env(safe-area-inset-bottom));display:grid;place-items:center;z-index:50;
-  pointer-events:none; padding-left:8px;padding-right:8px;
+  position:fixed;left:0;right:0;bottom:calc(12px + var(--safe-bottom));display:grid;place-items:center;z-index:70;pointer-events:none;
 }
+/* keep tabbar width fluid but constrained */
 .tabbar{
-  width:min(680px,94%);height:var(--nav-h);border-radius:26px;background:rgba(255,255,255,.10);
+  width:min(680px,96%);height:var(--nav-h);border-radius:26px;background:rgba(255,255,255,.10);
   backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.10);
   box-shadow:0 18px 40px rgba(2,6,23,.40), inset 0 1px 0 rgba(255,255,255,.08);
   display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:10px 12px;pointer-events:auto;position:relative;overflow:visible;
+  gap:8px;
 }
+/* tab button */
 .tab{
   position:relative;display:grid;place-items:center;gap:6px;height:100%;background:transparent;border-radius:16px;user-select:none;padding-bottom:6px;z-index:2;
-  transition:transform .12s ease, color .22s ease;
-  -webkit-tap-highlight-color: transparent;
+  transition:transform .12s ease, color .22s ease; touch-action:manipulation;
 }
 .tab:active{transform:scale(.96)}
-.tab span{font-size:var(--tab-font);color:var(--tab-inactive);font-weight:600}
-.tab .ic{width:var(--icon-size);height:var(--icon-size);display:inline-grid;place-items:center;color:var(--tab-inactive)}
-.tab[aria-selected="true"] span,
-.tab[aria-selected="true"] .ic{color:#fff}
+.tab span{font-size:12px;color:var(--tab-inactive);font-weight:600}
+.tab .ic{width:22px;height:22px;display:inline-grid;place-items:center;color:var(--tab-inactive)}
+.tab[aria-selected="true"] span, .tab[aria-selected="true"] .ic{color:#fff}
 
-/* Big round indicator centered on the tab (covers icon + text) */
+/* indicator */
 .indicator{
-  position:absolute;top:50%;left:0;width:clamp(64px,12vw,74px);height:clamp(64px,12vw,74px);border-radius:999px;
-  transform:translateX(0) translateY(-50%);z-index:1;pointer-events:none;filter:drop-shadow(0 18px 38px rgba(2,6,23,.36));
-  opacity:1;will-change:transform;
+  position:absolute;top:50%;left:0;width:74px;height:74px;border-radius:999px;transform:translateX(0) translateY(-50%);z-index:1;pointer-events:none;
+  filter:drop-shadow(0 18px 38px rgba(2,6,23,.36));opacity:1;will-change:transform;
 }
 .indicator::before{
   content:"";position:absolute;inset:0;border-radius:inherit;
@@ -138,10 +118,10 @@ h1{margin:0 0 8px;font-size:var(--h1-size)} h2{margin:0 0 8px;font-size:16px}
   border:1px solid rgba(255,255,255,.20);mix-blend-mode:screen;
 }
 .indicator::after{
-  content:"";position:absolute;inset:8px;border-radius:inherit;background:rgba(255,255,255,var(--indicator-bg-opacity));filter:blur(12px);opacity:.85;
+  content:"";position:absolute;inset:10px;border-radius:inherit;background:rgba(255,255,255,var(--indicator-bg-opacity));filter:blur(16px);opacity:.85;
 }
 
-/* CENTER HOME FAB — raised higher than others */
+/* center FAB */
 .center-slot{position:relative;display:grid;place-items:center;z-index:3;pointer-events:none}
 .fab{
   position:absolute;left:50%;
@@ -152,42 +132,55 @@ h1{margin:0 0 8px;font-size:var(--h1-size)} h2{margin:0 0 8px;font-size:16px}
   box-shadow: 0 10px 30px rgba(0,0,0,.28);
   animation:fabGlow 2.6s ease-in-out infinite;
   transition:transform .18s ease;
-  font-weight:800;color:#fff;
-  font-size: clamp(12px, 2.6vw, 18px);
+  font-weight:800;
+  padding:4px;
 }
 .fab:active{transform:translateX(-50%) translateY(2px) scale(.98)}
+.fab div{font-weight:800;color:#fff;pointer-events:none;font-size:clamp(12px,2.8vw,16px)}
 
-/* subtle glow keyed to theme via --glow-color */
+/* glow */
 @keyframes fabGlow{
   0%{ box-shadow: 0 8px 30px rgba(0,0,0,.28), 0 0 18px 0 var(--glow-color); transform: translateX(-50%) translateY(0); }
   50%{ box-shadow: 0 18px 48px rgba(0,0,0,.36), 0 0 42px 6px color-mix(in srgb, var(--glow-color) 60%, transparent); transform: translateX(-50%) translateY(-3px); }
   100%{ box-shadow: 0 8px 30px rgba(0,0,0,.28), 0 0 18px 0 var(--glow-color); transform: translateX(-50%) translateY(0); }
 }
 
-/* THEME TOGGLE */
-.theme-toggle{display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:14px;background:var(--card-2);border:1px solid rgba(255,255,255,.06);cursor:pointer}
+/* theme toggle */
+.theme-toggle{
+  display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:14px;background:var(--card-2);
+  border:1px solid rgba(255,255,255,.06);cursor:pointer;flex:0 0 auto;
+}
 .theme-toggle input{display:none}
 .theme-toggle .knob{width:26px;height:26px;border-radius:999px;background:linear-gradient(180deg,var(--a1),var(--a2))}
 
-/* GRID UTIL */
+/* small responsive tweaks */
+@media (max-width:720px){
+  :root{ --nav-h:86px; --fab:82px; --radius:14px }
+  .tabbar{height:var(--nav-h)}
+  .indicator{width:64px;height:64px}
+  .badge{border-radius:10px}
+  .card{border-radius:14px}
+}
+@media (max-width:420px){
+  :root{ --nav-h:78px; --fab:78px; --radius:12px }
+  .tabbar{height:var(--nav-h);padding:8px}
+  .indicator{width:58px;height:58px}
+  .fab{top:calc(-1 * var(--fab) * var(--fab-rise) + 2px)}
+  .top-inner{padding:8px 12px}
+  main.content{padding-left:12px;padding-right:12px}
+  .tab span{display:none} /* hide labels on very small screens to prevent overlap */
+}
+
+/* grid utilities */
 .row{display:grid;gap:12px} @media(min-width:720px){.grid-2{grid-template-columns:repeat(2,1fr)}}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
 
-/* small responsive tweak for very narrow viewports */
-@media (max-width:420px){
-  :root{
-    --radius:12px;
-  }
-  .tabbar{height:var(--nav-h);}
-  .indicator{width:clamp(56px,13vw,64px);height:clamp(56px,13vw,64px)}
-}
+/* prevent large cards from overflowing */
+.card img{max-width:100%;height:auto}
 
-/* prevent accidental horizontal overflow */
-html,body,#app{max-width:100vw;overflow-x:hidden}
-
-/* Reduced motion */
+/* reduce motion option */
 @media (prefers-reduced-motion: reduce){
-  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important}
 }
 </style>
 </head>
@@ -197,20 +190,20 @@ html,body,#app{max-width:100vw;overflow-x:hidden}
     <div class="top-inner">
       <div class="brand">
         <div class="badge" aria-hidden="true">SG</div>
-        <div>
-          <h1 style="margin:0;font-size:var(--h1-size)">Shridhar Group of Company</h1>
-          <div class="muted" style="font-size:var(--muted-size)">App Development · Play Store Publish · Branding</div>
+        <div style="min-width:0">
+          <h1 style="margin:0;font-size:clamp(16px,3.6vw,20px);line-height:1">Shridhar Group of Company</h1>
+          <div class="muted" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">App Development · Play Store Publish · Branding</div>
         </div>
       </div>
       <label class="theme-toggle" title="Toggle theme" aria-label="Toggle light theme">
         <input id="themeToggle" type="checkbox" aria-hidden="true">
-        <div style="font-size:12px">Theme</div>
+        <div style="font-size:12px;white-space:nowrap;margin-right:6px">Theme</div>
         <div class="knob" aria-hidden="true"></div>
       </label>
     </div>
   </header>
 
-  <main class="content" role="main">
+  <main class="content" role="main" aria-live="polite">
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="ic-grid" viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="currentColor"/></symbol>
   <symbol id="ic-briefcase" viewBox="0 0 24 24"><path d="M9 6V4h6v2h5a2 2 0 012 2v3H2V8a2 2 0 012-2h5zm-7 7h20v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z" fill="currentColor"/></symbol>
@@ -221,17 +214,17 @@ html,body,#app{max-width:100vw;overflow-x:hidden}
 
     <!-- HOME -->
     <section id="home" class="page active" aria-label="Home">
-      <div class="card" id="hero">
-        <h1 style="margin:0;font-size:var(--h1-size)">Build. Launch. Brand — with confidence.</h1>
-        <div class="muted">End-to-end product studio: apps, websites, marketplace onboarding and premium brand kits.</div>
+      <div class="card" id="hero" role="region" aria-label="Hero">
+        <h1 style="margin:0;font-size:clamp(18px,4vw,22px)">Build. Launch. Brand — with confidence.</h1>
+        <div class="muted" style="margin-top:6px;font-size:clamp(12px,2.4vw,13px)">End-to-end product studio: apps, websites, marketplace onboarding and premium brand kits.</div>
         <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
           <div style="display:flex;gap:10px;align-items:center">
-            <div style="width:84px;height:84px;border-radius:12px;background:#fff;overflow:hidden;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#0b1220;font-weight:800;font-size:14px">QR</div>
-            <div>
-              <div style="font-weight:800">Open our App</div>
+            <div style="width:84px;height:84px;border-radius:12px;background:#fff;overflow:hidden;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#0b1220;font-weight:800">QR</div>
+            <div style="min-width:0">
+              <div style="font-weight:800;font-size:14px">Open our App</div>
               <div class="muted">Scan or tap to open on Play Store</div>
               <div style="margin-top:8px">
-                <a class="card" style="padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;display:inline-block" href="https://play.google.com/store/apps/details?id=com.myvtu.app" target="_blank" rel="noopener">Open App →</a>
+                <a class="card" style="padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;display:inline-block;text-decoration:none" href="https://play.google.com/store/apps/details?id=com.myvtu.app" target="_blank" rel="noopener">Open App →</a>
               </div>
             </div>
           </div>
@@ -300,12 +293,12 @@ html,body,#app{max-width:100vw;overflow-x:hidden}
       <div class="indicator" id="indicator" aria-hidden="true"></div>
 
       <button class="tab" role="tab" aria-label="Services" data-target="services" aria-selected="false">
-        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ic-grid"/></svg></div>
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><use href="#ic-grid"/></svg></div>
         <span>Services</span>
       </button>
 
       <button class="tab" role="tab" aria-label="Work" data-target="work" aria-selected="false">
-        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ic-briefcase"/></svg></div>
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><use href="#ic-briefcase"/></svg></div>
         <span>Work</span>
       </button>
 
@@ -314,12 +307,12 @@ html,body,#app{max-width:100vw;overflow-x:hidden}
       </div>
 
       <button class="tab" role="tab" aria-label="About" data-target="about" aria-selected="false">
-        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ic-user"/></svg></div>
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><use href="#ic-user"/></svg></div>
         <span>About</span>
       </button>
 
       <button class="tab" role="tab" aria-label="Contact" data-target="contact" aria-selected="false">
-        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#ic-mail"/></svg></div>
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><use href="#ic-mail"/></svg></div>
         <span>Contact</span>
       </button>
     </nav>
@@ -327,7 +320,7 @@ html,body,#app{max-width:100vw;overflow-x:hidden}
 </div>
 
 <script>
-// THEME
+/* THEME */
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('sg_theme');
 if(savedTheme) document.body.classList.toggle('light', savedTheme==='light');
@@ -341,61 +334,82 @@ themeToggle.addEventListener('change',()=>{
   if(meta) meta.setAttribute('content', is ? '#f6f8fb' : '#071026');
 });
 
-// PAGES & NAV
+/* PAGES & NAV */
 const tabs = Array.from(document.querySelectorAll('.tabbar .tab'));
 const pages = Array.from(document.querySelectorAll('.page'));
 const indicator = document.getElementById('indicator');
 const fab = document.getElementById('homeFab');
+const tabbar = document.querySelector('.tabbar');
 
+/* Utility: ensure indicator not taller than tabbar */
+function clampIndicatorSize(){
+  const barH = tabbar.getBoundingClientRect().height;
+  const desired = Math.min(74, Math.max(44, barH * 0.85));
+  indicator.style.width = desired + 'px';
+  indicator.style.height = desired + 'px';
+}
+
+/* Move indicator to active tab - more robust calculation than parentElement usage */
+function moveIndicator(){
+  const active = document.querySelector('.tab[aria-selected="true"]');
+  if(!active){
+    indicator.style.opacity = '0'; return;
+  }
+  const barRect = tabbar.getBoundingClientRect();
+  const rect = active.getBoundingClientRect();
+  const centerX = rect.left + rect.width/2 - barRect.left;
+  const x = centerX - indicator.offsetWidth/2;
+
+  // micro overshoot animation
+  try{
+    indicator.animate(
+      [
+        { transform: indicator.style.transform || `translateX(${x}px) translateY(-50%)` },
+        { transform: `translateX(${x+8}px) translateY(-50%)` },
+        { transform: `translateX(${x}px) translateY(-50%)` }
+      ],
+      { duration: 420, easing: 'cubic-bezier(.17,1.2,.35,1)' }
+    );
+  }catch(e){}
+  indicator.style.transform = `translateX(${x}px) translateY(-50%)`;
+  indicator.style.opacity = '1';
+}
+
+/* set active page and aria states */
 function setActive(target){
   pages.forEach(p=>p.classList.toggle('active', p.id===target));
   tabs.forEach((t)=>{const is=t.dataset.target===target; t.setAttribute('aria-selected',is?'true':'false');});
   document.body.classList.toggle('home-active', target==='home');
 
-  // Hide indicator when Home is active (to avoid any overlap with FAB)
+  // Hide indicator when Home is active (avoid overlap with FAB)
   indicator.style.opacity = (target==='home') ? '0' : '1';
 
   if(target==='home'){
     buildHomeFeed();
+    // subtle pulse restart
     document.body.classList.remove('home-pulse');
-    void document.body.offsetWidth; // reflow to restart animation
+    void document.body.offsetWidth;
     document.body.classList.add('home-pulse');
   }
+  // small debounce to ensure sizes measured after layout changes
+  setTimeout(()=>{clampIndicatorSize(); moveIndicator();}, 35);
 
-  moveIndicator();
   if(location.hash !== '#'+target) history.replaceState(null,'','#'+target);
 }
 
-function moveIndicator(){
-  const active = document.querySelector('.tab[aria-selected="true"]');
-  if(!active) return;
-
-  const barRect = active.parentElement.getBoundingClientRect();
-  const rect = active.getBoundingClientRect();
-  const centerX = rect.left + rect.width/2 - barRect.left;
-  const x = centerX - indicator.offsetWidth/2;
-
-  indicator.animate(
-    [
-      { transform: indicator.style.transform || `translateX(${x}px) translateY(-50%)` },
-      { transform: `translateX(${x+8}px) translateY(-50%)` },
-      { transform: `translateX(${x}px) translateY(-50%)` }
-    ],
-    { duration: 420, easing: 'cubic-bezier(.17,1.2,.35,1)' }
-  );
-  indicator.style.transform = `translateX(${x}px) translateY(-50%)`;
-  indicator.style.opacity = document.querySelector('.tab[aria-selected="true"]') ? '1' : indicator.style.opacity;
-}
-
-// set initial aria-selected and indicator
+/* click handlers */
 tabs.forEach(t=>t.addEventListener('click',()=>setActive(t.dataset.target)));
 fab.addEventListener('click',()=>setActive('home'));
-window.addEventListener('resize', moveIndicator);
 
-// initial route
+/* responsive: recalc indicator on resize, font change or orientation change */
+let resizeTO;
+window.addEventListener('resize', ()=>{ clearTimeout(resizeTO); resizeTO=setTimeout(()=>{clampIndicatorSize(); moveIndicator();},80); }, {passive:true});
+window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{clampIndicatorSize(); moveIndicator();},150); });
+
+/* initial route */
 setTimeout(()=>setActive((location.hash && location.hash.slice(1)) || 'home'), 10);
 
-// HOME FEED: copy key info from other pages (without their <h2>)
+/* HOME FEED: copy key info from other pages (without their <h2>) */
 function buildHomeFeed(){
   const feed = document.getElementById('homeFeed');
   if(!feed) return;
@@ -405,18 +419,30 @@ function buildHomeFeed(){
     const card = sec && sec.querySelector('.card');
     if(!card) return;
     const clone = card.cloneNode(true);
+    // remove headers to keep succinct on home
     const h2 = clone.querySelector('h2'); if(h2) h2.remove();
+    // reduce heavy margins for mobile
+    clone.style.margin = '0';
     feed.appendChild(clone);
   });
 }
 
-// Reduced motion
+/* Reduced motion: short-circuit animations where preference set */
 if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('*').forEach(el=>el.style.animationDuration='.001ms');
 }
 
-// ensure indicator positioned correctly once fonts & layout settle
-window.addEventListener('load', ()=> setTimeout(moveIndicator, 120));
+/* When page first loads adjust indicator size */
+window.addEventListener('load', ()=>{ clampIndicatorSize(); moveIndicator(); });
+
+/* Accessibility: keyboard support for tabs */
+tabs.forEach((tab, idx) => {
+  tab.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight') { e.preventDefault(); const next = tabs[(idx+1)%tabs.length]; next.focus(); next.click(); }
+    if(e.key === 'ArrowLeft')  { e.preventDefault(); const prev = tabs[(idx-1+tabs.length)%tabs.length]; prev.focus(); prev.click(); }
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tab.click(); }
+  });
+});
 </script>
 </body>
 </html>
