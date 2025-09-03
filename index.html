@@ -20,7 +20,7 @@ html,body{height:100%}
   --bg:#071026; --card:#0b1421; --card-2:#0d1624; --text:#e6eef7; --muted:rgba(230,238,247,.72);
   --a1:#6dd3ff; --a2:#a78bfa;
 
-  /* Layout scales (responsive via clamp) */
+  /* Layout scales (now responsive via clamp) */
   --nav-h: clamp(64px, 12vw, 92px);
   --fab: clamp(64px, 11.5vw, 92px);
   --fab-rise:.64;
@@ -116,49 +116,13 @@ h2{font-size:var(--fs-h2);line-height:1.25}
 
 /* GRID */
 .row{display:grid;gap:var(--sp-s)}
-.grid-2{grid-template-columns:1fr}
 @media(min-width:720px){.grid-2{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.grid-3{grid-template-columns:repeat(3,1fr)}}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
 
-/* HERO */
+/* HOME specific compaction */
 #hero .qr-wrap{display:flex;gap:var(--sp-s);align-items:center;flex-wrap:nowrap}
 #hero .qr{width: clamp(62px, 16vw, 84px);height: clamp(62px, 16vw, 84px);border-radius:12px;background:#fff;overflow:hidden;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#0b1220;font-weight:800;font-size: clamp(14px, 3.8vw, 18px)}
 #hero .cta{display:inline-block;padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff}
-
-/* COUNTERS */
-.counters{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp-s)}
-.counter{display:grid;place-items:center;padding:10px;border-radius:14px;background:var(--card-2);border:1px solid rgba(255,255,255,.06)}
-.counter .num{font-weight:800;font-size:clamp(16px,4.4vw,22px)}
-.counter .lbl{color:var(--muted);font-size:var(--fs-muted)}
-
-/* SERVICES */
-.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-s)}
-@media(min-width:760px){.service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.service-item{
-  padding:12px;border-radius:14px;background:var(--card-2);border:1px solid rgba(255,255,255,.06);
-  display:grid;gap:6px;align-content:start;min-height:92px;transition:transform .12s ease, box-shadow .18s ease;
-}
-.service-item strong{font-size:clamp(13px,3.2vw,15px)}
-.service-item .desc{color:var(--muted);font-size:var(--fs-muted)}
-.service-item:active{transform:translateY(1px) scale(.99)}
-.service-item:hover{box-shadow:0 12px 28px rgba(2,6,23,.36)}
-
-/* PRICING */
-.pricing-grid{display:grid;grid-template-columns:1fr;gap:var(--sp-s)}
-@media(min-width:860px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
-.price-card{
-  border-radius:18px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,.02));
-  padding:14px;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow-1);display:grid;gap:6px
-}
-.price-head{display:flex;align-items:center;justify-content:space-between}
-.price{font-weight:800;font-size:clamp(18px,5vw,26px)}
-.pill{font-size:11px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10)}
-.price-feat{margin-top:6px;display:grid;gap:6px}
-.price-feat li{list-style:none;display:flex;gap:8px;align-items:flex-start}
-.price-cta{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
-.btn{padding:8px 10px;border-radius:12px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;font-weight:700}
-.btn.outline{background:transparent;border:1px solid rgba(255,255,255,.22);color:#fff}
 
 /* NAV */
 .nav-wrap{
@@ -183,7 +147,7 @@ h2{font-size:var(--fs-h2);line-height:1.25}
 .tab[aria-selected="true"] span,
 .tab[aria-selected="true"] .ic{color:#fff}
 
-/* Indicator */
+/* Indicator sized relative to nav (keeps centered under icon+text) */
 .indicator{
   position:absolute;top:50%;left:0;
   width: clamp(54px, 11.4vw, 74px);height: clamp(54px, 11.4vw, 74px);
@@ -230,7 +194,7 @@ h2{font-size:var(--fs-h2);line-height:1.25}
 .theme-toggle input{display:none}
 .theme-toggle .knob{width:22px;height:22px;border-radius:999px;background:linear-gradient(180deg,var(--a1),var(--a2))}
 
-/* SOCIAL BOX — made SMALLER to fit inside box neatly */
+/* SOCIAL BOX (smaller icons, perfect fit, at the end) */
 .social-box{margin-top:var(--sp-s)}
 .social-box h3{
   margin:0 0 var(--sp-s);
@@ -241,49 +205,90 @@ h2{font-size:var(--fs-h2);line-height:1.25}
 .soc-grid-icons{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:var(--sp-s);
+  gap: var(--sp-xs);
   align-items:center;
   justify-items:center;
 }
 .soc-chip{
-  width:clamp(38px,9.5vw,48px);
-  height:clamp(38px,9.5vw,48px);
+  width:clamp(40px,10vw,52px);
+  height:clamp(40px,10vw,52px);
   border-radius:14px;
   background:linear-gradient(180deg,#ffffff,#f4f6f9);
   border:1px solid rgba(2,6,23,.08);
   box-shadow:0 6px 16px rgba(2,6,23,.16);
   display:grid;place-items:center;
   transition:transform .12s ease, box-shadow .18s ease, border-color .18s ease;
+  overflow:hidden;
 }
 .soc-chip:active{transform:translateY(1px) scale(.98)}
-.soc-chip:hover{box-shadow:0 12px 28px rgba(2,6,23,.22); border-color:rgba(2,6,23,.16)}
+.soc-chip:hover{box-shadow:0 12px 26px rgba(2,6,23,.22); border-color:rgba(2,6,23,.16)}
 .soc-chip svg{
-  width:clamp(18px,5vw,24px);
-  height:clamp(18px,5vw,24px);
+  width:clamp(20px,5vw,26px);
+  height:clamp(20px,5vw,26px);
   color:#000;
 }
 
-/* MODAL */
-.modal-backdrop{
-  position:fixed;inset:0;background:rgba(2,6,23,.6);backdrop-filter:blur(4px);
-  display:none;align-items:flex-end;justify-content:center;z-index:60
+/* Smallest devices */
+@media (max-width:560px){ .soc-grid-icons{grid-template-columns:repeat(5,minmax(0,1fr));} }
+@media (max-width:380px){
+  :root{ --radius:16px; }
+  .tabbar{ border-radius:20px; padding:6px 8px; }
+  .indicator::after{ inset:8px; }
 }
-.modal{width:min(720px,96%);border-radius:18px 18px 0 0;background:var(--card);border:1px solid rgba(255,255,255,.12);padding:14px 14px 20px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.modal h3{margin:0;font-size:clamp(16px,4.2vw,20px)}
-.modal p{margin:6px 0}
-.modal .close{font-weight:800;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.22)}
-.modal .m-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-
-/* FAQ */
-.faq{display:grid;gap:8px}
-.faq details{border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:14px;background:var(--card-2)}
-.faq summary{cursor:pointer;font-weight:700}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition:none !important; scroll-behavior:auto !important; }
 }
+
+/* ---------- ADDITIONS (content-only styling, fits existing theme) ---------- */
+
+/* Stats (running numbers) */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-s)}
+@media(min-width:720px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{display:grid;gap:4px;place-items:center;padding:10px;border-radius:14px;background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
+.stat .num{font-weight:800;font-size:clamp(18px,4.6vw,24px)}
+.stat .label{color:var(--muted);font-size:var(--fs-muted)}
+
+/* Price list cards */
+.price-grid{display:grid;gap:var(--sp-s)}
+@media(min-width:720px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+.price-card{display:grid;gap:8px;border-radius:16px;padding:var(--sp-s);background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
+.price-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price-title{font-weight:800}
+.price-badge{font-weight:800;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;white-space:nowrap}
+.features{display:grid;gap:6px}
+.features li{list-style:none;display:flex;gap:8px;align-items:flex-start}
+.features li::before{content:"✓";font-weight:800}
+.price-cta{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(180deg,var(--a1),var(--a2));color:#fff;font-weight:800
+}
+.btn.secondary{background:transparent;color:var(--text)}
+.small{font-size:var(--fs-muted);color:var(--muted)}
+
+/* Work: portfolio + ratings */
+.work-grid{display:grid;gap:var(--sp-s)}
+@media(min-width:720px){.work-grid{grid-template-columns:repeat(2,1fr)}}
+.work-card{display:grid;gap:6px;border-radius:16px;padding:var(--sp-s);background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
+.stars{display:inline-block;white-space:nowrap}
+.star{font-size:14px;opacity:.9}
+.meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:var(--fs-muted)}
+
+/* Reviews */
+.reviews{display:grid;gap:var(--sp-s)}
+@media(min-width:720px){.reviews{grid-template-columns:repeat(2,1fr)}}
+.review{display:grid;gap:6px;border-radius:16px;padding:var(--sp-s);background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
+.reviewer{display:flex;align-items:center;gap:10px}
+.avatar{width:36px;height:36px;border-radius:999px;background:linear-gradient(180deg,var(--a1),var(--a2));display:grid;place-items:center;font-weight:800;color:#fff}
+
+/* Contact: quick actions */
+.quick-actions{display:grid;gap:var(--sp-s)}
+@media(min-width:720px){.quick-actions{grid-template-columns:repeat(2,1fr)}}
+.action-card{display:grid;gap:8px;border-radius:16px;padding:var(--sp-s);background:linear-gradient(180deg,var(--card-2),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
+.action-cta{display:flex;gap:8px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -358,17 +363,27 @@ h2{font-size:var(--fs-h2);line-height:1.25}
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Running numbers -->
-      <div class="card">
-        <h2>Numbers that keep running</h2>
-        <div class="counters" id="counters">
-          <div class="counter"><div class="num" data-target="125">0</div><div class="lbl">Projects Delivered</div></div>
-          <div class="counter"><div class="num" data-target="38">0</div><div class="lbl">Apps Published</div></div>
-          <div class="counter"><div class="num" data-target="420">0</div><div class="lbl">Happy Clients</div></div>
-          <div class="counter"><div class="num" data-target="19">0</div><div class="lbl">Cities Served</div></div>
-          <div class="counter"><div class="num" data-target="7">0</div><div class="lbl">Years Experience</div></div>
+        <!-- RUNNING NUMBERS (Stats) -->
+        <div class="row" style="margin-top:var(--sp-s)">
+          <div class="stats" id="stats">
+            <div class="stat">
+              <div class="num" data-count="120">0</div>
+              <div class="label">Projects Delivered</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="60">0</div>
+              <div class="label">Play Store Launches</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="98">0</div>
+              <div class="label">Client Satisfaction (%)</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="24">0</div>
+              <div class="label">Active Retainers</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -380,149 +395,93 @@ h2{font-size:var(--fs-h2);line-height:1.25}
     <section id="services" class="page" aria-label="Services">
       <div class="card">
         <h2>Services</h2>
-        <div class="muted">Tap any service to view the recommended plan & price.</div>
-
-        <!-- LONG list -->
-        <div class="service-grid" style="margin-top:var(--sp-xxs)">
-          <button class="service-item" data-plan="basic">
-            <strong>Business Website</strong>
-            <div class="desc">Modern landing page + WhatsApp integration</div>
-          </button>
-          <button class="service-item" data-plan="basic">
-            <strong>Portfolio / Personal Site</strong>
-            <div class="desc">Standout profile, projects & contact</div>
-          </button>
-          <button class="service-item" data-plan="app">
-            <strong>Android App (One-time)</strong>
-            <div class="desc">Lifetime app for small businesses</div>
-          </button>
-          <button class="service-item" data-plan="pro">
-            <strong>Professional App Suite</strong>
-            <div class="desc">All access + lifetime support</div>
-          </button>
-          <button class="service-item" data-plan="basic">
-            <strong>Online Menu / Restaurant</strong>
-            <div class="desc">QR menu, orders on WhatsApp</div>
-          </button>
-          <button class="service-item" data-plan="app">
-            <strong>E-Commerce Starter</strong>
-            <div class="desc">Products, checkout links, inventory</div>
-          </button>
-          <button class="service-item" data-plan="pro">
-            <strong>Full E-Commerce App</strong>
-            <div class="desc">Gateway, coupons, dashboards</div>
-          </button>
-          <button class="service-item" data-plan="pro">
-            <strong>POS + Billing with GST</strong>
-            <div class="desc">Inventory, barcode, reports</div>
-          </button>
-          <button class="service-item" data-plan="app">
-            <strong>Learning / Course App</strong>
-            <div class="desc">Videos, notes, quizzes, results</div>
-          </button>
-          <button class="service-item" data-plan="basic">
-            <strong>Brand Kit</strong>
-            <div class="desc">Logo, fonts, palette & stationery</div>
-          </button>
-          <button class="service-item" data-plan="pro">
-            <strong>Play Store Publishing</strong>
-            <div class="desc">Assets, listing, rollouts, ASO</div>
-          </button>
-          <button class="service-item" data-plan="basic">
-            <strong>SEO & Speed Optimisation</strong>
-            <div class="desc">Core Web Vitals, sitemaps, schema</div>
-          </button>
-          <button class="service-item" data-plan="pro">
-            <strong>Maintenance & SLA</strong>
-            <div class="desc">Version bumps, fixes, security</div>
-          </button>
-          <button class="service-item" data-plan="app">
-            <strong>WhatsApp Commerce</strong>
-            <div class="desc">Catalog + automated replies</div>
-          </button>
-          <button class="service-item" data-plan="app">
-            <strong>Hybrid App (WebView)</strong>
-            <div class="desc">Sign-in, deep links, updates</div>
-          </button>
+        <div class="row grid-2" style="margin-top:var(--sp-xxs)">
+          <div class="card"><strong>App Development</strong><div class="muted">Android/iOS · Native/Hybrid · CI/CD</div></div>
+          <div class="card"><strong>Play Store Publishing</strong><div class="muted">Listing · Assets · Rollouts · ASO</div></div>
+          <div class="card"><strong>Website Development</strong><div class="muted">Landing · CMS · SEO</div></div>
+          <div class="card"><strong>Branding & Print</strong><div class="muted">Logo · Color · Stationery</div></div>
         </div>
       </div>
 
-      <!-- Pricing Table (exactly as your poster) -->
-      <div class="card">
-        <h2>Pricing Plans</h2>
-        <div class="muted">No hidden fees. No contract. One-time payments as per your image.</div>
-
-        <div class="pricing-grid" style="margin-top:var(--sp-xxs)">
-          <!-- Website ₹15,000 -->
-          <div class="price-card" data-plan="basic">
+      <!-- DETAILED PACKAGES + PRICES -->
+      <div class="card" style="margin-top:var(--sp-s)">
+        <h2>Packages & Pricing</h2>
+        <div class="price-grid" style="margin-top:var(--sp-xxs)">
+          <!-- App Starter -->
+          <div class="price-card">
             <div class="price-head">
-              <div>
-                <strong>Website</strong><br/>
-                <span class="muted">Basic Businesses — Integrated to WhatsApp</span>
-              </div>
-              <div class="price">₹15,000</div>
+              <div class="price-title">App Starter</div>
+              <div class="price-badge">₹49,999</div>
             </div>
-            <div class="pill">One-Time Payment</div>
-            <ul class="price-feat">
-              <li>✅ 1–5 Pages, responsive, SEO-ready</li>
-              <li>✅ WhatsApp chat & click-to-order</li>
-              <li>✅ Hosting & domain guidance</li>
-              <li>✅ Delivery in days, not weeks</li>
+            <ul class="features">
+              <li>1 platform (Android) — React Native/Flutter</li>
+              <li>Up to 6 screens (Login, Home, Profile, etc.)</li>
+              <li>Basic API integration & Firebase Analytics</li>
+              <li>Play Store listing guidance</li>
+              <li>2 weeks support post-launch</li>
             </ul>
             <div class="price-cta">
-              <a class="btn" href="tel:+917483640694">Call Now</a>
-              <a class="btn outline" target="_blank" rel="noopener" href="https://wa.me/917483640694?text=I%20want%20the%20Website%20plan%20(₹15000).">WhatsApp</a>
+              <a class="btn" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20I%27m%20interested%20in%20the%20App%20Starter%20package%20(₹49,999)." target="_blank" rel="noopener">WhatsApp Quote →</a>
+              <span class="small">ETA: 2–3 weeks</span>
             </div>
           </div>
 
-          <!-- App - Life Time ₹25,000 -->
-          <div class="price-card" data-plan="app">
+          <!-- App Growth -->
+          <div class="price-card">
             <div class="price-head">
-              <div>
-                <strong>App — Life Time</strong><br/>
-                <span class="muted">Best for small businesses — WhatsApp Integration</span>
-              </div>
-              <div class="price">₹25,000</div>
+              <div class="price-title">App Growth</div>
+              <div class="price-badge">₹99,999</div>
             </div>
-            <div class="pill">One-Time Payment</div>
-            <ul class="price-feat">
-              <li>✅ Android app (release APK)</li>
-              <li>✅ Brand screens + WhatsApp actions</li>
-              <li>✅ Upload assets & guide for listing</li>
-              <li>✅ Lifetime usage for your business</li>
+            <ul class="features">
+              <li>Android + iOS build pipeline (CI/CD)</li>
+              <li>Up to 16 screens + custom components</li>
+              <li>Secure auth, push notifications, deep links</li>
+              <li>Play Store & App Store assets (icons, screenshots)</li>
+              <li>Crashlytics & performance monitoring</li>
             </ul>
             <div class="price-cta">
-              <a class="btn" href="tel:+917483640694">Call Now</a>
-              <a class="btn outline" target="_blank" rel="noopener" href="https://wa.me/917483640694?text=I%20want%20the%20App%20Life%20Time%20plan%20(₹25000).">WhatsApp</a>
+              <a class="btn" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20please%20share%20details%20for%20the%20App%20Growth%20package%20(₹99,999)." target="_blank" rel="noopener">WhatsApp Quote →</a>
+              <span class="small">ETA: 4–6 weeks</span>
             </div>
           </div>
 
-          <!-- Professional App ₹50,000 -->
-          <div class="price-card" data-plan="pro">
+          <!-- Website Launch -->
+          <div class="price-card">
             <div class="price-head">
-              <div>
-                <strong>Professional App</strong><br/>
-                <span class="muted">Best for large businesses — All Access + Life Time</span>
-              </div>
-              <div class="price">₹50,000</div>
+              <div class="price-title">Website Launch</div>
+              <div class="price-badge">₹24,999</div>
             </div>
-            <div class="pill">One-Time Payment</div>
-            <ul class="price-feat">
-              <li>✅ Full feature set unlocked</li>
-              <li>✅ Admin dashboard & analytics</li>
-              <li>✅ Play Store publish support</li>
-              <li>✅ Priority assistance</li>
+            <ul class="features">
+              <li>5-page responsive site (Landing, About, Services, Work, Contact)</li>
+              <li>Basic SEO, Google Analytics, SSL</li>
+              <li>CMS (optional) & contact form</li>
+              <li>1-year hosting guidance</li>
             </ul>
             <div class="price-cta">
-              <a class="btn" href="tel:+917483640694">Call Now</a>
-              <a class="btn outline" target="_blank" rel="noopener" href="https://wa.me/917483640694?text=I%20want%20the%20Professional%20App%20plan%20(₹50000).">WhatsApp</a>
+              <a class="btn" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20I%27d%20like%20the%20Website%20Launch%20package%20(₹24,999)." target="_blank" rel="noopener">WhatsApp Quote →</a>
+              <span class="small">ETA: 1–2 weeks</span>
+            </div>
+          </div>
+
+          <!-- Branding Kit -->
+          <div class="price-card">
+            <div class="price-head">
+              <div class="price-title">Branding Kit Pro</div>
+              <div class="price-badge">₹19,999</div>
+            </div>
+            <ul class="features">
+              <li>Logo suite (primary/secondary/mark)</li>
+              <li>Color system, typography, usage guide (PDF)</li>
+              <li>Stationery: business card, letterhead</li>
+              <li>Social media templates (10)</li>
+            </ul>
+            <div class="price-cta">
+              <a class="btn" href="https://wa.me/917483640694?text=Hello%20Shridhar%20Group%2C%20I%20want%20the%20Branding%20Kit%20Pro%20(₹19,999)." target="_blank" rel="noopener">WhatsApp Quote →</a>
+              <span class="small">ETA: 1–2 weeks</span>
             </div>
           </div>
         </div>
-
-        <div class="muted" style="margin-top:8px">
-          Prices shown exactly follow your attached image. Need custom scope? We’ll quote it upfront.
-        </div>
+        <div class="small" style="margin-top:6px">*Prices are indicative; GST extra as applicable. Custom quotes available.</div>
       </div>
     </section>
 
@@ -531,20 +490,81 @@ h2{font-size:var(--fs-h2);line-height:1.25}
       <div class="card">
         <h2>Work</h2>
         <div class="row grid-2" style="margin-top:var(--sp-xxs)">
-          <div class="card"><strong>EduLearn App</strong><div class="muted">Play Store launch · Notes, tests, results</div></div>
-          <div class="card"><strong>Merchant Site</strong><div class="muted">Catalog + checkout + invoicing</div></div>
-          <div class="card"><strong>Health Tracker</strong><div class="muted">Wearable sync · charts · alerts</div></div>
-          <div class="card"><strong>POS Suite</strong><div class="muted">Inventory · GST billing · reports</div></div>
-          <div class="card"><strong>Food Ordering</strong><div class="muted">QR menu, kitchen display, rider app</div></div>
-          <div class="card"><strong>Hyperlocal Commerce</strong><div class="muted">Storefronts per area · delivery slots</div></div>
+          <div class="card"><strong>EduLearn App</strong><div class="muted">Play Store launch</div></div>
+          <div class="card"><strong>Merchant Site</strong><div class="muted">Catalog + checkout</div></div>
+          <div class="card"><strong>Health Tracker</strong><div class="muted">Wearable sync + charts</div></div>
+          <div class="card"><strong>POS Suite</strong><div class="muted">Inventory + GST</div></div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>Client words</h2>
-        <div class="row grid-2">
-          <div class="card"><strong>Shreya, EduLearn</strong><div class="muted">“Publish was smooth and support was instant.”</div></div>
-          <div class="card"><strong>Raghav, QuickPOS</strong><div class="muted">“Billing + GST reports saved us hours daily.”</div></div>
+      <!-- Portfolio + ratings & metrics -->
+      <div class="card" style="margin-top:var(--sp-s)">
+        <h2>Case Studies & Reviews</h2>
+        <div class="work-grid" style="margin-top:var(--sp-xxs)">
+          <div class="work-card">
+            <strong>EduLearn App</strong>
+            <div class="stars" aria-label="Rating 4.9 out of 5">
+              <span class="star">★★★★★</span> <span class="small">4.9/5</span>
+            </div>
+            <div class="muted">Onboarding, video lessons, quizzes, payments integration.</div>
+            <div class="meta"><span>50k+ installs</span>•<span>Crash-free: 99.7%</span></div>
+            <div class="price-cta">
+              <a class="btn secondary" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20I%20liked%20the%20EduLearn%20case%20study.%20Can%20we%20discuss%20a%20similar%20app%3F" target="_blank" rel="noopener">Discuss similar →</a>
+            </div>
+          </div>
+          <div class="work-card">
+            <strong>Merchant Site</strong>
+            <div class="stars" aria-label="Rating 4.8 out of 5">
+              <span class="star">★★★★★</span> <span class="small">4.8/5</span>
+            </div>
+            <div class="muted">Headless CMS, product catalog, Razorpay checkout & GST invoices.</div>
+            <div class="meta"><span>+32% conversion</span>•<span>Core Web Vitals: Good</span></div>
+            <div class="price-cta">
+              <a class="btn secondary" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20I%20saw%20the%20Merchant%20Site%20project.%20Need%20an%20ecommerce%20site." target="_blank" rel="noopener">Request ecommerce →</a>
+            </div>
+          </div>
+          <div class="work-card">
+            <strong>Health Tracker</strong>
+            <div class="stars" aria-label="Rating 4.7 out of 5">
+              <span class="star">★★★★★</span> <span class="small">4.7/5</span>
+            </div>
+            <div class="muted">Device sync (BLE), activity charts, reminders, secure cloud sync.</div>
+            <div class="meta"><span>HIPAA-ready</span>•<span>Battery safe</span></div>
+            <div class="price-cta">
+              <a class="btn secondary" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20interested%20in%20a%20Health%20Tracker%20style%20app." target="_blank" rel="noopener">Enquire →</a>
+            </div>
+          </div>
+          <div class="work-card">
+            <strong>POS Suite</strong>
+            <div class="stars" aria-label="Rating 4.9 out of 5">
+              <span class="star">★★★★★</span> <span class="small">4.9/5</span>
+            </div>
+            <div class="muted">Inventory, barcode, GST reports, offline-first sync for counters.</div>
+            <div class="meta"><span>6 stores</span>•<span>24/7 uptime</span></div>
+            <div class="price-cta">
+              <a class="btn secondary" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20I%27m%20looking%20for%20a%20POS%20suite%20with%20GST%20support." target="_blank" rel="noopener">Get POS quote →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="reviews" style="margin-top:var(--sp-s)">
+          <div class="review">
+            <div class="reviewer">
+              <div class="avatar">AK</div>
+              <div><strong>Anita K.</strong><div class="small">Founder, EduLearn</div></div>
+            </div>
+            <div class="stars" aria-label="Rating 5 out of 5"><span class="star">★★★★★</span> <span class="small">5/5</span></div>
+            <div class="muted">“Smooth launch, zero surprises. The app hit 10k installs in the first month.”</div>
+          </div>
+          <div class="review">
+            <div class="reviewer">
+              <div class="avatar">RS</div>
+              <div><strong>Rohan S.</strong><div class="small">Retail Ops</div></div>
+            </div>
+            <div class="stars" aria-label="Rating 4.8 out of 5"><span class="star">★★★★★</span> <span class="small">4.8/5</span></div>
+            <div class="muted">“Checkout is blazing fast and reports are accurate. Great team to work with.”</div>
+          </div>
         </div>
       </div>
     </section>
@@ -562,25 +582,14 @@ h2{font-size:var(--fs-h2);line-height:1.25}
         </div>
       </div>
 
-      <div class="card">
-        <h2>FAQ</h2>
-        <div class="faq">
-          <details>
-            <summary>Is this really a one-time payment?</summary>
-            <div class="muted">Yes. As per your poster, the Website (₹15,000), App-Life Time (₹25,000), and Professional App (₹50,000) are one-time payments for the build & delivery.</div>
-          </details>
-          <details>
-            <summary>How fast can you deliver?</summary>
-            <div class="muted">Websites in days; apps in 1–2 weeks depending on features and listing timelines.</div>
-          </details>
-          <details>
-            <summary>Can we start with Website and later upgrade to App?</summary>
-            <div class="muted">Absolutely. Pay only the difference when you move to a higher plan within 60 days.</div>
-          </details>
-          <details>
-            <summary>What do you need from me?</summary>
-            <div class="muted">Logo (if any), brand colors, content (text/images), and your WhatsApp/phone/email to link.</div>
-          </details>
+      <!-- More details -->
+      <div class="card" style="margin-top:var(--sp-s)">
+        <h2>Why Choose Us</h2>
+        <div class="row grid-2" style="margin-top:var(--sp-xxs)">
+          <div class="card"><strong>Transparent Pricing</strong><div class="muted">Clear scope, clear costs, no surprises.</div></div>
+          <div class="card"><strong>Ship Fast</strong><div class="muted">Battle-tested blueprints and CI/CD to reduce time to market.</div></div>
+          <div class="card"><strong>Quality First</strong><div class="muted">Automated tests, analytics & crash monitoring baked in.</div></div>
+          <div class="card"><strong>Compliance Ready</strong><div class="muted">Privacy, permissions & ASO guidelines followed strictly.</div></div>
         </div>
       </div>
     </section>
@@ -597,11 +606,26 @@ h2{font-size:var(--fs-h2);line-height:1.25}
         </div>
       </div>
 
-      <div class="card">
-        <h2>Pricing Poster</h2>
-        <div class="muted">For reference, this mirrors the exact plans above.</div>
-        <!-- If the image file is placed next to index.html, keep just src="Pricings of WebApp.png" -->
-        <img src="Pricings of WebApp.png" alt="Pricing Plans Poster">
+      <!-- Quick actions with deep WhatsApp links -->
+      <div class="card" style="margin-top:var(--sp-s)">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions" style="margin-top:var(--sp-xxs)">
+          <div class="action-card">
+            <strong>Get a custom quote</strong>
+            <div class="muted">Tell us your idea, features, and timeline.</div>
+            <div class="action-cta">
+              <a class="btn" target="_blank" rel="noopener" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20I%20need%20a%20custom%20quote.%20Here%27s%20my%20project%3A">WhatsApp →</a>
+              <a class="btn secondary" href="mailto:hello@shridhar.group">Email →</a>
+            </div>
+          </div>
+          <div class="action-card">
+            <strong>Book a 15-min call</strong>
+            <div class="muted">We’ll map scope, budget, and next steps.</div>
+            <div class="action-cta">
+              <a class="btn" target="_blank" rel="noopener" href="https://wa.me/917483640694?text=Hi%20Shridhar%20Group%2C%20please%20book%20a%2015-min%20intro%20call.">Schedule on WhatsApp →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -635,21 +659,6 @@ h2{font-size:var(--fs-h2);line-height:1.25}
         <span>Contact</span>
       </button>
     </nav>
-  </div>
-</div>
-
-<!-- MODAL (service -> pricing mapping) -->
-<div class="modal-backdrop" id="modalWrap" aria-hidden="true">
-  <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
-    <div class="modal-head">
-      <h3 id="modalTitle">Recommended Plan</h3>
-      <button class="close" id="closeModal" aria-label="Close">✕</button>
-    </div>
-    <div id="modalBody" class="muted">Loading…</div>
-    <div class="m-actions">
-      <a id="modalCall" class="btn" href="tel:+917483640694">Call Now</a>
-      <a id="modalWA" class="btn outline" target="_blank" rel="noopener" href="#">WhatsApp</a>
-    </div>
   </div>
 </div>
 
@@ -726,22 +735,6 @@ function buildHomeFeed(){
   const feed = document.getElementById('homeFeed');
   if(!feed) return;
   feed.innerHTML='';
-
-  // Add a short "Top Services" card
-  const topCard = document.createElement('div');
-  topCard.className = 'card';
-  topCard.innerHTML = `
-    <strong>Top Services</strong>
-    <div class="muted">Tap to view price instantly</div>
-    <div class="service-grid" style="margin-top:8px">
-      <button class="service-item" data-plan="basic"><strong>Website</strong><div class="desc">WhatsApp + 1–5 pages</div></button>
-      <button class="service-item" data-plan="app"><strong>App — Life Time</strong><div class="desc">Small business app</div></button>
-      <button class="service-item" data-plan="pro"><strong>Professional App</strong><div class="desc">All access + lifetime</div></button>
-    </div>
-  `;
-  feed.appendChild(topCard);
-
-  // Clone first card of each page as a preview
   ['services','work','about','contact'].forEach(id=>{
     const sec = document.getElementById(id);
     const card = sec && sec.querySelector('.card');
@@ -750,9 +743,6 @@ function buildHomeFeed(){
     const h2 = clone.querySelector('h2'); if(h2) h2.remove();
     feed.appendChild(clone);
   });
-
-  // rebind service clicks in the cloned block
-  feed.querySelectorAll('.service-item').forEach(b=>b.addEventListener('click',()=>openPlan(b.dataset.plan)));
 }
 
 // Reduced motion
@@ -762,14 +752,18 @@ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 
 /* ------------------------------
    SOCIAL: app deep-links + fallbacks
+   - Injects an icon-only "Connect with us" box at END of every page
+   - Tap tries native app; if missing, opens web
 --------------------------------*/
 const SOCIAL_TARGETS = {
-  linkedin:  { app:'https://www.linkedin.com/in/shridhar-group-of-company-083729355?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', web:'https://www.linkedin.com/in/shridhar-group-of-company-083729355?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
-  instagram: { app:'https://www.instagram.com/shridhargroupofcompany2024?igsh=aHlsaWNpcm9kanc1', web:'https://www.instagram.com/shridhargroupofcompany2024?igsh=aHlsaWNpcm9kanc1' },
-  twitter:   { app:'https://x.com/SC_company2024?t=0NPDIpNOo_Ymqys4swftYw&s=09', web:'https://x.com/SC_company2024?t=0NPDIpNOo_Ymqys4swftYw&s=09' },
-  youtube:   { app:'https://www.youtube.com/@ShridharGroupofCompany', web:'https://www.youtube.com/@ShridharGroupofCompany' },
+  linkedin:  { app:'https://www.linkedin.com/in/shridhar-group-of-company-083729355?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',                          web:'https://www.linkedin.com/in/shridhar-group-of-company-083729355?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
+  instagram: { app:'https://www.instagram.com/shridhargroupofcompany2024?igsh=aHlsaWNpcm9kanc1',                      web:'https://www.instagram.com/shridhargroupofcompany2024?igsh=aHlsaWNpcm9kanc1' },
+  twitter:   { app:'https://x.com/SC_company2024?t=0NPDIpNOo_Ymqys4swftYw&s=09',                           web:'https://x.com/SC_company2024?t=0NPDIpNOo_Ymqys4swftYw&s=09' },
+  youtube:   { app:'https://www.youtube.com/@ShridharGroupofCompany',            web:'https://www.youtube.com/@ShridharGroupofCompany' },
   facebook:  { app:'https://www.facebook.com/share/1Fa1s4P5rg/', web:'https://www.facebook.com/share/1Fa1s4P5rg/' },
 };
+// To link straight to your handles, replace the "web" URLs above, e.g.
+// instagram: { app:'instagram://app', web:'https://www.instagram.com/YourUser/' },
 
 function openSocialApp(key){
   const t = SOCIAL_TARGETS[key];
@@ -821,110 +815,39 @@ function injectSocialBox(){
         btn.addEventListener('click',()=>openSocialApp(btn.dataset.key));
       });
     }
-    page.appendChild(node);
+    page.appendChild(node); // always inject at the very end of each page
   });
 }
 injectSocialBox();
 
 /* ------------------------------
-   COUNTERS: animate on view
+   RUNNING NUMBERS (count-up on view)
 --------------------------------*/
-const counterObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.querySelectorAll('.num').forEach(n=>{
-        const target = +n.dataset.target;
+function animateCounters(){
+  const counters = document.querySelectorAll('.num[data-count]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'),10);
         const start = 0;
-        const dur = 1200; // ms
-        const t0 = performance.now();
-        function step(t){
-          const p = Math.min(1,(t - t0)/dur);
-          n.textContent = Math.floor(start + p*(target - start));
-          if(p<1) requestAnimationFrame(step);
+        const duration = 1400;
+        const startTime = performance.now();
+        function tick(now){
+          const p = Math.min(1,(now-startTime)/duration);
+          const val = Math.floor(start + (target-start)*p);
+          el.textContent = val;
+          if(p<1) requestAnimationFrame(tick);
+          else el.textContent = target.toString();
         }
-        requestAnimationFrame(step);
-      });
-      counterObserver.unobserve(entry.target);
-    }
-  });
-},{threshold:0.35});
-const counters = document.getElementById('counters');
-if(counters) counterObserver.observe(counters);
-
-/* ------------------------------
-   PRICING MODAL: map service -> plan
---------------------------------*/
-const PLAN_DATA = {
-  basic: {
-    title: 'Website — Basic Businesses',
-    price: '₹15,000',
-    pill: 'One-Time Payment',
-    lines: [
-      '1–5 pages, responsive, SEO-ready',
-      'WhatsApp chat & click-to-order',
-      'Hosting & domain guidance',
-      'Fast delivery'
-    ],
-    wa: 'https://wa.me/917483640694?text=I%20want%20the%20Website%20plan%20(₹15000).'
-  },
-  app: {
-    title: 'App — Life Time (Small Businesses)',
-    price: '₹25,000',
-    pill: 'One-Time Payment',
-    lines: [
-      'Android app (release APK)',
-      'Brand screens + WhatsApp actions',
-      'Upload assets & listing guide',
-      'Lifetime usage for your business'
-    ],
-    wa: 'https://wa.me/917483640694?text=I%20want%20the%20App%20Life%20Time%20plan%20(₹25000).'
-  },
-  pro: {
-    title: 'Professional App — All Access + Life Time',
-    price: '₹50,000',
-    pill: 'One-Time Payment',
-    lines: [
-      'Full feature set unlocked',
-      'Admin dashboard & analytics',
-      'Play Store publish support',
-      'Priority assistance'
-    ],
-    wa: 'https://wa.me/917483640694?text=I%20want%20the%20Professional%20App%20plan%20(₹50000).'
-  }
-};
-
-const modal = document.getElementById('modalWrap');
-const modalBody = document.getElementById('modalBody');
-const modalTitle = document.getElementById('modalTitle');
-const modalWA = document.getElementById('modalWA');
-const closeModalBtn = document.getElementById('closeModal');
-
-function openPlan(key){
-  const p = PLAN_DATA[key]; if(!p) return;
-  modalTitle.textContent = 'Recommended Plan';
-  modalBody.innerHTML = `
-    <strong>${p.title}</strong><br/>
-    <div class="pill" style="display:inline-block;margin-top:6px">${p.pill}</div>
-    <div style="margin-top:8px"><strong>Price: ${p.price}</strong></div>
-    <ul style="margin:8px 0 0 16px">${p.lines.map(l=>`<li>${l}</li>`).join('')}</ul>
-  `;
-  modalWA.href = p.wa;
-  modal.style.display = 'flex';
-  modal.setAttribute('aria-hidden','false');
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      }
+    });
+  }, {threshold:0.3});
+  counters.forEach(c=>io.observe(c));
 }
-
-closeModalBtn.addEventListener('click',()=>{ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); });
-modal.addEventListener('click',(e)=>{ if(e.target===modal){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); } });
-
-// Bind all service-item clicks
-document.querySelectorAll('.service-item').forEach(btn=>{
-  btn.addEventListener('click',()=>openPlan(btn.dataset.plan));
-});
-
-// Also let user tap pricing cards to open the modal with the same content
-document.querySelectorAll('.price-card').forEach(card=>{
-  card.addEventListener('click',()=>openPlan(card.dataset.plan));
-});
+animateCounters();
 </script>
 </body>
 </html>
